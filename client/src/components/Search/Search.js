@@ -13,7 +13,9 @@ const Search = props => {
         placeholder="Enter spell name here"
         onChange={props.inputChange}
       />
-      <button className="search-submit">Submit</button>
+      <button className="search-submit" onClick={props.onSubmit}>
+        Submit
+      </button>
     </form>
   );
 };
