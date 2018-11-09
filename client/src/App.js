@@ -54,7 +54,10 @@ class App extends Component {
                 let desc = [];
                 if (Array.isArray(data.desc)) {
                   for (let i = 0; i < data.desc.length; i++) {
-                    const newDesc = data.desc[i].replace(/â€™/g, "'");
+                    const newDesc = data.desc[i]
+                      .replace(/â€™/g, "'")
+                      .replace(/â€œ/g, '"')
+                      .replace(/â€�/g, '"');
                     desc.push(newDesc);
                   }
                 } else {
@@ -73,10 +76,12 @@ class App extends Component {
                   higherLevel: data.higher_level,
                   school: data.school.name,
                   castingTime: data.casting_time,
+                  level: data.level,
                 };
                 this.setState({
                   currentSpell: spellData,
                   spellFound: true,
+                  searchActive: false,
                 });
               })
               .catch(function(error) {
