@@ -4,12 +4,14 @@ import "./App.css";
 import ClassSelection from "./components/Search/ClassSelection";
 import ClassSelBtn from "./components/Search/ClassSelBtn";
 import Search from "./components/Search/Search";
+import Card from "./components/Card/Card";
 
 class App extends Component {
   state = {
     searchActive: false,
     search: "",
     classList: null,
+    spellFound: false,
     currentSpell: {},
   };
 
@@ -49,20 +51,32 @@ class App extends Component {
             fetch(res.results[i].url)
               .then(response => response.json())
               .then(data => {
+                let desc = [];
+                if (Array.isArray(data.desc)) {
+                  for (let i = 0; i < data.desc.length; i++) {
+                    const newDesc = data.desc[i].replace(/â€™/g, "'");
+                    desc.push(newDesc);
+                  }
+                } else {
+                  let newDesc = data.desc.replace(/â€™/g, "'");
+                  desc.push(newDesc);
+                }
                 const spellData = {
                   name: data.name,
                   range: data.range,
                   duration: data.duration,
-                  materials: data.materials,
+                  materials: data.material,
                   ritual: data.ritual,
+                  concentration: data.concentration,
                   components: data.components,
-                  desc: data.desc,
+                  desc: desc,
                   higherLevel: data.higher_level,
                   school: data.school.name,
                   castingTime: data.casting_time,
                 };
                 this.setState({
                   currentSpell: spellData,
+                  spellFound: true,
                 });
               })
               .catch(function(error) {
@@ -114,6 +128,9 @@ class App extends Component {
             })}
           </ClassSelection>
         )}
+        {this.state.spellFound ? (
+          <Card spell={this.state.currentSpell} />
+        ) : null}
       </div>
     );
   }

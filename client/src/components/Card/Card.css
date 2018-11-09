@@ -1,0 +1,13 @@
+.cardContainer {
+  width: 350px;
+}
+
+.full {
+  width: 100%;
+  float: left;
+}
+
+.half {
+  width: 50%;
+  float: left;
+}
