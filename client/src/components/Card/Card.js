@@ -1,5 +1,13 @@
 import React from "react";
 import "./Card.css";
+import RitualIcon from "../Icons/RitualIcon";
+import EvocationIcon from "../Icons/EvocationIcon";
+import AbjurationIcon from "../Icons/AbjurationIcon";
+import EnchantmentIcon from "../Icons/EnchantmentIcon";
+import ConjurationIcon from "../Icons/ConjurationIcon";
+import NecromancyIcon from "../Icons/NecromancyIcon";
+import TransmutationIcon from "../Icons/TransmutationIcon";
+import concentrationIcon from "../../images/concentration.png";
 
 const Card = props => {
   const components = props.spell.components.join(" ");
@@ -8,7 +16,35 @@ const Card = props => {
   return (
     <div className="card-container">
       <div className="card-text-block text-center full">{props.spell.name}</div>
-      <div className="card-text-block half">School: {props.spell.school}</div>
+      <div className="card-text-block half">
+        {props.spell.school === "Abjuration" ? (
+          <React.Fragment>
+            <AbjurationIcon /> {props.spell.school}
+          </React.Fragment>
+        ) : props.spell.school === "Conjuration" ? (
+          <React.Fragment>
+            <ConjurationIcon /> {props.spell.school}
+          </React.Fragment>
+        ) : props.spell.school === "Enchantment" ? (
+          <React.Fragment>
+            <EnchantmentIcon /> {props.spell.school}
+          </React.Fragment>
+        ) : props.spell.school === "Evocation" ? (
+          <React.Fragment>
+            <EvocationIcon /> {props.spell.school}
+          </React.Fragment>
+        ) : props.spell.school === "Necromancy" ? (
+          <React.Fragment>
+            <NecromancyIcon /> {props.spell.school}
+          </React.Fragment>
+        ) : props.spell.school === "Transmutation" ? (
+          <React.Fragment>
+            <TransmutationIcon /> {props.spell.school}
+          </React.Fragment>
+        ) : (
+          "School: " + props.spell.school
+        )}
+      </div>
       <div className="card-text-block half">
         Casting Time: {props.spell.castingTime}
       </div>
@@ -24,8 +60,24 @@ const Card = props => {
       </div>
       <div className="card-text-block full">{desc}</div>
       <div className="card-text-block full">
-        <div className="half">{props.spell.concentration}</div>
-        <div className="half">{props.spell.ritual}</div>
+        <div className="half">
+          <span>
+            <img
+              className="card-icon"
+              src={concentrationIcon}
+              alt="concentration"
+            />
+          </span>
+          {": "}
+          {props.spell.concentration}
+        </div>
+        <div className="half">
+          <span>
+            <RitualIcon />
+          </span>
+          {": "}
+          {props.spell.ritual}
+        </div>
       </div>
       <div className="card-text-block full">
         Materials:{" "}

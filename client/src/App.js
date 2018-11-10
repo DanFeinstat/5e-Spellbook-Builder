@@ -64,11 +64,24 @@ class App extends Component {
                   let newDesc = data.desc.replace(/â€™/g, "'");
                   desc.push(newDesc);
                 }
+                let materials = [];
+                if (Array.isArray(data.material)) {
+                  for (let i = 0; i < data.material.length; i++) {
+                    const newmaterials = data.material[i]
+                      .replace(/â€™/g, "'")
+                      .replace(/â€œ/g, '"')
+                      .replace(/â€�/g, '"');
+                    materials.push(newmaterials);
+                  }
+                } else {
+                  let newmaterials = data.material.replace(/â€™/g, "'");
+                  materials.push(newmaterials);
+                }
                 const spellData = {
                   name: data.name,
                   range: data.range,
                   duration: data.duration,
-                  materials: data.material,
+                  materials: materials,
                   ritual: data.ritual,
                   concentration: data.concentration,
                   components: data.components,
