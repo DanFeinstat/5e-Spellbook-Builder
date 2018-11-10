@@ -56,27 +56,40 @@ class App extends Component {
                   for (let i = 0; i < data.desc.length; i++) {
                     const newDesc = data.desc[i]
                       .replace(/â€™/g, "'")
+                      .replace(/â€“/g, "-")
                       .replace(/â€œ/g, '"')
                       .replace(/â€�/g, '"');
                     desc.push(newDesc);
                   }
                 } else {
-                  let newDesc = data.desc.replace(/â€™/g, "'");
+                  let newDesc = data.desc
+                    .replace(/â€™/g, "'")
+                    .replace(/â€“/g, "-");
                   desc.push(newDesc);
                 }
-                let materials = [];
-                if (Array.isArray(data.material)) {
-                  for (let i = 0; i < data.material.length; i++) {
-                    const newmaterials = data.material[i]
-                      .replace(/â€™/g, "'")
-                      .replace(/â€œ/g, '"')
-                      .replace(/â€�/g, '"');
-                    materials.push(newmaterials);
+                const fixMaterialCharacters = data => {
+                  if (data.material === undefined) {
+                    return undefined;
+                  } else if (
+                    Array.isArray(data.material) &&
+                    data.material.length > 1
+                  ) {
+                    let materials = [];
+                    for (let i = 0; i < data.material.length; i++) {
+                      const newMaterials = data.material[i]
+                        .replace(/â€™/g, "'")
+                        .replace(/â€œ/g, '"')
+                        .replace(/â€�/g, '"');
+                      materials.push(newMaterials);
+                    }
+                    return materials;
+                  } else {
+                    let newMaterials = data.material.replace(/â€™/g, "'");
+                    return newMaterials;
                   }
-                } else {
-                  let newmaterials = data.material.replace(/â€™/g, "'");
-                  materials.push(newmaterials);
-                }
+                };
+                let materials = fixMaterialCharacters(data);
+
                 const spellData = {
                   name: data.name,
                   range: data.range,

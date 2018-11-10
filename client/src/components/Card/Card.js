@@ -1,10 +1,12 @@
 import React from "react";
 import "./Card.css";
 import RitualIcon from "../Icons/RitualIcon";
-import EvocationIcon from "../Icons/EvocationIcon";
 import AbjurationIcon from "../Icons/AbjurationIcon";
-import EnchantmentIcon from "../Icons/EnchantmentIcon";
 import ConjurationIcon from "../Icons/ConjurationIcon";
+import DivinationIcon from "../Icons/DivinationIcon";
+import EnchantmentIcon from "../Icons/EnchantmentIcon";
+import EvocationIcon from "../Icons/EvocationIcon";
+import IllusionIcon from "../Icons/IllusionIcon";
 import NecromancyIcon from "../Icons/NecromancyIcon";
 import TransmutationIcon from "../Icons/TransmutationIcon";
 import concentrationIcon from "../../images/concentration.png";
@@ -25,6 +27,10 @@ const Card = props => {
           <React.Fragment>
             <ConjurationIcon /> {props.spell.school}
           </React.Fragment>
+        ) : props.spell.school === "Divination" ? (
+          <React.Fragment>
+            <DivinationIcon /> {props.spell.school}
+          </React.Fragment>
         ) : props.spell.school === "Enchantment" ? (
           <React.Fragment>
             <EnchantmentIcon /> {props.spell.school}
@@ -32,6 +38,10 @@ const Card = props => {
         ) : props.spell.school === "Evocation" ? (
           <React.Fragment>
             <EvocationIcon /> {props.spell.school}
+          </React.Fragment>
+        ) : props.spell.school === "Illusion" ? (
+          <React.Fragment>
+            <IllusionIcon /> {props.spell.school}
           </React.Fragment>
         ) : props.spell.school === "Necromancy" ? (
           <React.Fragment>
@@ -81,7 +91,7 @@ const Card = props => {
       </div>
       <div className="card-text-block full">
         Materials:{" "}
-        {props.spell.materials
+        {props.spell.materials !== undefined
           ? props.spell.materials
           : "No materials required."}
       </div>
