@@ -57,6 +57,7 @@ class App extends Component {
                     const newDesc = data.desc[i]
                       .replace(/â€™/g, "'")
                       .replace(/â€“/g, "-")
+                      .replace(/â€”/g, "-")
                       .replace(/â€œ/g, '"')
                       .replace(/â€�/g, '"');
                     desc.push(newDesc);
@@ -64,7 +65,10 @@ class App extends Component {
                 } else {
                   let newDesc = data.desc
                     .replace(/â€™/g, "'")
-                    .replace(/â€“/g, "-");
+                    .replace(/â€“/g, "-")
+                    .replace(/â€”/g, "-")
+                    .replace(/â€œ/g, '"')
+                    .replace(/â€�/g, '"');
                   desc.push(newDesc);
                 }
                 const fixMaterialCharacters = data => {

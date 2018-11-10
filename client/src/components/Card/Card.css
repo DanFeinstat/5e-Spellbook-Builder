@@ -33,3 +33,13 @@
   width: 50%;
   float: left;
 }
+
+.twoThirds {
+  width: 66.7%;
+  float: left;
+}
+
+.third {
+  width: 33.3%;
+  float: left;
+}
