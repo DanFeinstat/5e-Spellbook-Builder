@@ -94,7 +94,7 @@ class Card extends Component {
           <div className="twoThirds">
             Components:{" "}
             {components.map((data, index) => {
-              return data;
+              return <React.Fragment key={index}>{data}</React.Fragment>;
             })}
           </div>
           <div className="third">

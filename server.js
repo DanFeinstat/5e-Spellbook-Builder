@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 
 const app = express();
 const PORT = process.env.PORT || 3002;
@@ -12,6 +13,17 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.use(routes);
+
+mongoose.Promise = global.Promise;
+
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost/spellbook",
+  {
+    useMongoClient: true,
+  }
+);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));

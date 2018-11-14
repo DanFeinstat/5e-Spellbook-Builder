@@ -144,7 +144,7 @@ class App extends Component {
       "Wizard",
     ];
     return (
-      <div>
+      <div className={"App App-background-" + this.state.classList}>
         {this.state.searchActive ? (
           <Search
             inputChange={this.handleInputChange}
