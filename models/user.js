@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
 const yummySalt = 10;
-const vwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 
 const userSchema = new Schema({
   name: { type: String, required: true },
@@ -40,9 +40,9 @@ userSchema.methods.comparePassword = (candidatePassword, cb) => {
 };
 
 userSchema.findByToken = token => {
-  let decond;
+  let decode;
   try {
-    decone = jwt.verify(token, "secret");
+    decode = jwt.verify(token, "secret");
     return userSchema.findOne({ _id: decode._id });
   } catch (e) {
     return Promise.reject();
@@ -51,4 +51,4 @@ userSchema.findByToken = token => {
 
 const Users = mongoose.model("UserInfo", userSchema);
 
-module.export = Users;
+module.exports = Users;
