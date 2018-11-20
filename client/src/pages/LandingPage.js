@@ -5,15 +5,21 @@ import ClassSelection from "../components/Search/ClassSelection";
 import ClassSelBtn from "../components/Search/ClassSelBtn";
 import Search from "../components/Search/Search";
 import Card from "../components/Card/Card";
+const jwt = require("jsonwebtoken");
 
 class LandingPage extends Component {
   state = {
+    id: "",
     searchActive: false,
     search: "",
     classList: null,
     spellFound: false,
     currentSpell: {},
   };
+
+  componentDidMount() {
+    this.decodeUserID();
+  }
 
   handleInputChange = e => {
     const name = e.target.name;
@@ -125,6 +131,17 @@ class LandingPage extends Component {
       });
   };
 
+  decodeUserID = () => {
+    console.log(localStorage.spellbookJwt);
+    const decoder = jwt.decode(localStorage.spellbookJwt);
+    console.log(decoder);
+    const decodedID = decoder.id;
+    console.log(decodedID);
+    this.setState({
+      id: decodedID,
+    });
+  };
+
   toSelectClass = e => {
     const newClass = e.target.textContent;
     this.setState({
@@ -164,7 +181,19 @@ class LandingPage extends Component {
           </ClassSelection>
         )}
         {this.state.spellFound ? (
-          <Card spell={this.state.currentSpell} />
+          this.state.id ? (
+            <Card
+              spell={this.state.currentSpell}
+              class={this.state.classList}
+              loggedIn={true}
+            />
+          ) : (
+            <Card
+              spell={this.state.currentSpell}
+              class={this.state.classList}
+              loggedIn={false}
+            />
+          )
         ) : null}
       </div>
     );

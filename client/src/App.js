@@ -1,6 +1,7 @@
 import React from "react";
 import LandingPage from "./pages/LandingPage";
 import SignupPage from "./pages/SignupPage";
+import SpellbookPage from "./pages/SpellbookPage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 const App = () => (
   <Router>
@@ -8,7 +9,7 @@ const App = () => (
       <Switch>
         <Route exact path="/" component={LandingPage} />
         <Route exact path="/signup" component={SignupPage} />
-        {/* <Route exact path="/dashboard/owner" component={OwnerPage} /> */}
+        <Route exact path="/spellbook/user" component={SpellbookPage} />
         {/* <Route exact path="/login" component={Login} /> */}
         <Route component={Error} />
       </Switch>

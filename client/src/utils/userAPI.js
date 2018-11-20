@@ -11,7 +11,7 @@ export default {
     return axios.put("/api/user/" + id, spellData);
   },
   getSpells: id => {
-    return axios.get("/api/user/" + id + "/spells");
+    return axios.get("/api/user/" + id);
   },
   login: userData => {
     return axios.post("/api/user/login", userData);

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Signup from "../components/Lisu/Signup";
+import Login from "../components/Lisu/Login";
 import userAPI from "../utils/userAPI";
+import "./Pages.css";
 
 class SignupPage extends Component {
   state = {
@@ -40,14 +42,32 @@ class SignupPage extends Component {
     userAPI.createUser(userData).then(response => {
       console.log(response.data.spellbookJwt);
       localStorage.setItem("spellbookJwt", response.data.spellbookJwt);
+      window.location.href = "/spellbook/user";
+    });
+  };
+
+  handleLoginSubmit = e => {
+    e.preventDefault();
+    const userData = {
+      email: this.state.email,
+      password: this.state.password,
+    };
+
+    userAPI.login(userData).then(response => {
+      localStorage.setItem("spellbookJwt", response.data.spellbookJwt);
+      window.location.href = "/spellbook/user";
     });
   };
   render() {
     return (
-      <div>
+      <div className="page-signup-container">
         <Signup
           inputChange={this.handleInputChange}
           signupSubmit={this.handleSignupSubmit}
+        />
+        <Login
+          inputChange={this.handleInputChange}
+          loginSubmit={this.handleLoginSubmit}
         />
       </div>
     );

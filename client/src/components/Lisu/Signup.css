@@ -1,0 +1,35 @@
+.signup-container {
+  margin: auto;
+  margin-bottom: 50px;
+  margin-top: 30px;
+  width: 320px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.19), 0 8px 17px rgba(0, 0, 0, 0.2);
+  border: 1px solid #eee;
+  overflow: hidden;
+  padding: 15px;
+  background-color: whitesmoke;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup-input-group {
+  width: 200px;
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.signup-input {
+  margin-top: 3px;
+}
+
+.signup-submit-btn {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-right: 25px;
+  margin-left: 25px;
+  width: 150px;
+}

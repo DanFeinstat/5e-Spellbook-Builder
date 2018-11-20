@@ -21,6 +21,16 @@
   margin-bottom: -3px;
 }
 
+.card-transcribe-btn {
+  margin: auto;
+  width: 80px;
+  margin-top: -63px;
+  border: solid 1px black;
+  border-radius: 5px;
+  padding: 2px;
+  background-color: rgb(244, 239, 219);
+}
+
 .text-center {
   text-align: center;
 }
