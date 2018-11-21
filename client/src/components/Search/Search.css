@@ -28,6 +28,10 @@
   float: right;
   margin-top: 5px;
 }
+.search-back {
+  float: left;
+  margin-top: 5px;
+}
 
 /* .search-submit-container {
   width: 200px;

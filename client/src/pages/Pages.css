@@ -2,3 +2,24 @@
   display: flex;
   justify-content: center;
 }
+
+.page-spellbook-container {
+  width: 100vw;
+  height: auto;
+  min-height: 100vh;
+}
+
+.pages-spellbook-content {
+  max-width: 1000px;
+  margin: auto;
+  background: blue;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  min-height: 100vh;
+}
+@media (min-width: 769px) {
+  .pages-spellbook-content {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+}

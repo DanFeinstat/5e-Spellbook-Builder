@@ -20,19 +20,7 @@ module.exports = {
       })
       .catch(err => res.status(422).json(err));
   },
-  //   create: (req, res) => {
-  //     db.Users.create(
-  //       Object.assign(req.body, {
-  //         password: bcrypt.hashSync(req.body.password, 10),
-  //       })
-  //     )
-  //       .then(user => {
-  //         const spellbookJwt = jwt.sign({ _id: req.body._id }, "secret");
 
-  //         res.status(200).send({ userEmail: user.email, spellbookJwt });
-  //       })
-  //       .catch(err => res.status(422).json(err));
-  //   },
   deleteUser: function(req, res) {
     db.Users.deleteOne({ _id: req.params.id })
       .then(dbModel => res.json(dbModel))

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import "./Card.css";
+//API
+import userAPI from "../../utils/userAPI";
 //school icons
 import RitualIcon from "../Icons/RitualIcon";
 import AbjurationIcon from "../Icons/AbjurationIcon";
@@ -18,6 +20,32 @@ import MaterialIcon from "../Icons/MaterialIcon";
 import concentrationIcon from "../../images/concentration.png";
 
 class Card extends Component {
+  saveSpellToSpellbook = e => {
+    e.preventDefault();
+    console.log(this.props.spell);
+    userAPI
+      .getSpells(this.props.loggedIn)
+      .then(response => {
+        // let response = response;
+        let isDuplicate = res => {
+          console.log(res);
+          for (let i = 0; i < res.data.spells.length; i++) {
+            if (res.data.spells[i].name === this.props.spell.name) {
+              return true;
+            }
+          }
+        };
+        let duplicate = isDuplicate(response);
+        if (!duplicate) {
+          console.log("Not a duplicate!");
+          userAPI
+            .addSpell(this.props.loggedIn, this.props.spell)
+            .then(response => console.log("Spellbook Updated!"))
+            .catch(err => console.log(err));
+        }
+      })
+      .catch(err => console.log(err));
+  };
   convertComponentsToIcons = comps => {
     let compsArr = [];
     for (let i = 0; i < comps.length; i++) {
@@ -41,7 +69,7 @@ class Card extends Component {
     //   const higherLevel = this.props.spell.higherLevel.join(" ");
     return (
       <React.Fragment>
-        <div className="card-container">
+        <div className={"card-container card-float-" + this.props.float}>
           <div className="card-text-block text-center full">
             {this.props.spell.name}
           </div>
@@ -142,7 +170,10 @@ class Card extends Component {
           ) : null}
         </div>
         {this.props.loggedIn ? (
-          <div className={"card-transcribe-btn bg-" + this.props.class}>
+          <div
+            onClick={this.saveSpellToSpellbook}
+            className={"card-transcribe-btn bg-" + this.props.class}
+          >
             Transcribe
           </div>
         ) : null}

@@ -22,6 +22,9 @@ const Search = props => {
         <button className="search-submit" onClick={props.onSubmit}>
           Submit
         </button>
+        <button className="search-back" onClick={props.returnToClassSelect}>
+          Back
+        </button>
       </div>
       {/* </div> */}
     </form>

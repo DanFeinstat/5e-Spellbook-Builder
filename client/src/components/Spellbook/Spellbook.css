@@ -1,0 +1,24 @@
+.spellbook-container {
+  width: 340px;
+  overflow: hidden;
+  margin: auto;
+  margin-top: 50px;
+  padding: 5px;
+  background-color: gainsboro;
+  /* float: left; */
+}
+
+@media (min-width: 769px) {
+  .spellbook-container {
+    margin: 5px;
+    margin-left: 20px;
+    margin-top: 50px;
+    float: left;
+  }
+}
+
+@media (min-width: 800px) {
+  .spellbook-container {
+    width: 400px;
+  }
+}

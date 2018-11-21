@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import userAPI from "../utils/userAPI";
+import SpellItem from "../components/Spellbook/SpellItem";
+import Spellbook from "../components/Spellbook/Spellbook";
+import Card from "../components/Card/Card";
+import "./Pages.css";
 const jwt = require("jsonwebtoken");
 
 class SpellbookPage extends Component {
@@ -8,44 +12,86 @@ class SpellbookPage extends Component {
     name: "",
     email: "",
     spells: [],
+    spellToDisplay: "",
   };
 
   componentDidMount() {
     console.log("loaded");
-    this.decodeUserID();
+    this.decodeUserIDandPopulate();
   }
 
-  componentDidUpdate() {
-    this.populateSpellbook();
-  }
+  //   componentDidUpdate() {
 
-  decodeUserID = () => {
+  //   }
+
+  decodeUserIDandPopulate = () => {
     console.log(localStorage.spellbookJwt);
     const decoder = jwt.decode(localStorage.spellbookJwt);
     console.log(decoder);
     const decodedID = decoder.id;
     console.log(decodedID);
-    this.setState({
-      id: decodedID,
-    });
+    this.setState(
+      {
+        id: decodedID,
+      },
+      this.populateSpellbook
+    );
   };
 
   populateSpellbook = () => {
+    console.log(this.state.id);
     userAPI
       .getSpells(this.state.id)
-      .then(response =>
-        // this.setState({
-        //   name: response.data[0].name,
-        //   email: response.data[0].email,
-        //   spells: response.data[0].spells,
-        // })
-        console.log(response)
-      )
+      .then(response => {
+        console.log(response);
+        this.setState({
+          name: response.data.name,
+          email: response.data.email,
+          spells: response.data.spells,
+        });
+      })
       .catch(err => console.log(err));
   };
 
+  displaySpell = e => {
+    console.log(e.target.dataset.name);
+    for (let i = 0; i < this.state.spells.length; i++) {
+      if (this.state.spells[i].name === e.target.dataset.name) {
+        this.setState({
+          spellToDisplay: this.state.spells[i],
+        });
+      }
+    }
+  };
+
   render() {
-    return <div />;
+    return (
+      <div className="page-spellbook-container">
+        <div className="pages-spellbook-content">
+          <Spellbook>
+            {this.state.spells.map((spell, index) => {
+              return (
+                <SpellItem
+                  key={index}
+                  name={spell.name}
+                  school={spell.school}
+                  level={spell.level}
+                  spellToDisplay={this.displaySpell}
+                />
+              );
+            })}
+          </Spellbook>
+          {this.state.spellToDisplay ? (
+            <Card
+              spell={this.state.spellToDisplay}
+              class={"none"}
+              loggedIn={false}
+              // float={"right"}
+            />
+          ) : null}
+        </div>
+      </div>
+    );
   }
 }
 

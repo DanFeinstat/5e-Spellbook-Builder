@@ -5,6 +5,7 @@ import ClassSelection from "../components/Search/ClassSelection";
 import ClassSelBtn from "../components/Search/ClassSelBtn";
 import Search from "../components/Search/Search";
 import Card from "../components/Card/Card";
+import userAPI from "../utils/userAPI";
 const jwt = require("jsonwebtoken");
 
 class LandingPage extends Component {
@@ -142,11 +143,27 @@ class LandingPage extends Component {
     });
   };
 
+  //   saveSpellToSpellbook = e => {
+  //     e.preventDefault();
+  //     userAPI
+  //       .addSpell(this.state.id, this.state.currentSpell)
+  //       .then(response => console.log(response))
+  //       .catch(err => console.log(err));
+  //   };
+
   toSelectClass = e => {
     const newClass = e.target.textContent;
     this.setState({
       searchActive: true,
       classList: newClass,
+    });
+  };
+
+  returnToClassList = e => {
+    e.preventDefault();
+    this.setState({
+      searchActive: false,
+      classList: "",
     });
   };
   render() {
@@ -166,6 +183,7 @@ class LandingPage extends Component {
           <Search
             inputChange={this.handleInputChange}
             onSubmit={this.onSpellSubmit}
+            returnToClassSelect={this.returnToClassList}
           />
         ) : (
           <ClassSelection>
@@ -181,19 +199,19 @@ class LandingPage extends Component {
           </ClassSelection>
         )}
         {this.state.spellFound ? (
-          this.state.id ? (
-            <Card
-              spell={this.state.currentSpell}
-              class={this.state.classList}
-              loggedIn={true}
-            />
-          ) : (
-            <Card
-              spell={this.state.currentSpell}
-              class={this.state.classList}
-              loggedIn={false}
-            />
-          )
+          //   {this.state.id ?
+          //    ( <Card
+          //       spell={this.state.currentSpell}
+          //       class={this.state.classList}
+          //       loggedIn={this.state.id}
+          //     />
+          //   ) :
+          <Card
+            spell={this.state.currentSpell}
+            class={this.state.classList}
+            loggedIn={this.state.id}
+            //   transcribe={this.saveSpellToSpellbook}
+          />
         ) : null}
       </div>
     );
