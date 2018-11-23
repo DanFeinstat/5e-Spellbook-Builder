@@ -13,3 +13,11 @@
   align-items: center;
   /* justify-content: center; */
 }
+
+.login-input {
+  margin-top: 4px;
+}
+
+.login-label {
+  margin-top: 6px;
+}

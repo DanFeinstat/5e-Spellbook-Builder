@@ -18,7 +18,9 @@ const Signup = props => {
         />
       </div>
       <div className="signup-input-group">
-        <label for="email">Email</label>
+        <label className="signup-label" for="email">
+          Email
+        </label>
         <input
           className="signup-input"
           maxlength="50"
@@ -31,7 +33,9 @@ const Signup = props => {
         />
       </div>
       <div className="signup-input-group">
-        <label for="password">Password</label>
+        <label className="signup-label" for="password">
+          Password
+        </label>
         <input
           className="signup-input"
           maxlength="20"
@@ -44,7 +48,9 @@ const Signup = props => {
         />
       </div>
       <div className="signup-input-group">
-        <label for="confirmPassword">Confirm Password</label>
+        <label className="signup-label" for="confirmPassword">
+          Confirm Password
+        </label>
         <input
           className="signup-input"
           maxlength="20"

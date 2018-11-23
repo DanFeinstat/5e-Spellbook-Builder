@@ -23,13 +23,26 @@
 }
 
 .signup-input {
-  margin-top: 3px;
+  margin-top: 4px;
+}
+
+.signup-label {
+  margin-top: 6px;
 }
 
 .signup-submit-btn {
-  margin-top: 5px;
-  margin-bottom: 5px;
+  margin-top: 8px;
+  margin-bottom: 6px;
   margin-right: 25px;
   margin-left: 25px;
   width: 150px;
+  border: 1px black;
+  border-radius: 2px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.signup-submit-btn:hover {
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14),
+    0 1px 10px 0 rgba(0, 0, 0, 0.12);
+  transform: scale(1.08);
 }

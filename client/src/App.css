@@ -5,13 +5,130 @@
 }
 
 .App-background-Bard {
-  background-image: url(./images/backgroundTexture.png) !important;
+  background-image: url(./images/backgroundTexture.png),
+    url(./images/bardbackground.jpg) !important;
   background-size: cover;
+  background-position: left top, 100% -10%;
+  background-size: cover, 80vw;
+}
+.App-background-Cleric {
+  background-image: url(./images/backgroundTexture.png),
+    url(./images/possiblecleric.jpg) !important;
+  background-position: left top, 1000% 0%;
+  background-size: cover, 96vw;
+  background-repeat: no-repeat, no-repeat;
+}
+
+.App-background-Druid {
+  background-image: url(./images/backgroundTexture.png),
+    url(./images/druidbackground.jpg) !important;
+  /* background-position: left top, 125% 0%; */
+  background-repeat: no-repeat, no-repeat;
+  /* background-size: cover, 42vh; */
+  background-position: left top, right top;
+  background-size: cover, 100vw;
+}
+.App-background-Paladin {
+  background-image: url(./images/backgroundTexture.png),
+    url(./images/paladinbackground.jpg) !important;
+  /* background-position: left top, 125% 0%; */
+  background-repeat: no-repeat, no-repeat;
+  /* background-size: cover, 42vh; */
+  background-position: left top, right top;
+  background-size: cover, 80vw;
+}
+
+.App-background-Ranger {
+  background-image: url(./images/backgroundTexture.png),
+    url(./images/rangerbackground.jpg) !important;
+  background-position: left top, 140% 0%;
+  background-repeat: no-repeat, no-repeat;
+  background-size: cover, 80vw;
+}
+
+.App-background-Sorcerer {
+  background-image: url(./images/backgroundTexture.png),
+    url(./images/sorcererbackground.jpg) !important;
+  background-position: left top, 140% 0%;
+  background-size: cover, 75vw;
+  background-repeat: no-repeat, no-repeat;
+}
+.App-background-Warlock {
+  background-image: url(./images/backgroundTexture.png),
+    url(./images/warlockbackground.jpg) !important;
+  background-position: left top, 120% -40%;
+  background-size: cover, 70vw;
+  background-repeat: no-repeat, no-repeat;
 }
 
 .App-background-Wizard {
-  background-image: url(./images/backgroundTexture.png) !important;
-  background-size: cover;
+  background-image: url(./images/backgroundTexture.png),
+    url(./images/wizardbackground.jpg) !important;
+  background-position: left top, 100px 0%;
+  background-size: cover, 99vw;
+  background-repeat: no-repeat, no-repeat;
+}
+
+@media (max-height: 400px) {
+  .App-background-Sorcerer {
+    background-size: cover, 80vw;
+  }
+  .App-background-Warlock {
+    background-position: left top, 140%, 0%;
+    background-size: cover, 80vw;
+  }
+}
+
+/* @media(max-height:){
+
+} */
+@media (min-width: 420px) {
+  .App-background-Cleric {
+    background-position: left top, 180% 0%;
+    background-size: cover, 80vw;
+  }
+}
+
+@media (min-width: 630px) {
+  .App-background-Cleric {
+    /* background-size: cover, 70vw; */
+    background-position: left top, 140% 0%;
+    background-size: cover, 80vw;
+  }
+  .App-background-Wizard {
+    background-position: left top, 300% 0%;
+    background-size: cover, 90vw;
+  }
+}
+
+@media (min-width: 700px) {
+  .App-background-Sorcerer {
+    background-position: left top, 100% -10%;
+    background-size: cover, 70vw;
+  }
+  .App-background-Warlock {
+    background-position: left top, 150% -250px;
+    background-size: cover, 80vw;
+  }
+}
+@media (min-width: 800px) {
+  .App-background-Warlock {
+    background-position: left top, 150% -350px;
+    background-size: cover, 80vw;
+  }
+}
+@media (min-width: 1200px) {
+  .App-background-Warlock {
+    background-position: left top, 140% 90%;
+    background-size: cover, 80vw;
+  }
+}
+
+@media (min-width: 1420px) {
+  .App-background-Warlock {
+    background-position: left top, 140% 70%;
+    background-size: cover, 80vw;
+  }
 }
 
 .App-logo {

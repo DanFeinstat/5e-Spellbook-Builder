@@ -9,21 +9,25 @@ const Login = props => {
       <div className="signup-input-group">
         <label for="email">Email</label>
         <input
+          className="login-input"
           name="email"
           type="email"
           id="email"
-          placeholder="yourEmail@whatever.com"
+          placeholder=" yourEmail@whatever.com"
           autoComplete="email"
           onChange={props.inputChange}
         />
       </div>
       <div className="signup-input-group">
-        <label for="login-password">Password</label>
+        <label className="login-label" for="login-password">
+          Password
+        </label>
         <input
+          className="login-input"
           name="password"
           type="password"
           id="login-password"
-          placeholder="admin"
+          placeholder=" admin"
           autoComplete="current-password"
           onChange={props.inputChange}
         />

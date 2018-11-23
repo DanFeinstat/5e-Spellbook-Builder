@@ -5,6 +5,7 @@ import ClassSelection from "../components/Search/ClassSelection";
 import ClassSelBtn from "../components/Search/ClassSelBtn";
 import Search from "../components/Search/Search";
 import Card from "../components/Card/Card";
+import LoginBtn from "../components/Login/LoginBtn";
 import userAPI from "../utils/userAPI";
 const jwt = require("jsonwebtoken");
 
@@ -19,7 +20,9 @@ class LandingPage extends Component {
   };
 
   componentDidMount() {
-    this.decodeUserID();
+    if (localStorage.spellbookJwt) {
+      this.decodeUserID();
+    }
   }
 
   handleInputChange = e => {
@@ -156,6 +159,7 @@ class LandingPage extends Component {
     this.setState({
       searchActive: true,
       classList: newClass,
+      spellFound: false,
     });
   };
 
@@ -164,7 +168,13 @@ class LandingPage extends Component {
     this.setState({
       searchActive: false,
       classList: "",
+      spellFound: false,
     });
+  };
+
+  toLogin = e => {
+    e.preventDefault();
+    window.location.href = "/signup";
   };
   render() {
     const classes = [
@@ -213,6 +223,7 @@ class LandingPage extends Component {
             //   transcribe={this.saveSpellToSpellbook}
           />
         ) : null}
+        {!this.state.id ? <LoginBtn login={this.toLogin} /> : null}
       </div>
     );
   }

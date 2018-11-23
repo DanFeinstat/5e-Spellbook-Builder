@@ -61,13 +61,13 @@ class SignupPage extends Component {
   render() {
     return (
       <div className="page-signup-container">
-        <Signup
-          inputChange={this.handleInputChange}
-          signupSubmit={this.handleSignupSubmit}
-        />
         <Login
           inputChange={this.handleInputChange}
           loginSubmit={this.handleLoginSubmit}
+        />
+        <Signup
+          inputChange={this.handleInputChange}
+          signupSubmit={this.handleSignupSubmit}
         />
       </div>
     );

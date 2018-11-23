@@ -1,5 +1,7 @@
-.cs-btn {
-  margin: 6px;
+.logout-btn {
+  float: left;
+  margin: 20px;
+  font-size: 120%;
   padding-left: 16px;
   padding-right: 16px;
   padding-top: 4px;
@@ -8,12 +10,20 @@
   border: none;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
   cursor: pointer;
-  transition: box-shadow 135ms cubic-bezier(0.4, 0, 0.2, 1),
-    transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  float: right;
+  background: black;
+  color: linen;
 }
 
-.cs-btn:hover {
+.logout-btn:hover {
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14),
     0 1px 10px 0 rgba(0, 0, 0, 0.12);
   transform: scale(1.08);
+}
+
+@media (min-width: 900px) {
+  .login-btn {
+    margin: 100px;
+    margin-bottom: 50px;
+  }
 }

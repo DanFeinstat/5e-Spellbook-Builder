@@ -4,6 +4,7 @@ import SpellItem from "../components/Spellbook/SpellItem";
 import Spellbook from "../components/Spellbook/Spellbook";
 import Card from "../components/Card/Card";
 import "./Pages.css";
+import LogoutBtn from "../components/Spellbook/LogoutBtn";
 const jwt = require("jsonwebtoken");
 
 class SpellbookPage extends Component {
@@ -64,10 +65,26 @@ class SpellbookPage extends Component {
     }
   };
 
+  toLogout = e => {
+    e.preventDefault();
+    localStorage.clear(localStorage.spellbookJwt);
+    this.setState(
+      {
+        id: "",
+        name: "",
+        email: "",
+        spells: [],
+        spellToDisplay: "",
+      },
+      (window.location.href = "/")
+    );
+  };
+
   render() {
     return (
       <div className="page-spellbook-container">
         <div className="pages-spellbook-content">
+          <LogoutBtn logout={this.toLogout} />
           <Spellbook>
             {this.state.spells.map((spell, index) => {
               return (
