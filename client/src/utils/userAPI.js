@@ -16,4 +16,7 @@ export default {
   login: userData => {
     return axios.post("/api/user/login", userData);
   },
+  deleteSpell: (id, spellName) => {
+    return axios.put("/api/user/deletespell/" + id + "/" + spellName);
+  },
 };

@@ -40,12 +40,23 @@ class Card extends Component {
           console.log("Not a duplicate!");
           userAPI
             .addSpell(this.props.loggedIn, this.props.spell)
-            .then(response => console.log("Spellbook Updated!"))
+            .then(response => console.log("Spell added!"))
             .catch(err => console.log(err));
         }
       })
       .catch(err => console.log(err));
   };
+
+  // deleteSpellFromSpellbook = e => {
+  //   userAPI
+  //     .deleteSpell(this.props.loggedIn, this.props.spellToDisplay)
+  //     .then(response => {
+  //       console.log("Spell Removed!");
+  //       console.log(response);
+  //     })
+  //     .catch(err => console.log(err));
+  // };
+
   convertComponentsToIcons = comps => {
     let compsArr = [];
     for (let i = 0; i < comps.length; i++) {
@@ -128,7 +139,7 @@ class Card extends Component {
             </div>
             <div className="third">
               Level:{" "}
-              {this.props.spell.level === -1
+              {this.props.spell.level === -1 || this.props.spell.level === 0
                 ? "Cantrip"
                 : this.props.spell.level}
             </div>
@@ -171,10 +182,14 @@ class Card extends Component {
         </div>
         {this.props.loggedIn ? (
           <div
-            onClick={this.saveSpellToSpellbook}
+            onClick={
+              this.props.page === "landing"
+                ? this.saveSpellToSpellbook
+                : this.props.removeSpell
+            }
             className={"card-transcribe-btn bg-" + this.props.class}
           >
-            Transcribe
+            {this.props.page === "landing" ? "Transcribe" : "Delete"}
           </div>
         ) : null}
       </React.Fragment>

@@ -11,4 +11,5 @@ router
   .put(userController.addSpell)
   .get(userController.getSpells);
 
+router.route("/deletespell/:id/:spellname").put(userController.deleteSpell);
 module.exports = router;

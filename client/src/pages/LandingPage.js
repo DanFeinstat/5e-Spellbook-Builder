@@ -176,6 +176,11 @@ class LandingPage extends Component {
     e.preventDefault();
     window.location.href = "/signup";
   };
+
+  toSpellbook = e => {
+    e.preventDefault();
+    window.location.href = "/spellbook/user";
+  };
   render() {
     const classes = [
       "Bard",
@@ -217,13 +222,18 @@ class LandingPage extends Component {
           //     />
           //   ) :
           <Card
+            page="landing"
             spell={this.state.currentSpell}
             class={this.state.classList}
             loggedIn={this.state.id}
             //   transcribe={this.saveSpellToSpellbook}
           />
         ) : null}
-        {!this.state.id ? <LoginBtn login={this.toLogin} /> : null}
+        {!this.state.id ? (
+          <LoginBtn text={"Log In"} onward={this.toLogin} />
+        ) : (
+          <LoginBtn text={"Spellbook"} onward={this.toSpellbook} />
+        )}
       </div>
     );
   }

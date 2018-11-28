@@ -9,6 +9,9 @@
   height: auto;
   min-height: 100vh;
 }
+.page-spellbook-li {
+  cursor: pointer;
+}
 
 .pages-spellbook-content {
   max-width: 1000px;
@@ -17,11 +20,21 @@
   padding-top: 10px;
   padding-bottom: 10px;
   min-height: 100vh;
+  overflow: hidden;
 }
 @media (min-width: 769px) {
   .pages-spellbook-content {
     padding-top: 50px;
     padding-bottom: 50px;
+  }
+}
+
+@media (max-width: 999px) {
+  .pages-spellbook-content {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
   }
 }
 

@@ -3,8 +3,8 @@ import "./LoginBtn.css";
 
 const LoginBtn = props => {
   return (
-    <button className="login-btn" onClick={props.login}>
-      Log In
+    <button className="login-btn" onClick={props.onward}>
+      {props.text}
     </button>
   );
 };
