@@ -15,6 +15,10 @@
     width: 320px;
   }
 }
+/* @media (min-width: 1000px) {
+  .card-container {
+  }
+} */
 
 .card-text-block {
   margin-top: 5px;
@@ -47,7 +51,7 @@
 }
 
 @media (min-width: 1000px) {
-  .card-transcribe-btn {
+  .spellbook-adjust {
     margin-left: 585px;
   }
 }

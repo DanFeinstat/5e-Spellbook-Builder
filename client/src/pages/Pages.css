@@ -11,12 +11,19 @@
 }
 .page-spellbook-li {
   cursor: pointer;
+  font-family: "Rock Salt", cursive;
+  text-decoration: underline;
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.page-spellbook-li:hover {
+  transform: scale(1.03) translate(6px);
 }
 
 .pages-spellbook-content {
   max-width: 1000px;
   margin: auto;
-  background: blue;
+  background-image: url(../images/fullbackgroundtexture.png);
+  background-position: 100% 100%;
   padding-top: 10px;
   padding-bottom: 10px;
   min-height: 100vh;

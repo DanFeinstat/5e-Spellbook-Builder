@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import "../App.css";
 //Components
 import ClassSelection from "../components/Search/ClassSelection";
 import ClassSelBtn from "../components/Search/ClassSelBtn";
 import Search from "../components/Search/Search";
+import SearchList from "../components/Search/SearchList";
 import Card from "../components/Card/Card";
 import LoginBtn from "../components/Login/LoginBtn";
 import userAPI from "../utils/userAPI";
@@ -35,21 +37,44 @@ class LandingPage extends Component {
 
   titleCase = str => {
     str = str.toLowerCase().split(" ");
-    for (var i = 0; i < str.length; i++) {
-      str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+    for (let i = 0; i < str.length; i++) {
+      if (
+        str[i] !== "and" &&
+        str[i] !== "or" &&
+        str[i] !== "from" &&
+        str[i] !== "into" &&
+        str[i] !== "of" &&
+        str[i] !== "with"
+      ) {
+        str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+        for (let j = 0; j < str[i].length; j++) {
+          // console.log(str[i].charAt(j));
+          if (str[i].charAt(j) === "/") {
+            str[i] =
+              str[i].slice(0, j + 1) +
+              str[i].charAt(j + 1).toUpperCase() +
+              str[i].slice(j + 2);
+          }
+        }
+      }
     }
     return str.join(" ");
   };
-
+  toFetchSpell = e => {
+    this.setState({ search: e.target.dataset.name }, this.toQuerySpellData);
+  };
   onSpellSubmit = e => {
     e.preventDefault();
+    this.toQuerySpellData();
+  };
+  toQuerySpellData = () => {
     const queryURL =
       "http://www.dnd5eapi.co/api/spells/" +
       this.state.classList.toLowerCase() +
       "/";
     let spellName = this.state.search.trim();
     let toSubmit = this.titleCase(spellName);
-    // console.log(toSubmit);
+    console.log(toSubmit);
     // console.log(queryURL);
     fetch(queryURL)
       .then(response => response.json())
@@ -118,11 +143,14 @@ class LandingPage extends Component {
                   castingTime: data.casting_time,
                   level: data.level,
                 };
-                this.setState({
-                  currentSpell: spellData,
-                  spellFound: true,
-                  searchActive: false,
-                });
+                this.setState(
+                  {
+                    currentSpell: spellData,
+                    spellFound: true,
+                    searchActive: false,
+                  },
+                  this.scrollToCard
+                );
               })
               .catch(function(error) {
                 console.log(error);
@@ -135,12 +163,17 @@ class LandingPage extends Component {
       });
   };
 
+  scrollToCard = () => {
+    let cardDiv = ReactDOM.findDOMNode(document.getElementById("scrollRefOne"));
+    cardDiv.scrollIntoView({ behavior: "smooth", block: "start" }, true);
+  };
+
   decodeUserID = () => {
-    console.log(localStorage.spellbookJwt);
+    // console.log(localStorage.spellbookJwt);
     const decoder = jwt.decode(localStorage.spellbookJwt);
-    console.log(decoder);
+    // console.log(decoder);
     const decodedID = decoder.id;
-    console.log(decodedID);
+    // console.log(decodedID);
     this.setState({
       id: decodedID,
     });
@@ -229,6 +262,10 @@ class LandingPage extends Component {
             //   transcribe={this.saveSpellToSpellbook}
           />
         ) : null}
+        <SearchList
+          classSelected={this.state.classList}
+          fetchSpell={this.toFetchSpell}
+        />
         {!this.state.id ? (
           <LoginBtn text={"Log In"} onward={this.toLogin} />
         ) : (

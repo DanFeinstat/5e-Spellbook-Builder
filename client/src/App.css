@@ -13,10 +13,10 @@
 }
 .App-background-Cleric {
   background-image: url(./images/backgroundTexture.png),
-    url(./images/possiblecleric.jpg) !important;
+    url(./images/possiblecleric.jpg), url(./images/fullbackgroundtexture.png) !important;
   background-position: left top, 1000% 0%;
-  background-size: cover, 96vw;
-  background-repeat: no-repeat, no-repeat;
+  background-size: 100vw, 97vw;
+  background-repeat: no-repeat, no-repeat, repeat;
 }
 
 .App-background-Druid {
@@ -85,7 +85,7 @@
 @media (min-width: 420px) {
   .App-background-Cleric {
     background-position: left top, 180% 0%;
-    background-size: cover, 80vw;
+    background-size: 100vw, 80vw;
   }
 }
 
@@ -93,7 +93,7 @@
   .App-background-Cleric {
     /* background-size: cover, 70vw; */
     background-position: left top, 140% 0%;
-    background-size: cover, 80vw;
+    background-size: 100vw, 80vw;
   }
   .App-background-Wizard {
     background-position: left top, 300% 0%;

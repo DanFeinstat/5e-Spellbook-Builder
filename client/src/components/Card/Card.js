@@ -80,7 +80,10 @@ class Card extends Component {
     //   const higherLevel = this.props.spell.higherLevel.join(" ");
     return (
       <React.Fragment>
-        <div className={"card-container card-float-" + this.props.float}>
+        <div
+          className={"card-container card-float-" + this.props.float}
+          id="scrollRefOne"
+        >
           <div className="card-text-block text-center full">
             {this.props.spell.name}
           </div>
@@ -187,7 +190,11 @@ class Card extends Component {
                 ? this.saveSpellToSpellbook
                 : this.props.removeSpell
             }
-            className={"card-transcribe-btn bg-" + this.props.class}
+            className={
+              this.props.page === "landing"
+                ? "card-transcribe-btn bg-" + this.props.class
+                : "card-transcribe-btn spellbook-adjust bg-" + this.props.class
+            }
           >
             {this.props.page === "landing" ? "Transcribe" : "Delete"}
           </div>
