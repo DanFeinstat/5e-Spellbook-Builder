@@ -100,7 +100,7 @@ class Card extends Component {
           className={"card-container card-float-" + this.props.float}
           id="scrollRefOne"
         >
-          <div className="card-text-block text-center full">
+          <div className="card-text-block text-center full card-font-3">
             {this.props.spell.name}
           </div>
           <div className="card-text-block half">
@@ -149,23 +149,27 @@ class Card extends Component {
             )}
           </div>
           <div className="card-text-block half">
-            Casting Time: {this.props.spell.castingTime}
+            <span className="card-font-2">CASTING TIME</span>:{" "}
+            {this.props.spell.castingTime}
           </div>
           <div className="card-text-block full">
             <div className="half">
               <DurationIcon />: {this.props.spell.duration}
             </div>
-            <div className="half">Range: {this.props.spell.range}</div>
+            <div className="half">
+              <span className="card-font-2">RANGE</span>:{" "}
+              {this.props.spell.range}
+            </div>
           </div>
           <div className="card-text-block full">
             <div className="twoThirds">
-              Components:{" "}
+              <span className="card-font-2">COMPONENTS</span>:{" "}
               {components.map((data, index) => {
                 return <React.Fragment key={index}>{data}</React.Fragment>;
               })}
             </div>
             <div className="third">
-              Level:{" "}
+              <span className="card-font-2">LEVEL</span>:{" "}
               {this.props.spell.level === -1 || this.props.spell.level === 0
                 ? "Cantrip"
                 : this.props.spell.level}
@@ -193,14 +197,14 @@ class Card extends Component {
             </div>
           </div>
           <div className="card-text-block full">
-            Materials:{" "}
+            <span className="card-font-2">MATERIALS</span>:{" "}
             {this.props.spell.materials !== undefined
               ? this.props.spell.materials
               : "No materials required."}
           </div>
           {this.props.spell.level !== -1 ? (
             <div className="card-text-block full">
-              Higher Level:{" "}
+              <span className="card-font-2">HIGHER LEVEL</span>:{" "}
               {this.props.spell.higherLevel !== undefined
                 ? this.props.spell.higherLevel.join(" ")
                 : "This spell does not scale."}

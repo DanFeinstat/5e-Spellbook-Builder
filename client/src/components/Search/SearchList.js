@@ -1016,7 +1016,13 @@ const SearchList = props => {
         ? eval(props.classSelected.toLowerCase() + "Lists").map(
             (level, index) => {
               let listNumber = index;
-              let spellLevel = index === 0 ? "Cantrip" : index;
+              let spellLevel =
+                props.classSelected !== "Paladin" &&
+                props.classSelected !== "Ranger"
+                  ? index === 0
+                    ? "Cantrip"
+                    : index
+                  : index + 1;
               let spellList = "level" + listNumber;
               return level.length ? (
                 // data-level={"level" + listNumber}

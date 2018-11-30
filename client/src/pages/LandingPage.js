@@ -223,6 +223,16 @@ class LandingPage extends Component {
       searchActive: false,
       classList: null,
       spellFound: false,
+      level0: false,
+      level1: false,
+      level2: false,
+      level3: false,
+      level4: false,
+      level5: false,
+      level6: false,
+      level7: false,
+      level8: false,
+      level9: false,
     });
   };
 
