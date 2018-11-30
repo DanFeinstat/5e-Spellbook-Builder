@@ -4,7 +4,7 @@ import "./SbRow.css";
 const SbRow = props => {
   return (
     <div>
-      <h3>Spell Level: {props.level}</h3>
+      <h3 onClick={props.toggleList}>Spell Level: {props.level}</h3>
       <ul>{props.children}</ul>
     </div>
   );

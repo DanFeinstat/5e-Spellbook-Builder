@@ -1,3 +1,35 @@
+.pages-landing-search-container {
+  width: 100vw;
+  height: 140px;
+}
+@media (max-width: 899px) {
+  .pages-landing-content-container {
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+@media (min-width: 900px) {
+  .pages-landing-list-container {
+    width: 30vw;
+    overflow: hidden;
+    float: left;
+  }
+  .pages-landing-card-container {
+    width: 50vw;
+    padding-bottom: 20px;
+    overflow: hidden;
+    float: left;
+  }
+}
+@media (min-width: 1100px) {
+  .pages-landing-card-container {
+    width: 30vw;
+  }
+}
+
 .page-signup-container {
   display: flex;
   flex-direction: column;
@@ -11,7 +43,11 @@
 }
 .page-spellbook-li {
   cursor: pointer;
-  font-family: "Rock Salt", cursive;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  /* font-family: "Spirax", cursive; */
+  font-family: "Oregano", cursive;
+  font-size: 130%;
   text-decoration: underline;
   transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -40,7 +76,6 @@
   .pages-spellbook-content {
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
   }
 }

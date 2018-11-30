@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 import "../App.css";
+import "./Pages.css";
 //Components
 import ClassSelection from "../components/Search/ClassSelection";
 import ClassSelBtn from "../components/Search/ClassSelBtn";
@@ -14,18 +15,37 @@ const jwt = require("jsonwebtoken");
 class LandingPage extends Component {
   state = {
     id: "",
+    width: window.innerWidth,
     searchActive: false,
     search: "",
     classList: null,
     spellFound: false,
     currentSpell: {},
+    level0: false,
+    level1: false,
+    level2: false,
+    level3: false,
+    level4: false,
+    level5: false,
+    level6: false,
+    level7: false,
+    level8: false,
+    level9: false,
   };
 
   componentDidMount() {
+    window.addEventListener("resize", this.handleWindowSizeChange);
     if (localStorage.spellbookJwt) {
       this.decodeUserID();
     }
   }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.handleWindowSizeChange);
+  }
+
+  handleWindowSizeChange = () => {
+    this.setState({ width: window.innerWidth });
+  };
 
   handleInputChange = e => {
     const name = e.target.name;
@@ -67,6 +87,7 @@ class LandingPage extends Component {
     e.preventDefault();
     this.toQuerySpellData();
   };
+
   toQuerySpellData = () => {
     const queryURL =
       "http://www.dnd5eapi.co/api/spells/" +
@@ -148,8 +169,8 @@ class LandingPage extends Component {
                     currentSpell: spellData,
                     spellFound: true,
                     searchActive: false,
-                  },
-                  this.scrollToCard
+                  }
+                  // this.scrollToCard
                 );
               })
               .catch(function(error) {
@@ -163,10 +184,10 @@ class LandingPage extends Component {
       });
   };
 
-  scrollToCard = () => {
-    let cardDiv = ReactDOM.findDOMNode(document.getElementById("scrollRefOne"));
-    cardDiv.scrollIntoView({ behavior: "smooth", block: "start" }, true);
-  };
+  // scrollToCard = () => {
+  //   let cardDiv = ReactDOM.findDOMNode(document.getElementById("scrollRefOne"));
+  //   cardDiv.scrollIntoView({ behavior: "smooth", block: "start" }, true);
+  // };
 
   decodeUserID = () => {
     // console.log(localStorage.spellbookJwt);
@@ -200,7 +221,7 @@ class LandingPage extends Component {
     e.preventDefault();
     this.setState({
       searchActive: false,
-      classList: "",
+      classList: null,
       spellFound: false,
     });
   };
@@ -214,7 +235,16 @@ class LandingPage extends Component {
     e.preventDefault();
     window.location.href = "/spellbook/user";
   };
+
+  toggleLevelList = e => {
+    const level = e.target.dataset.level;
+    this.setState(prevState => ({
+      [level]: !prevState[level],
+    }));
+  };
+
   render() {
+    const reArrange = this.state.width <= 899;
     const classes = [
       "Bard",
       "Cleric",
@@ -227,45 +257,87 @@ class LandingPage extends Component {
     ];
     return (
       <div className={"App App-background-" + this.state.classList}>
-        {this.state.searchActive ? (
-          <Search
-            inputChange={this.handleInputChange}
-            onSubmit={this.onSpellSubmit}
-            returnToClassSelect={this.returnToClassList}
-          />
+        <div className="pages-landing-search-container">
+          {this.state.searchActive ? (
+            <Search
+              inputChange={this.handleInputChange}
+              onSubmit={this.onSpellSubmit}
+              returnToClassSelect={this.returnToClassList}
+            />
+          ) : (
+            <ClassSelection>
+              {classes.map((value, index) => {
+                return (
+                  <ClassSelBtn
+                    selecClass={this.toSelectClass}
+                    key={index}
+                    name={value}
+                  />
+                );
+              })}
+            </ClassSelection>
+          )}
+        </div>
+        {reArrange ? (
+          <div className="pages-landing-content-container">
+            {this.state.spellFound ? (
+              <Card
+                page="landing"
+                spell={this.state.currentSpell}
+                class={this.state.classList}
+                loggedIn={this.state.id}
+                scrollActive={reArrange}
+                //   transcribe={this.saveSpellToSpellbook}
+              />
+            ) : null}
+            <SearchList
+              toggleList={this.toggleLevelList}
+              classSelected={this.state.classList}
+              fetchSpell={this.toFetchSpell}
+              level0={this.state.level0}
+              level1={this.state.level1}
+              level2={this.state.level2}
+              level3={this.state.level3}
+              level4={this.state.level4}
+              level5={this.state.level5}
+              level6={this.state.level6}
+              level7={this.state.level7}
+              level8={this.state.level8}
+              level9={this.state.level9}
+            />
+          </div>
         ) : (
-          <ClassSelection>
-            {classes.map((value, index) => {
-              return (
-                <ClassSelBtn
-                  selecClass={this.toSelectClass}
-                  key={index}
-                  name={value}
+          <div>
+            <div className="pages-landing-list-container">
+              <SearchList
+                toggleList={this.toggleLevelList}
+                classSelected={this.state.classList}
+                fetchSpell={this.toFetchSpell}
+                level0={this.state.level0}
+                level1={this.state.level1}
+                level2={this.state.level2}
+                level3={this.state.level3}
+                level4={this.state.level4}
+                level5={this.state.level5}
+                level6={this.state.level6}
+                level7={this.state.level7}
+                level8={this.state.level8}
+                level9={this.state.level9}
+              />
+            </div>
+            <div className="pages-landing-card-container">
+              {this.state.spellFound ? (
+                <Card
+                  page="landing"
+                  spell={this.state.currentSpell}
+                  class={this.state.classList}
+                  loggedIn={this.state.id}
+                  //   transcribe={this.saveSpellToSpellbook}
                 />
-              );
-            })}
-          </ClassSelection>
+              ) : null}
+            </div>
+          </div>
         )}
-        {this.state.spellFound ? (
-          //   {this.state.id ?
-          //    ( <Card
-          //       spell={this.state.currentSpell}
-          //       class={this.state.classList}
-          //       loggedIn={this.state.id}
-          //     />
-          //   ) :
-          <Card
-            page="landing"
-            spell={this.state.currentSpell}
-            class={this.state.classList}
-            loggedIn={this.state.id}
-            //   transcribe={this.saveSpellToSpellbook}
-          />
-        ) : null}
-        <SearchList
-          classSelected={this.state.classList}
-          fetchSpell={this.toFetchSpell}
-        />
         {!this.state.id ? (
           <LoginBtn text={"Log In"} onward={this.toLogin} />
         ) : (

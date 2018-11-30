@@ -151,6 +151,13 @@ class SpellbookPage extends Component {
     window.location.href = "/";
   };
 
+  // toggleLevelList = e => {
+  //   const level = e.target.dataset.level;
+  //   this.setState(prevState => ({
+  //     [level]: !prevState.level,
+  //   }));
+  // };
+
   render() {
     return (
       <div className="page-spellbook-container">
@@ -162,7 +169,12 @@ class SpellbookPage extends Component {
               let listNumber = index;
               let spellLevel = index === 0 ? "Cantrip" : index;
               return level.length ? (
-                <SbRow level={spellLevel} key={listNumber}>
+                <SbRow
+                  level={spellLevel}
+                  key={listNumber}
+                  // data-level={"level" + listNumber}
+                  // toggleList={this.toggleLevelList}
+                >
                   {level.map((list, index) => {
                     return (
                       <li

@@ -10,6 +10,22 @@
   background-color: whitesmoke;
 }
 
+.card-font-1 {
+  font-family: "Elsie", cursive;
+}
+.card-font-2 {
+  font-family: "Roboto", sans-serif;
+}
+/* font-family: 'Caveat', cursive;
+font-family: "Rock Salt", cursive;
+font-family: "Berkshire Swash", cursive;
+font-family: "Contrail One", cursive;
+font-family: "Cinzel Decorative", cursive;
+font-family: "Elsie", cursive;
+font-family: "Oregano", cursive;
+font-family: "East Sea Dokdo", cursive;
+font-family: "Spirax", cursive;
+*/
 @media (min-width: 331px) {
   .card-container {
     width: 320px;

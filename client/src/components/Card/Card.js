@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import "./Card.css";
 //API
 import userAPI from "../../utils/userAPI";
@@ -20,6 +21,16 @@ import MaterialIcon from "../Icons/MaterialIcon";
 import concentrationIcon from "../../images/concentration.png";
 
 class Card extends Component {
+  componentDidMount() {
+    if (this.props.scrollActive) {
+      this.scrollToCard();
+    }
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.spell !== prevProps.spell && this.props.scrollActive) {
+      this.scrollToCard();
+    }
+  }
   saveSpellToSpellbook = e => {
     e.preventDefault();
     console.log(this.props.spell);
@@ -70,6 +81,11 @@ class Card extends Component {
     }
     return compsArr;
   };
+
+  scrollToCard = () => {
+    let cardDiv = ReactDOM.findDOMNode(document.getElementById("scrollRefOne"));
+    cardDiv.scrollIntoView({ behavior: "smooth", block: "start" }, true);
+  };
   render() {
     // const components = this.props.spell.components.join(" ");
     const components = this.convertComponentsToIcons(
@@ -90,35 +106,43 @@ class Card extends Component {
           <div className="card-text-block half">
             {this.props.spell.school === "Abjuration" ? (
               <React.Fragment>
-                <AbjurationIcon /> {this.props.spell.school}
+                <AbjurationIcon />{" "}
+                <span className="card-font-1">{this.props.spell.school}</span>
               </React.Fragment>
             ) : this.props.spell.school === "Conjuration" ? (
               <React.Fragment>
-                <ConjurationIcon /> {this.props.spell.school}
+                <ConjurationIcon />{" "}
+                <span className="card-font-1">{this.props.spell.school}</span>
               </React.Fragment>
             ) : this.props.spell.school === "Divination" ? (
               <React.Fragment>
-                <DivinationIcon /> {this.props.spell.school}
+                <DivinationIcon />{" "}
+                <span className="card-font-1">{this.props.spell.school}</span>
               </React.Fragment>
             ) : this.props.spell.school === "Enchantment" ? (
               <React.Fragment>
-                <EnchantmentIcon /> {this.props.spell.school}
+                <EnchantmentIcon />{" "}
+                <span className="card-font-1">{this.props.spell.school}</span>
               </React.Fragment>
             ) : this.props.spell.school === "Evocation" ? (
               <React.Fragment>
-                <EvocationIcon /> {this.props.spell.school}
+                <EvocationIcon />{" "}
+                <span className="card-font-1">{this.props.spell.school}</span>
               </React.Fragment>
             ) : this.props.spell.school === "Illusion" ? (
               <React.Fragment>
-                <IllusionIcon /> {this.props.spell.school}
+                <IllusionIcon />{" "}
+                <span className="card-font-1">{this.props.spell.school}</span>
               </React.Fragment>
             ) : this.props.spell.school === "Necromancy" ? (
               <React.Fragment>
-                <NecromancyIcon /> {this.props.spell.school}
+                <NecromancyIcon />{" "}
+                <span className="card-font-1">{this.props.spell.school}</span>
               </React.Fragment>
             ) : this.props.spell.school === "Transmutation" ? (
               <React.Fragment>
-                <TransmutationIcon /> {this.props.spell.school}
+                <TransmutationIcon />{" "}
+                <span className="card-font-1">{this.props.spell.school}</span>
               </React.Fragment>
             ) : (
               "School: " + this.props.spell.school
