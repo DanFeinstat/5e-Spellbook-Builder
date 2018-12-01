@@ -1,7 +1,71 @@
 .pages-landing-search-container {
   width: 100vw;
-  height: 140px;
+  height: 160px;
+  cursor: default;
 }
+.pages-landing-splash {
+  width: 300px;
+  padding-top: 86px;
+  padding-bottom: 158px;
+  margin: auto;
+  margin-top: 10px;
+  text-align: center;
+  cursor: default;
+  font-family: "Cinzel Decorative", cursive;
+  font-weight: 900;
+  font-size: 150%;
+  background-image: url(../images/Unsealed_Spellbook_rune.png) !important;
+  background-repeat: no-repeat;
+  background-size: 300px;
+  background-position: center center;
+}
+.pages-landing-tutorial-content {
+  width: 300px;
+  margin: auto;
+  margin-top: 10px;
+  text-align: center;
+  cursor: default;
+}
+.pages-landing-tutorial-content2 {
+  width: 300px;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 60px;
+  text-align: center;
+  cursor: default;
+}
+
+@media (min-width: 414px) {
+  .pages-landing-splash {
+    width: 380px;
+    padding-top: 114px;
+    padding-bottom: 210px;
+    font-weight: bolder;
+    font-size: 180%;
+  }
+  .pages-landing-tutorial-content {
+    width: 380px;
+  }
+  .pages-landing-tutorial-content2 {
+    width: 380px;
+  }
+}
+@media (min-width: 520px) {
+  .pages-landing-splash {
+    width: 500px;
+    padding-top: 172px;
+    padding-bottom: 272px;
+    font-weight: 900;
+    font-size: 250%;
+  }
+  .pages-landing-tutorial-content {
+    width: 500px;
+  }
+  .pages-landing-tutorial-content2 {
+    width: 500px;
+  }
+}
+
 @media (max-width: 899px) {
   .pages-landing-content-container {
     width: 100vw;
@@ -34,6 +98,11 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+    url(../images/fullbackgroundtexture.png) !important;
 }
 
 .page-spellbook-container {
@@ -48,7 +117,7 @@
   /* font-family: "Spirax", cursive; */
   font-family: "Oregano", cursive;
   font-size: 130%;
-  text-decoration: underline;
+  /* text-decoration: underline; */
   transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .page-spellbook-li:hover {

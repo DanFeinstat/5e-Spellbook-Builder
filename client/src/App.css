@@ -4,6 +4,11 @@
   width: 100vw;
 }
 
+.App-background-null {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+    url(./images/fullbackgroundtexture.png) !important;
+}
+
 .App-background-Bard {
   background-image: url(./images/backgroundTexture.png),
     url(./images/bardbackground.jpg), url(./images/fullbackgroundtexture.png) !important;

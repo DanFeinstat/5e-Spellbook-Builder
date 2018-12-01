@@ -8,8 +8,10 @@ import ClassSelBtn from "../components/Search/ClassSelBtn";
 import Search from "../components/Search/Search";
 import SearchList from "../components/Search/SearchList";
 import Card from "../components/Card/Card";
+import TutorialCard from "../components/Card/TutorialCard";
 import LoginBtn from "../components/Login/LoginBtn";
 import userAPI from "../utils/userAPI";
+import cardTutorial from "../utils/dataObjects/cardTutorial";
 const jwt = require("jsonwebtoken");
 
 class LandingPage extends Component {
@@ -21,6 +23,7 @@ class LandingPage extends Component {
     classList: null,
     spellFound: false,
     currentSpell: {},
+    tutorial: false,
     level0: false,
     level1: false,
     level2: false,
@@ -253,6 +256,12 @@ class LandingPage extends Component {
     }));
   };
 
+  toggleTutorial = e => {
+    this.setState(prevState => ({
+      tutorial: !prevState.tutorial,
+    }));
+  };
+
   render() {
     const reArrange = this.state.width <= 899;
     const classes = [
@@ -279,15 +288,42 @@ class LandingPage extends Component {
               {classes.map((value, index) => {
                 return (
                   <ClassSelBtn
-                    selecClass={this.toSelectClass}
+                    selectClass={this.toSelectClass}
                     key={index}
                     name={value}
                   />
                 );
               })}
+              {!this.state.classList ? (
+                <ClassSelBtn
+                  name="Tutorial"
+                  special="cs-btn-tutorial"
+                  selectClass={this.toggleTutorial}
+                />
+              ) : null}
             </ClassSelection>
           )}
         </div>
+        {!this.state.classList && this.state.tutorial ? (
+          <React.Fragment>
+            <h2 className="pages-landing-tutorial-content">
+              Welcome to the 5e Spellbook!
+            </h2>
+            <p className="pages-landing-tutorial-content">
+              Below is an example spell card that demonstrates the layout and
+              icons used. The "Transcribe" button at the bottom will only show
+              up if you're logged in. It allows you to save the spell to a
+              personal spellbook.
+            </p>
+            <TutorialCard />
+            <p className="pages-landing-tutorial-content2">
+              To get started, select a class at the top of the page, or hit the
+              "Log In" button in the bottom right of the screen.
+            </p>
+          </React.Fragment>
+        ) : !this.state.classList && !this.state.tutorial ? (
+          <h1 className="pages-landing-splash">Welcome to the 5e Spellbook!</h1>
+        ) : null}
         {reArrange ? (
           <div className="pages-landing-content-container">
             {this.state.spellFound ? (

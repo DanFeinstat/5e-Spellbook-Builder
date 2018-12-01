@@ -4,7 +4,6 @@ import "./Card.css";
 //API
 import userAPI from "../../utils/userAPI";
 //school icons
-import RitualIcon from "../Icons/RitualIcon";
 import AbjurationIcon from "../Icons/AbjurationIcon";
 import ConjurationIcon from "../Icons/ConjurationIcon";
 import DivinationIcon from "../Icons/DivinationIcon";
@@ -14,6 +13,7 @@ import IllusionIcon from "../Icons/IllusionIcon";
 import NecromancyIcon from "../Icons/NecromancyIcon";
 import TransmutationIcon from "../Icons/TransmutationIcon";
 //card category icons
+import RitualIcon from "../Icons/RitualIcon";
 import DurationIcon from "../Icons/DurationIcon";
 import VerbalIcon from "../Icons/VerbalIcon";
 import SomaticIcon from "../Icons/SomaticIcon";
@@ -100,7 +100,7 @@ class Card extends Component {
           className={"card-container card-float-" + this.props.float}
           id="scrollRefOne"
         >
-          <div className="card-text-block text-center full card-font-3">
+          <div className="card-text-block text-center full card-font-1 card-title">
             {this.props.spell.name}
           </div>
           <div className="card-text-block half">

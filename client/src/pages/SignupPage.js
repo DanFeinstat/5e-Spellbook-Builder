@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Signup from "../components/Lisu/Signup";
 import Login from "../components/Lisu/Login";
+import LoginBtn from "../components/Login/LoginBtn";
 import userAPI from "../utils/userAPI";
 import "./Pages.css";
 
@@ -38,9 +39,9 @@ class SignupPage extends Component {
       email: this.state.email,
       password: this.state.password,
     };
-    console.log(userData);
+    // console.log(userData);
     userAPI.createUser(userData).then(response => {
-      console.log(response.data.spellbookJwt);
+      // console.log(response.data.spellbookJwt);
       localStorage.setItem("spellbookJwt", response.data.spellbookJwt);
       window.location.href = "/spellbook/user";
     });
@@ -58,6 +59,10 @@ class SignupPage extends Component {
       window.location.href = "/spellbook/user";
     });
   };
+
+  toLanding = () => {
+    window.location.href = "/";
+  };
   render() {
     return (
       <div className="page-signup-container">
@@ -69,6 +74,7 @@ class SignupPage extends Component {
           inputChange={this.handleInputChange}
           signupSubmit={this.handleSignupSubmit}
         />
+        <LoginBtn text="Back" onward={this.toLanding} />
       </div>
     );
   }

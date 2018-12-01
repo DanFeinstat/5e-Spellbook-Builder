@@ -9,12 +9,17 @@
   padding: 15px;
   background-color: whitesmoke;
 }
-
+.card-title {
+  font-size: 120%;
+  font-weight: bold;
+}
 .card-font-1 {
   font-family: "Elsie", cursive;
+  /* font-weight: bold; */
 }
 .card-font-2 {
   font-family: "Boogaloo", cursive;
+  font-size: 90%;
 }
 .card-font-3 {
   font-family: "Cinzel Decorative", cursive;
