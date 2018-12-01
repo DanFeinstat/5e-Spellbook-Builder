@@ -105,7 +105,7 @@ class LandingPage extends Component {
       "/";
     let spellName = this.state.search.trim();
     let toSubmit = this.titleCase(spellName);
-    console.log(toSubmit);
+    // console.log(toSubmit);
     // console.log(queryURL);
     fetch(queryURL)
       .then(response => response.json())
@@ -113,7 +113,7 @@ class LandingPage extends Component {
         // console.log(res);
         for (let i = 0; i < res.results.length; i++) {
           if (res.results[i].name === toSubmit) {
-            console.log(res.results[i].url);
+            // console.log(res.results[i].url);
             fetch(res.results[i].url)
               .then(response => response.json())
               .then(data => {

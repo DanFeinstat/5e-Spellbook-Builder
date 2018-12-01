@@ -1038,7 +1038,7 @@ const SearchList = props => {
                   <ul key={listNumber}>
                     {level.map((list, index) => {
                       const toggleKey = "level" + listNumber;
-                      console.log(toggleKey);
+                      // console.log(toggleKey);
                       return (
                         <li
                           className={

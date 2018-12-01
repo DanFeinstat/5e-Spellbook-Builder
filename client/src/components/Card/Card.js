@@ -33,13 +33,13 @@ class Card extends Component {
   }
   saveSpellToSpellbook = e => {
     e.preventDefault();
-    console.log(this.props.spell);
+    // console.log(this.props.spell);
     userAPI
       .getSpells(this.props.loggedIn)
       .then(response => {
         // let response = response;
         let isDuplicate = res => {
-          console.log(res);
+          // console.log(res);
           for (let i = 0; i < res.data.spellbooks[0].spells.length; i++) {
             if (
               res.data.spellbooks[0].spells[i].name === this.props.spell.name
@@ -50,8 +50,8 @@ class Card extends Component {
         };
         let duplicate = isDuplicate(response);
         if (!duplicate) {
-          console.log("Not a duplicate!");
-          console.log(this.props.username);
+          // console.log("Not a duplicate!");
+          // console.log(this.props.username);
           userAPI
             .addSpell(
               this.props.loggedIn,

@@ -1,6 +1,4 @@
 import axios from "axios";
-import { SSL_OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION } from "constants";
-
 export default {
   createUser: userData => {
     return axios.post("/api/user/signup", userData);

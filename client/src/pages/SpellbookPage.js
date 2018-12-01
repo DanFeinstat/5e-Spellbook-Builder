@@ -20,7 +20,7 @@ class SpellbookPage extends Component {
   };
 
   componentDidMount() {
-    console.log("loaded");
+    // console.log("loaded");
     this.decodeUserIDandPopulate();
   }
 
@@ -29,11 +29,11 @@ class SpellbookPage extends Component {
   //   }
 
   decodeUserIDandPopulate = () => {
-    console.log(localStorage.spellbookJwt);
+    // console.log(localStorage.spellbookJwt);
     const decoder = jwt.decode(localStorage.spellbookJwt);
-    console.log(decoder);
+    // console.log(decoder);
     const decodedID = decoder.id;
-    console.log(decodedID);
+    // console.log(decodedID);
     this.setState(
       {
         id: decodedID,
@@ -50,7 +50,7 @@ class SpellbookPage extends Component {
         this.state.spellToDisplay.name
       )
       .then(response => {
-        console.log("Spell Removed!");
+        // console.log("Spell Removed!");
         this.populateSpellbook();
         this.setState({
           spellToDisplay: "",
@@ -64,8 +64,8 @@ class SpellbookPage extends Component {
     userAPI
       .getSpells(this.state.id)
       .then(response => {
-        console.log(response);
-        console.log(response.data.spellbooks[0].spells);
+        // console.log(response);
+        // console.log(response.data.spellbooks[0].spells);
         const alphabetizedSpells = response.data.spellbooks[0].spells.sort(
           function(a, b) {
             if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
@@ -73,7 +73,7 @@ class SpellbookPage extends Component {
             return 0;
           }
         );
-        console.log(alphabetizedSpells);
+        // console.log(alphabetizedSpells);
         let spellsByLevel = [];
         let level0 = [];
         let level1 = [];
@@ -92,7 +92,7 @@ class SpellbookPage extends Component {
           ) {
             spellsByLevel.push(alphabetizedSpells[k]);
             level0.push(alphabetizedSpells[k]);
-            console.log(level0);
+            // console.log(level0);
           }
         }
         for (let i = 1; i < 10; i++) {
@@ -112,7 +112,7 @@ class SpellbookPage extends Component {
           let listFragment = eval("level" + l);
           listOfLists.push(listFragment);
         }
-        console.log(listOfLists);
+        // console.log(listOfLists);
         this.setState({
           names: response.data.names,
           email: response.data.email,
@@ -130,7 +130,7 @@ class SpellbookPage extends Component {
   };
 
   displaySpell = e => {
-    console.log(e.target.dataset.name);
+    // console.log(e.target.dataset.name);
     for (let i = 0; i < this.state.spells.length; i++) {
       if (this.state.spells[i].name === e.target.dataset.name) {
         this.setState({
