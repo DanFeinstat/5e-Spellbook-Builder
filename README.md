@@ -1,12 +1,12 @@
 # 5e Spellbook Builder
 
-Have you ever been in the middle of a combat round and needed to take a 5 minute break to search for spell details in the PHB? This spellbook builder is a tool to allow users to search and save spell lists with full spell details to an account for easy access during game time.
+Have you ever been in the middle of a combat round and needed to take a 5 minute break to search for spell details in the PHB? This spellbook builder is a tool to allow users to search and save spell lists with quickly accessible full spell details.
 
 Note: Currently this Spellbook Builder only supports content from the core rulebooks.
 
 ## Technology
 
-the 5e Spellbook Builder is MERN app built with:
+the 5e Spellbook Builder is a MERN app built with:
 
 - React
 - Node
