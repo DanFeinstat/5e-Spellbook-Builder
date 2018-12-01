@@ -109,6 +109,9 @@
   width: 100vw;
   height: auto;
   min-height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+    url(../images/vintageTableTexture.jpg) !important;
+  background-repeat: repeat, repeat, repeat;
 }
 .page-spellbook-li {
   cursor: pointer;

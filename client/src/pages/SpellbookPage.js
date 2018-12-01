@@ -159,13 +159,6 @@ class SpellbookPage extends Component {
     window.location.href = "/";
   };
 
-  // toggleLevelList = e => {
-  //   const level = e.target.dataset.level;
-  //   this.setState(prevState => ({
-  //     [level]: !prevState.level,
-  //   }));
-  // };
-
   render() {
     return (
       <div className="page-spellbook-container">

@@ -50,10 +50,10 @@ module.exports = {
 
   deleteSpell: (req, res) => {
     db.Users.updateOne(
-      { _id: req.params.id, spellbooks: { name: req.params.username } },
+      { _id: req.params.id, "spellbooks.name": req.params.username },
       {
         $pull: {
-          spellbooks: { spells: { name: req.params.spellname } },
+          "spellbooks.$.spells": { name: req.params.spellname },
         },
       }
     )

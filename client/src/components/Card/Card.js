@@ -58,8 +58,10 @@ class Card extends Component {
               this.props.username,
               this.props.spell
             )
-            .then(response => console.log("Spell added!"))
+            .then(response => alert("Spell added!"))
             .catch(err => console.log(err));
+        } else {
+          alert("This spell is already in your spellbook.");
         }
       })
       .catch(err => console.log(err));
