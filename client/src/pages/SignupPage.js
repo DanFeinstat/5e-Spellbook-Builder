@@ -35,9 +35,10 @@ class SignupPage extends Component {
       return alert("Your passwords do not match");
     }
     const userData = {
-      name: this.state.name,
+      names: [this.state.name],
       email: this.state.email,
       password: this.state.password,
+      spellbooks: [{ name: this.state.name }],
     };
     // console.log(userData);
     userAPI.createUser(userData).then(response => {

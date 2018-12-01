@@ -21,6 +21,12 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
 
+  getUser: (req, res) => {
+    db.User.find({ _id: req.params.id })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+
   deleteUser: function(req, res) {
     db.Users.deleteOne({ _id: req.params.id })
       .then(dbModel => res.json(dbModel))
@@ -29,10 +35,10 @@ module.exports = {
 
   addSpell: (req, res) => {
     db.Users.updateOne(
-      { _id: req.params.id },
+      { _id: req.params.id, "spellbooks.name": req.params.username },
       {
         $push: {
-          spells: [req.body],
+          "spellbooks.$.spells": req.body,
         },
       }
     )
@@ -40,12 +46,14 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
 
+  // db.msgs.update({"userID":"olivia","friends":{$elemMatch:{"userID":"tom"}}},{$push:{"friends.$.messages":{text:"hello"}}})
+
   deleteSpell: (req, res) => {
     db.Users.updateOne(
-      { _id: req.params.id },
+      { _id: req.params.id, spellbooks: { name: req.params.username } },
       {
         $pull: {
-          spells: { name: req.params.spellname },
+          spellbooks: { spells: { name: req.params.spellname } },
         },
       }
     )
@@ -66,23 +74,6 @@ module.exports = {
       .catch(err => res.status(404).send(err));
   },
   login: function(req, res) {
-    // db.Users.findOne({ email: req.body.email })
-    //   .then(user => {
-    //     var passwordResult = bcrypt.compareSync(
-    //       req.body.password,
-    //       user.password
-    //     );
-
-    //     if (passwordResult) {
-    //       const spellbookJwt = jwt.sign({ id: user._id }, process.env.SECRET);
-    //       res.status(200).send({ spellbookJwt, user });
-    //     } else {
-    //       res.status(404).send({ message: "Incorrect Password" });
-    //     }
-    //   })
-    //   .catch(() =>
-    //     res.status(400).send({ message: "Could not find your email" })
-    //   );
     db.Users.findOne({ email: req.body.email })
       .then(dbModel => {
         var passwordResult = bcrypt.compare(

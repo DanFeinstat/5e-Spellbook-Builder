@@ -11,12 +11,13 @@ import Card from "../components/Card/Card";
 import TutorialCard from "../components/Card/TutorialCard";
 import LoginBtn from "../components/Login/LoginBtn";
 import userAPI from "../utils/userAPI";
-import cardTutorial from "../utils/dataObjects/cardTutorial";
+// import cardTutorial from "../utils/dataObjects/cardTutorial";
 const jwt = require("jsonwebtoken");
 
 class LandingPage extends Component {
   state = {
     id: "",
+    names: [],
     width: window.innerWidth,
     searchActive: false,
     search: "",
@@ -42,6 +43,12 @@ class LandingPage extends Component {
       this.decodeUserID();
     }
   }
+  componentDidUpdate() {
+    if (localStorage.spellbookJwt && !this.state.id) {
+      this.decodeUserID();
+    }
+  }
+
   componentWillUnmount() {
     window.removeEventListener("resize", this.handleWindowSizeChange);
   }
@@ -198,8 +205,19 @@ class LandingPage extends Component {
     // console.log(decoder);
     const decodedID = decoder.id;
     // console.log(decodedID);
-    this.setState({
-      id: decodedID,
+    this.setState(
+      {
+        id: decodedID,
+      },
+      this.updateUserData
+    );
+  };
+
+  updateUserData = () => {
+    userAPI.getSpells(this.state.id).then(response => {
+      this.setState({
+        names: response.data.names,
+      });
     });
   };
 
@@ -330,6 +348,7 @@ class LandingPage extends Component {
               <Card
                 page="landing"
                 spell={this.state.currentSpell}
+                username={this.state.names[0]}
                 class={this.state.classList}
                 loggedIn={this.state.id}
                 scrollActive={reArrange}
@@ -377,6 +396,7 @@ class LandingPage extends Component {
                   page="landing"
                   spell={this.state.currentSpell}
                   class={this.state.classList}
+                  username={this.state.names[0]}
                   loggedIn={this.state.id}
                   //   transcribe={this.saveSpellToSpellbook}
                 />

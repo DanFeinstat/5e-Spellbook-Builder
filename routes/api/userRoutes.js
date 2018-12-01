@@ -5,11 +5,16 @@ router.route("/signup").post(userController.create);
 
 router.route("/login").post(userController.login);
 
+router.route("/data/:id").get(userController.getUser);
+
 router
   .route("/:id")
   .delete(userController.deleteUser)
-  .put(userController.addSpell)
   .get(userController.getSpells);
 
-router.route("/deletespell/:id/:spellname").put(userController.deleteSpell);
+router.route("/:id/:username").put(userController.addSpell);
+
+router
+  .route("/deletespell/:id/:username/:spellname")
+  .put(userController.deleteSpell);
 module.exports = router;

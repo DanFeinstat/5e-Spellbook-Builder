@@ -11,7 +11,7 @@ const jwt = require("jsonwebtoken");
 class SpellbookPage extends Component {
   state = {
     id: "",
-    name: "",
+    names: [],
     email: "",
     spells: [],
     listsByLevels: [],
@@ -44,7 +44,11 @@ class SpellbookPage extends Component {
 
   deleteSpellFromSpellbook = e => {
     userAPI
-      .deleteSpell(this.state.id, this.state.spellToDisplay.name)
+      .deleteSpell(
+        this.state.id,
+        this.state.names[0],
+        this.state.spellToDisplay.name
+      )
       .then(response => {
         console.log("Spell Removed!");
         this.populateSpellbook();
@@ -60,12 +64,15 @@ class SpellbookPage extends Component {
     userAPI
       .getSpells(this.state.id)
       .then(response => {
-        // console.log(response);
-        const alphabetizedSpells = response.data.spells.sort(function(a, b) {
-          if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
-          if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
-          return 0;
-        });
+        console.log(response);
+        console.log(response.data.spellbooks[0].spells);
+        const alphabetizedSpells = response.data.spellbooks[0].spells.sort(
+          function(a, b) {
+            if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+            if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+            return 0;
+          }
+        );
         console.log(alphabetizedSpells);
         let spellsByLevel = [];
         let level0 = [];
@@ -85,6 +92,7 @@ class SpellbookPage extends Component {
           ) {
             spellsByLevel.push(alphabetizedSpells[k]);
             level0.push(alphabetizedSpells[k]);
+            console.log(level0);
           }
         }
         for (let i = 1; i < 10; i++) {
@@ -106,7 +114,7 @@ class SpellbookPage extends Component {
         }
         console.log(listOfLists);
         this.setState({
-          name: response.data.name,
+          names: response.data.names,
           email: response.data.email,
           spells: spellsByLevel,
           listsByLevels: listOfLists,
@@ -190,24 +198,10 @@ class SpellbookPage extends Component {
                 </SbRow>
               ) : null;
             })}
-            {/* {this.state.spells.map((spell, index) => {
-              let spellLevel =
-                spell.level === -1 || spell.level === 0
-                  ? (spell.level = "Cantrip")
-                  : spell.level;
-              return (
-                <SpellItem
-                  key={index}
-                  name={spell.name}
-                  school={spell.school}
-                  level={spellLevel}
-                  spellToDisplay={this.displaySpell}
-                />
-              );
-            })} */}
           </Spellbook>
           {this.state.spellToDisplay ? (
             <Card
+              username={this.state.names[0]}
               page="spellbook"
               spell={this.state.spellToDisplay}
               class={"none"}

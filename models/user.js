@@ -5,14 +5,19 @@ const yummySalt = 10;
 const jwt = require("jsonwebtoken");
 
 const userSchema = new Schema({
-  name: { type: String, required: true },
+  names: { type: Array, required: true },
   email: {
     type: String,
     match: [/.+@.+\..+/, "Please enter a valid e-mail address"],
     required: true,
   },
   password: { type: String, required: true, select: false },
-  spells: { type: Array, default: [] },
+  spellbooks: [
+    {
+      name: { type: String, required: true },
+      spells: { type: Array, default: [] },
+    },
+  ],
 });
 
 userSchema.pre("save", function(next) {

@@ -40,8 +40,10 @@ class Card extends Component {
         // let response = response;
         let isDuplicate = res => {
           console.log(res);
-          for (let i = 0; i < res.data.spells.length; i++) {
-            if (res.data.spells[i].name === this.props.spell.name) {
+          for (let i = 0; i < res.data.spellbooks[0].spells.length; i++) {
+            if (
+              res.data.spellbooks[0].spells[i].name === this.props.spell.name
+            ) {
               return true;
             }
           }
@@ -49,8 +51,13 @@ class Card extends Component {
         let duplicate = isDuplicate(response);
         if (!duplicate) {
           console.log("Not a duplicate!");
+          console.log(this.props.username);
           userAPI
-            .addSpell(this.props.loggedIn, this.props.spell)
+            .addSpell(
+              this.props.loggedIn,
+              this.props.username,
+              this.props.spell
+            )
             .then(response => console.log("Spell added!"))
             .catch(err => console.log(err));
         }
