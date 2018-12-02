@@ -45,12 +45,12 @@ class LandingPage extends Component {
       this.decodeUserID();
     }
   }
-  componentDidUpdate() {
-    if (localStorage.spellbookJwt && !this.state.id) {
-      console.log("check");
-      this.decodeUserID();
-    }
-  }
+  // componentDidUpdate() {
+  //   if (localStorage.spellbookJwt && !this.state.id) {
+  //     console.log("check");
+  //     this.decodeUserID();
+  //   }
+  // }
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.handleWindowSizeChange);
