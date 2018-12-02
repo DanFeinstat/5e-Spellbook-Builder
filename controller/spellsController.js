@@ -2,7 +2,7 @@ const db = require("../models");
 
 module.exports = {
   findAll: (req, res) => {
-    db.Spells.find(req.query)
+    db.Spells.find()
       .then(dbModel => {
         console.log(dbModel);
         res.json(dbModel);
