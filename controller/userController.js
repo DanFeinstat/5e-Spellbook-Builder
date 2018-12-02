@@ -76,6 +76,7 @@ module.exports = {
   login: function(req, res) {
     db.Users.findOne({ email: req.body.email })
       .then(dbModel => {
+        console.log(dbModel);
         var passwordResult = bcrypt.compare(
           req.body.password,
           dbModel.password
