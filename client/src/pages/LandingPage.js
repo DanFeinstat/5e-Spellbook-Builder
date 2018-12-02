@@ -11,6 +11,7 @@ import Card from "../components/Card/Card";
 import TutorialCard from "../components/Card/TutorialCard";
 import LoginBtn from "../components/Login/LoginBtn";
 import userAPI from "../utils/userAPI";
+import spellAPI from "../utils/spellAPI";
 // import cardTutorial from "../utils/dataObjects/cardTutorial";
 const jwt = require("jsonwebtoken");
 
@@ -24,6 +25,7 @@ class LandingPage extends Component {
     classList: null,
     spellFound: false,
     currentSpell: {},
+    listofLists: [],
     tutorial: false,
     level0: false,
     level1: false,
@@ -117,6 +119,7 @@ class LandingPage extends Component {
             fetch(res.results[i].url)
               .then(response => response.json())
               .then(data => {
+                console.log(data);
                 let desc = [];
                 if (Array.isArray(data.desc)) {
                   for (let i = 0; i < data.desc.length; i++) {
@@ -229,14 +232,14 @@ class LandingPage extends Component {
   //       .catch(err => console.log(err));
   //   };
 
-  toSelectClass = e => {
-    const newClass = e.target.textContent;
-    this.setState({
-      searchActive: true,
-      classList: newClass,
-      spellFound: false,
-    });
-  };
+  // toSelectClass = e => {
+  //   const newClass = e.target.textContent;
+  //   this.setState({
+  //     searchActive: true,
+  //     classList: newClass,
+  //     spellFound: false,
+  //   });
+  // };
 
   returnToClassList = e => {
     e.preventDefault();
@@ -280,6 +283,72 @@ class LandingPage extends Component {
     }));
   };
 
+  getClassList = e => {
+    let newClass = e.target.textContent;
+    spellAPI
+      .getClassList(newClass)
+      .then(response => {
+        console.log(response);
+        let listofLists = [];
+        let level0 = [];
+        let level1 = [];
+        let level2 = [];
+        let level3 = [];
+        let level4 = [];
+        let level5 = [];
+        let level6 = [];
+        let level7 = [];
+        let level8 = [];
+        let level9 = [];
+        for (let i = 0; i < response.data.length; i++) {
+          if (response.data[i].data.level === "Cantrip") {
+            level0.push(response.data[i]);
+          } else {
+            let levelnum = response.data[i].data.level.charAt(0);
+            eval("level" + levelnum).push(response.data[i]);
+          }
+        }
+        if (level0.length >= 1) {
+          listofLists.push(level0);
+        }
+        if (level1.length >= 1) {
+          listofLists.push(level1);
+        }
+        if (level2.length >= 1) {
+          listofLists.push(level2);
+        }
+        if (level3.length >= 1) {
+          listofLists.push(level3);
+        }
+        if (level4.length >= 1) {
+          listofLists.push(level4);
+        }
+        if (level5.length >= 1) {
+          listofLists.push(level5);
+        }
+        if (level6.length >= 1) {
+          listofLists.push(level6);
+        }
+        if (level7.length >= 1) {
+          listofLists.push(level7);
+        }
+        if (level8.length >= 1) {
+          listofLists.push(level8);
+        }
+        if (level9.length >= 1) {
+          listofLists.push(level9);
+        }
+        console.log(listofLists);
+        this.setState({
+          searchActive: true,
+          classList: newClass,
+          spellFound: false,
+          listofLists: listofLists,
+        });
+      })
+      .catch(err => console.log(err));
+  };
+
   render() {
     const reArrange = this.state.width <= 899;
     const classes = [
@@ -306,7 +375,8 @@ class LandingPage extends Component {
               {classes.map((value, index) => {
                 return (
                   <ClassSelBtn
-                    selectClass={this.toSelectClass}
+                    // selectClass={this.toSelectClass}
+                    test={this.getClassList}
                     key={index}
                     name={value}
                   />

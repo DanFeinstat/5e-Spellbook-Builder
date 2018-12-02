@@ -3,7 +3,9 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const path = require("path");
 const dotenv = require("dotenv");
-const routes = require("./routes/api");
+const routes = require("./routes");
+const db = require("./models");
+const spellData = require("./spells.json");
 const jwt = require("jsonwebtoken");
 
 const app = express();
@@ -29,7 +31,7 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
-app.use("/api", routes);
+app.use(routes);
 
 mongoose.Promise = global.Promise;
 
@@ -37,6 +39,14 @@ mongoose.connect(
   process.env.MONGODB_URI || "mongodb://localhost/spellbook",
   { useNewUrlParser: true }
 );
+
+db.Spells.create({ data: spellData })
+  .then(function(dbUser) {
+    console.log(dbUser);
+  })
+  .catch(function(err) {
+    console.log(err.message);
+  });
 
 app.listen(PORT, function() {
   console.log("Listening on port: " + PORT);
