@@ -12,8 +12,14 @@ const app = express();
 const PORT = process.env.PORT || 3002;
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-  res.setHeader("Access-Control-Allow-Headers", "Content-type,Authorization");
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  // res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PATCH, DELETE, OPTIONS');
+  // res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  // res.setHeader("Access-Control-Allow-Headers", "Content-type,Authorization");
   next();
 });
 
@@ -39,14 +45,6 @@ mongoose.connect(
   process.env.MONGODB_URI || "mongodb://localhost/spellbook",
   { useNewUrlParser: true }
 );
-
-db.Spells.create({ data: spellData })
-  .then(function(dbUser) {
-    console.log(dbUser);
-  })
-  .catch(function(err) {
-    console.log(err.message);
-  });
 
 app.listen(PORT, function() {
   console.log("Listening on port: " + PORT);
