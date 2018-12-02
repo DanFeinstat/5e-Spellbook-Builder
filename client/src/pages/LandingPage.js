@@ -289,66 +289,71 @@ class LandingPage extends Component {
   getClassList = e => {
     let newClass = e.target.textContent;
     spellAPI
-      .getClassList(newClass)
+      .findAll()
       .then(response => {
         console.log(response);
-        let listofLists = [];
-        let level0 = [];
-        let level1 = [];
-        let level2 = [];
-        let level3 = [];
-        let level4 = [];
-        let level5 = [];
-        let level6 = [];
-        let level7 = [];
-        let level8 = [];
-        let level9 = [];
-        for (let i = 0; i < response.data.length; i++) {
-          if (response.data[i].data.level === "Cantrip") {
-            level0.push(response.data[i]);
-          } else {
-            let levelnum = response.data[i].data.level.charAt(0);
-            eval("level" + levelnum).push(response.data[i]);
-          }
-        }
-        if (level0.length >= 1) {
-          listofLists.push(level0);
-        }
-        if (level1.length >= 1) {
-          listofLists.push(level1);
-        }
-        if (level2.length >= 1) {
-          listofLists.push(level2);
-        }
-        if (level3.length >= 1) {
-          listofLists.push(level3);
-        }
-        if (level4.length >= 1) {
-          listofLists.push(level4);
-        }
-        if (level5.length >= 1) {
-          listofLists.push(level5);
-        }
-        if (level6.length >= 1) {
-          listofLists.push(level6);
-        }
-        if (level7.length >= 1) {
-          listofLists.push(level7);
-        }
-        if (level8.length >= 1) {
-          listofLists.push(level8);
-        }
-        if (level9.length >= 1) {
-          listofLists.push(level9);
-        }
-        console.log(listofLists);
-        this.setState({
-          searchActive: true,
-          classList: newClass,
-          spellFound: false,
-          listofLists: listofLists,
-        });
       })
+      // spellAPI
+      //   .getClassList(newClass)
+      //   .then(response => {
+      //     console.log(response);
+      //     let listofLists = [];
+      //     let level0 = [];
+      //     let level1 = [];
+      //     let level2 = [];
+      //     let level3 = [];
+      //     let level4 = [];
+      //     let level5 = [];
+      //     let level6 = [];
+      //     let level7 = [];
+      //     let level8 = [];
+      //     let level9 = [];
+      //     for (let i = 0; i < response.data.length; i++) {
+      //       if (response.data[i].data.level === "Cantrip") {
+      //         level0.push(response.data[i]);
+      //       } else {
+      //         let levelnum = response.data[i].data.level.charAt(0);
+      //         eval("level" + levelnum).push(response.data[i]);
+      //       }
+      //     }
+      //     if (level0.length >= 1) {
+      //       listofLists.push(level0);
+      //     }
+      //     if (level1.length >= 1) {
+      //       listofLists.push(level1);
+      //     }
+      //     if (level2.length >= 1) {
+      //       listofLists.push(level2);
+      //     }
+      //     if (level3.length >= 1) {
+      //       listofLists.push(level3);
+      //     }
+      //     if (level4.length >= 1) {
+      //       listofLists.push(level4);
+      //     }
+      //     if (level5.length >= 1) {
+      //       listofLists.push(level5);
+      //     }
+      //     if (level6.length >= 1) {
+      //       listofLists.push(level6);
+      //     }
+      //     if (level7.length >= 1) {
+      //       listofLists.push(level7);
+      //     }
+      //     if (level8.length >= 1) {
+      //       listofLists.push(level8);
+      //     }
+      //     if (level9.length >= 1) {
+      //       listofLists.push(level9);
+      //     }
+      //     console.log(listofLists);
+      //     this.setState({
+      //       searchActive: true,
+      //       classList: newClass,
+      //       spellFound: false,
+      //       listofLists: listofLists,
+      //     });
+      // })
       .catch(err => console.log(err));
   };
 

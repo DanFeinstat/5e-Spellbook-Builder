@@ -1,6 +1,11 @@
 const db = require("../models");
 
 module.exports = {
+  findAll: (req, res) => {
+    db.Spells.find(req.query)
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
   findClassList: (req, res) => {
     db.Spells.aggregate([
       { $unwind: "$data" },
@@ -10,7 +15,7 @@ module.exports = {
         },
       },
     ])
-      .then(dbModel => res.send(dbModel))
+      .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
 };
