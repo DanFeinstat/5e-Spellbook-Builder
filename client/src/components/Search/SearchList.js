@@ -1014,6 +1014,7 @@ const SearchList = props => {
     <div className="sL-container">
       {props.classSelected != null
         ? eval(props.classSelected.toLowerCase() + "Lists").map(
+            // ? props.listofLists.map(
             (level, index) => {
               let listNumber = index;
               let spellLevel =
