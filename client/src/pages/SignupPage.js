@@ -42,7 +42,7 @@ class SignupPage extends Component {
     };
     // console.log(userData);
     userAPI.createUser(userData).then(response => {
-      // console.log(response.data.spellbookJwt);
+      console.log(response);
       localStorage.setItem("spellbookJwt", response.data.spellbookJwt);
       window.location.href = "/spellbook/user";
     });
@@ -56,6 +56,7 @@ class SignupPage extends Component {
     };
 
     userAPI.login(userData).then(response => {
+      console.log(response);
       localStorage.setItem("spellbookJwt", response.data.spellbookJwt);
       window.location.href = "/spellbook/user";
     });
