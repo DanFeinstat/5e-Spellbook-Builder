@@ -33,6 +33,8 @@ dotenv.config({ path: ".env" });
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use(routes);
+
 // app.use(express.static(path.join(__dirname, "client/build")));
 if (process.env.NODE_ENV === "production") {
   // app.use(express.static("client/build"));
@@ -41,7 +43,6 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
   });
 }
-app.use(routes);
 
 mongoose.Promise = global.Promise;
 
