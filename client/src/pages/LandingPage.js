@@ -47,6 +47,7 @@ class LandingPage extends Component {
   }
   componentDidUpdate() {
     if (localStorage.spellbookJwt && !this.state.id) {
+      console.log("check");
       this.decodeUserID();
     }
   }
@@ -217,11 +218,13 @@ class LandingPage extends Component {
   };
 
   updateUserData = () => {
-    userAPI.getSpells(this.state.id).then(response => {
-      this.setState({
-        names: response.data.names,
+    if (this.state.id !== "") {
+      userAPI.getSpells(this.state.id).then(response => {
+        this.setState({
+          names: response.data.names,
+        });
       });
-    });
+    }
   };
 
   //   saveSpellToSpellbook = e => {
