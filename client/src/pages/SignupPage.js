@@ -58,7 +58,7 @@ class SignupPage extends Component {
     userAPI.login(userData).then(response => {
       console.log(response);
       localStorage.setItem("spellbookJwt", response.data.spellbookJwt);
-      window.location.href = "/spellbook/user";
+      // window.location.href = "/spellbook/user";
     });
   };
 
