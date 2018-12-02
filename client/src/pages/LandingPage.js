@@ -384,7 +384,7 @@ class LandingPage extends Component {
                 return (
                   <ClassSelBtn
                     // selectClass={this.toSelectClass}
-                    test={this.getClassList}
+                    selectClass={this.getClassList}
                     key={index}
                     name={value}
                   />
