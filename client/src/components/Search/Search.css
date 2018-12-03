@@ -38,6 +38,7 @@
   border: none;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
   cursor: pointer;
+  font-family: "Contrail One", cursive;
 }
 .search-back {
   float: left;
@@ -49,6 +50,7 @@
   border: none;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
   cursor: pointer;
+  font-family: "Contrail One", cursive;
 }
 
 .search-submit:hover {
