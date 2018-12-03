@@ -88,9 +88,6 @@
   }
 }
 
-/* @media(max-height:){
-
-} */
 @media (min-width: 420px) {
   .App-background-Cleric {
     background-position: left top, 180% 0%;
@@ -100,7 +97,6 @@
 
 @media (min-width: 630px) {
   .App-background-Cleric {
-    /* background-size: 100vw, 70vw; */
     background-position: left top, 140% 0%;
     background-size: 100vw, 80vw;
   }

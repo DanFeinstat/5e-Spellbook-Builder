@@ -111,7 +111,6 @@ class LandingPage extends Component {
   querySpellData = () => {
     let spellName = this.state.search.trim();
     spellAPI.findSpell(spellName).then(response => {
-      // console.log(response.data[0].data);
       if (response.data.length > 0) {
         let data = response.data[0].data;
         let comps = data.components.split(", ");
@@ -126,7 +125,6 @@ class LandingPage extends Component {
           concentration: data.concentration,
           components: comps,
           desc: data.desc,
-          // higherLevel: data.higher_level,
           school: data.school,
           castingTime: data.casting_time,
           level: newLevel,
@@ -144,114 +142,102 @@ class LandingPage extends Component {
     });
   };
 
-  toQuerySpellData = () => {
-    const queryURL =
-      "http://www.dnd5eapi.co/api/spells/" +
-      this.state.classList.toLowerCase() +
-      "/";
-    let spellName = this.state.search.trim();
-    let toSubmit = this.titleCase(spellName);
-    // console.log(toSubmit);
-    // console.log(queryURL);
-    fetch(queryURL)
-      .then(response => response.json())
-      .then(res => {
-        // console.log(res);
-        for (let i = 0; i < res.results.length; i++) {
-          if (res.results[i].name === toSubmit) {
-            // console.log(res.results[i].url);
-            fetch(res.results[i].url)
-              .then(response => response.json())
-              .then(data => {
-                console.log(data);
-                let desc = [];
-                if (Array.isArray(data.desc)) {
-                  for (let i = 0; i < data.desc.length; i++) {
-                    const newDesc = data.desc[i]
-                      .replace(/â€™/g, "'")
-                      .replace(/â€“/g, "-")
-                      .replace(/â€”/g, "-")
-                      .replace(/â€œ/g, '"')
-                      .replace(/â€�/g, '"');
-                    desc.push(newDesc);
-                  }
-                } else {
-                  let newDesc = data.desc
-                    .replace(/â€™/g, "'")
-                    .replace(/â€“/g, "-")
-                    .replace(/â€”/g, "-")
-                    .replace(/â€œ/g, '"')
-                    .replace(/â€�/g, '"');
-                  desc.push(newDesc);
-                }
-                const fixMaterialCharacters = data => {
-                  if (data.material === undefined) {
-                    return undefined;
-                  } else if (
-                    Array.isArray(data.material) &&
-                    data.material.length > 1
-                  ) {
-                    let materials = [];
-                    for (let i = 0; i < data.material.length; i++) {
-                      const newMaterials = data.material[i]
-                        .replace(/â€™/g, "'")
-                        .replace(/â€œ/g, '"')
-                        .replace(/â€�/g, '"');
-                      materials.push(newMaterials);
-                    }
-                    return materials;
-                  } else {
-                    let newMaterials = data.material.replace(/â€™/g, "'");
-                    return newMaterials;
-                  }
-                };
-                let materials = fixMaterialCharacters(data);
+  //Switched from API to my own Database, Holding on to this function in case there's a need to access that API again
+  // toQuerySpellData = () => {
+  //   const queryURL =
+  //     "http://www.dnd5eapi.co/api/spells/" +
+  //     this.state.classList.toLowerCase() +
+  //     "/";
+  //   let spellName = this.state.search.trim();
+  //   let toSubmit = this.titleCase(spellName);
+  //   fetch(queryURL)
+  //     .then(response => response.json())
+  //     .then(res => {
+  //       for (let i = 0; i < res.results.length; i++) {
+  //         if (res.results[i].name === toSubmit) {
+  //           fetch(res.results[i].url)
+  //             .then(response => response.json())
+  //             .then(data => {
+  //               let desc = [];
+  //               if (Array.isArray(data.desc)) {
+  //                 for (let i = 0; i < data.desc.length; i++) {
+  //                   const newDesc = data.desc[i]
+  //                     .replace(/â€™/g, "'")
+  //                     .replace(/â€“/g, "-")
+  //                     .replace(/â€”/g, "-")
+  //                     .replace(/â€œ/g, '"')
+  //                     .replace(/â€�/g, '"');
+  //                   desc.push(newDesc);
+  //                 }
+  //               } else {
+  //                 let newDesc = data.desc
+  //                   .replace(/â€™/g, "'")
+  //                   .replace(/â€“/g, "-")
+  //                   .replace(/â€”/g, "-")
+  //                   .replace(/â€œ/g, '"')
+  //                   .replace(/â€�/g, '"');
+  //                 desc.push(newDesc);
+  //               }
+  //               const fixMaterialCharacters = data => {
+  //                 if (data.material === undefined) {
+  //                   return undefined;
+  //                 } else if (
+  //                   Array.isArray(data.material) &&
+  //                   data.material.length > 1
+  //                 ) {
+  //                   let materials = [];
+  //                   for (let i = 0; i < data.material.length; i++) {
+  //                     const newMaterials = data.material[i]
+  //                       .replace(/â€™/g, "'")
+  //                       .replace(/â€œ/g, '"')
+  //                       .replace(/â€�/g, '"');
+  //                     materials.push(newMaterials);
+  //                   }
+  //                   return materials;
+  //                 } else {
+  //                   let newMaterials = data.material.replace(/â€™/g, "'");
+  //                   return newMaterials;
+  //                 }
+  //               };
+  //               let materials = fixMaterialCharacters(data);
 
-                const spellData = {
-                  name: data.name,
-                  range: data.range,
-                  duration: data.duration,
-                  materials: materials,
-                  ritual: data.ritual,
-                  concentration: data.concentration,
-                  components: data.components,
-                  desc: desc,
-                  higherLevel: data.higher_level,
-                  school: data.school.name,
-                  castingTime: data.casting_time,
-                  level: data.level,
-                };
-                this.setState(
-                  {
-                    currentSpell: spellData,
-                    spellFound: true,
-                    searchActive: false,
-                  }
-                  // this.scrollToCard
-                );
-              })
-              .catch(function(error) {
-                console.log(error);
-              });
-          }
-        }
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-  };
-
-  // scrollToCard = () => {
-  //   let cardDiv = ReactDOM.findDOMNode(document.getElementById("scrollRefOne"));
-  //   cardDiv.scrollIntoView({ behavior: "smooth", block: "start" }, true);
+  //               const spellData = {
+  //                 name: data.name,
+  //                 range: data.range,
+  //                 duration: data.duration,
+  //                 materials: materials,
+  //                 ritual: data.ritual,
+  //                 concentration: data.concentration,
+  //                 components: data.components,
+  //                 desc: desc,
+  //                 higherLevel: data.higher_level,
+  //                 school: data.school.name,
+  //                 castingTime: data.casting_time,
+  //                 level: data.level,
+  //               };
+  //               this.setState(
+  //                 {
+  //                   currentSpell: spellData,
+  //                   spellFound: true,
+  //                   searchActive: false,
+  //                 }
+  //                 // this.scrollToCard
+  //               );
+  //             })
+  //             .catch(function(error) {
+  //               console.log(error);
+  //             });
+  //         }
+  //       }
+  //     })
+  //     .catch(function(error) {
+  //       console.log(error);
+  //     });
   // };
 
   decodeUserID = () => {
-    // console.log(localStorage.spellbookJwt);
     const decoder = jwt.decode(localStorage.spellbookJwt);
-    // console.log(decoder);
     const decodedID = decoder.id;
-    // console.log(decodedID);
     this.setState(
       {
         id: decodedID,
@@ -269,23 +255,6 @@ class LandingPage extends Component {
       });
     }
   };
-
-  //   saveSpellToSpellbook = e => {
-  //     e.preventDefault();
-  //     userAPI
-  //       .addSpell(this.state.id, this.state.currentSpell)
-  //       .then(response => console.log(response))
-  //       .catch(err => console.log(err));
-  //   };
-
-  // toSelectClass = e => {
-  //   const newClass = e.target.textContent;
-  //   this.setState({
-  //     searchActive: true,
-  //     classList: newClass,
-  //     spellFound: false,
-  //   });
-  // };
 
   returnToClassList = e => {
     e.preventDefault();
@@ -331,15 +300,9 @@ class LandingPage extends Component {
 
   getClassList = e => {
     let newClass = e.target.textContent;
-    // spellAPI
-    //   .findAll()
-    //   .then(response => {
-    //     console.log(response);
-    //   })
     spellAPI
       .getClassList(newClass)
       .then(response => {
-        console.log(response);
         let listofLists = [];
         let level0 = [];
         let level1 = [];
@@ -389,7 +352,6 @@ class LandingPage extends Component {
         if (level9.length >= 1) {
           listofLists.push(level9);
         }
-        console.log(listofLists);
         this.setState({
           searchActive: true,
           classList: newClass,
@@ -426,7 +388,6 @@ class LandingPage extends Component {
               {classes.map((value, index) => {
                 return (
                   <ClassSelBtn
-                    // selectClass={this.toSelectClass}
                     selectClass={this.getClassList}
                     key={index}
                     name={value}
@@ -521,7 +482,6 @@ class LandingPage extends Component {
                   class={this.state.classList}
                   username={this.state.names[0]}
                   loggedIn={this.state.id}
-                  //   transcribe={this.saveSpellToSpellbook}
                 />
               ) : null}
             </div>

@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-// import allSpells from ("./spells.json");
 
 const spellSchema = new Schema({
   data: [

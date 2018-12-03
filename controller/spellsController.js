@@ -1,17 +1,6 @@
 const db = require("../models");
-// const spellData = require("../spells.json");
-// var express = require("express");
-// var app = express();
 
 module.exports = {
-  //   findAll: (req, res) => {
-  //     res.json(spellData);
-  //   },
-
-  //   findClassList:(req, res) => {
-
-  //   }
-
   findAll: (req, res) => {
     db.Spells.find()
       .then(dbModel => {

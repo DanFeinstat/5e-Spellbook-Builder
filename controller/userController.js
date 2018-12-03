@@ -46,8 +46,6 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
 
-  // db.msgs.update({"userID":"olivia","friends":{$elemMatch:{"userID":"tom"}}},{$push:{"friends.$.messages":{text:"hello"}}})
-
   deleteSpell: (req, res) => {
     db.Users.updateOne(
       { _id: req.params.id, "spellbooks.name": req.params.username },
@@ -62,7 +60,6 @@ module.exports = {
   },
 
   getSpells: (req, res) => {
-    // console.log(req.body);
     db.Users.findOne({ _id: req.params.id })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
@@ -76,7 +73,6 @@ module.exports = {
   login: function(req, res) {
     db.Users.findOne({ email: req.body.email })
       .then(dbModel => {
-        console.log(dbModel);
         var passwordResult = bcrypt.compare(
           req.body.password,
           dbModel.password

@@ -33,13 +33,10 @@ class Card extends Component {
   }
   saveSpellToSpellbook = e => {
     e.preventDefault();
-    // console.log(this.props.spell);
     userAPI
       .getSpells(this.props.loggedIn)
       .then(response => {
-        // let response = response;
         let isDuplicate = res => {
-          // console.log(res);
           for (let i = 0; i < res.data.spellbooks[0].spells.length; i++) {
             if (
               res.data.spellbooks[0].spells[i].name === this.props.spell.name
@@ -50,8 +47,6 @@ class Card extends Component {
         };
         let duplicate = isDuplicate(response);
         if (!duplicate) {
-          // console.log("Not a duplicate!");
-          // console.log(this.props.username);
           userAPI
             .addSpell(
               this.props.loggedIn,
@@ -66,16 +61,6 @@ class Card extends Component {
       })
       .catch(err => console.log(err));
   };
-
-  // deleteSpellFromSpellbook = e => {
-  //   userAPI
-  //     .deleteSpell(this.props.loggedIn, this.props.spellToDisplay)
-  //     .then(response => {
-  //       console.log("Spell Removed!");
-  //       console.log(response);
-  //     })
-  //     .catch(err => console.log(err));
-  // };
 
   convertComponentsToIcons = comps => {
     let compsArr = [];
@@ -96,13 +81,10 @@ class Card extends Component {
     cardDiv.scrollIntoView({ behavior: "smooth", block: "start" }, true);
   };
   render() {
-    // const components = this.props.spell.components.join(" ");
     const components = this.convertComponentsToIcons(
       this.props.spell.components
     );
-    // console.log(testComp);
     const desc = this.props.spell.desc;
-    //   const higherLevel = this.props.spell.higherLevel.join(" ");
     return (
       <React.Fragment>
         <div
@@ -211,14 +193,6 @@ class Card extends Component {
               ? this.props.spell.materials
               : "No materials required."}
           </div>
-          {/* {this.props.spell.level !== -1 ? (
-            <div className="card-text-block full">
-              <span className="card-font-2">HIGHER LEVEL</span>:{" "}
-              {this.props.spell.higherLevel !== undefined
-                ? this.props.spell.higherLevel.join(" ")
-                : "This spell does not scale."}
-            </div>
-          ) : null} */}
         </div>
         {this.props.loggedIn ? (
           <div
