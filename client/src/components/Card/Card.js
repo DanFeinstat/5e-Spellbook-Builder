@@ -101,7 +101,7 @@ class Card extends Component {
       this.props.spell.components
     );
     // console.log(testComp);
-    const desc = this.props.spell.desc.join(" ");
+    const desc = this.props.spell.desc;
     //   const higherLevel = this.props.spell.higherLevel.join(" ");
     return (
       <React.Fragment>
@@ -211,14 +211,14 @@ class Card extends Component {
               ? this.props.spell.materials
               : "No materials required."}
           </div>
-          {this.props.spell.level !== -1 ? (
+          {/* {this.props.spell.level !== -1 ? (
             <div className="card-text-block full">
               <span className="card-font-2">HIGHER LEVEL</span>:{" "}
               {this.props.spell.higherLevel !== undefined
                 ? this.props.spell.higherLevel.join(" ")
                 : "This spell does not scale."}
             </div>
-          ) : null}
+          ) : null} */}
         </div>
         {this.props.loggedIn ? (
           <div

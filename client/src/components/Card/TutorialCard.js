@@ -65,10 +65,10 @@ const TutorialCard = props => {
           <span className="card-font-2">MATERIALS</span>: A more detailed
           description of the materials needed for the spell.
         </div>
-        <div className="card-text-block full">
+        {/* <div className="card-text-block full">
           <span className="card-font-2">HIGHER LEVEL</span>: Description of
           effects when a higher level spell slot is used.
-        </div>
+        </div> */}
       </div>
       <div className={"tCard-transcribe-btn"}>Transcribe</div>
     </React.Fragment>

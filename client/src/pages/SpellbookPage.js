@@ -64,7 +64,7 @@ class SpellbookPage extends Component {
     userAPI
       .getSpells(this.state.id)
       .then(response => {
-        // console.log(response);
+        console.log(response);
         // console.log(response.data.spellbooks[0].spells);
         const alphabetizedSpells = response.data.spellbooks[0].spells.sort(
           function(a, b) {

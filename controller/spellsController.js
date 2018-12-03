@@ -20,6 +20,20 @@ module.exports = {
       })
       .catch(err => res.status(422).json(err));
   },
+  findSpell: (req, res) => {
+    db.Spells.aggregate([
+      { $unwind: "$data" },
+      {
+        $match: {
+          "data.name": req.params.spell,
+        },
+      },
+    ])
+      .then(dbModel => {
+        res.json(dbModel);
+      })
+      .catch(err => res.status(422).json(err));
+  },
   findClassList: (req, res) => {
     db.Spells.aggregate([
       { $unwind: "$data" },

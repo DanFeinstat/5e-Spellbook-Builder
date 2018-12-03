@@ -1013,31 +1013,48 @@ const SearchList = props => {
   return (
     <div className="sL-container">
       {props.classSelected != null
-        ? eval(props.classSelected.toLowerCase() + "Lists").map(
-            // ? props.listofLists.map(
-            (level, index) => {
-              let listNumber = index;
-              let spellLevel =
-                props.classSelected !== "Paladin" &&
-                props.classSelected !== "Ranger"
-                  ? index === 0
-                    ? "Cantrip"
-                    : index
-                  : index + 1;
-              let spellList = "level" + listNumber;
-              return level.length ? (
-                // data-level={"level" + listNumber}
-                // toggleList={this.toggleLevelList}
-                <React.Fragment>
-                  <h4
-                    className="sL-level"
-                    onClick={props.toggleList}
-                    data-level={"level" + listNumber}
-                  >
-                    Spell Level: {spellLevel}
-                  </h4>
-                  <ul key={listNumber}>
-                    {level.map((list, index) => {
+        ? // ? eval(props.classSelected.toLowerCase() + "Lists").map(
+          props.listofLists.map((level, index) => {
+            console.log(props.listofLists);
+            let listNumber = index;
+            let spellLevel =
+              props.classSelected !== "Paladin" &&
+              props.classSelected !== "Ranger"
+                ? index === 0
+                  ? "Cantrip"
+                  : index
+                : index + 1;
+            let spellList = "level" + listNumber;
+            return level.length ? (
+              // data-level={"level" + listNumber}
+              // toggleList={this.toggleLevelList}
+              <React.Fragment>
+                <h4
+                  className="sL-level"
+                  onClick={props.toggleList}
+                  data-level={"level" + listNumber}
+                >
+                  Spell Level: {spellLevel}
+                </h4>
+                <ul key={listNumber}>
+                  {level.map((list, index) => {
+                    const toggleKey = "level" + listNumber;
+                    return (
+                      <li
+                        className={
+                          props[toggleKey] === true
+                            ? "sL-li"
+                            : "sL-li sL-hidden"
+                        }
+                        key={index}
+                        data-name={list.data.name}
+                        onClick={props.fetchSpell}
+                      >
+                        {list.data.name}
+                      </li>
+                    );
+                  })}
+                  {/* {level.map((list, index) => {
                       const toggleKey = "level" + listNumber;
                       // console.log(toggleKey);
                       return (
@@ -1054,12 +1071,11 @@ const SearchList = props => {
                           {list}
                         </li>
                       );
-                    })}
-                  </ul>
-                </React.Fragment>
-              ) : null;
-            }
-          )
+                    })} */}
+                </ul>
+              </React.Fragment>
+            ) : null;
+          })
         : null}
     </div>
   );

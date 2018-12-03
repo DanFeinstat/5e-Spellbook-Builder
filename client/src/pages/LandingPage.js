@@ -94,11 +94,41 @@ class LandingPage extends Component {
     return str.join(" ");
   };
   toFetchSpell = e => {
-    this.setState({ search: e.target.dataset.name }, this.toQuerySpellData);
+    this.setState({ search: e.target.dataset.name }, this.querySpellData);
   };
   onSpellSubmit = e => {
     e.preventDefault();
     this.toQuerySpellData();
+  };
+
+  querySpellData = () => {
+    let spellName = this.state.search.trim();
+    spellAPI.findSpell(spellName).then(response => {
+      console.log(response.data[0].data);
+      let data = response.data[0].data;
+      let comps = data.components.split(", ");
+      let newLevel =
+        data.level !== "Cantrip" ? parseInt(data.level.charAt(0)) : 0;
+      const spellData = {
+        name: data.name,
+        range: data.range,
+        duration: data.duration,
+        materials: data.material,
+        ritual: data.ritual,
+        concentration: data.concentration,
+        components: comps,
+        desc: data.desc,
+        // higherLevel: data.higher_level,
+        school: data.school.name,
+        castingTime: data.casting_time,
+        level: newLevel,
+      };
+      this.setState({
+        currentSpell: spellData,
+        spellFound: true,
+        searchActive: false,
+      });
+    });
   };
 
   toQuerySpellData = () => {
@@ -288,72 +318,72 @@ class LandingPage extends Component {
 
   getClassList = e => {
     let newClass = e.target.textContent;
+    // spellAPI
+    //   .findAll()
+    //   .then(response => {
+    //     console.log(response);
+    //   })
     spellAPI
-      .findAll()
+      .getClassList(newClass)
       .then(response => {
         console.log(response);
+        let listofLists = [];
+        let level0 = [];
+        let level1 = [];
+        let level2 = [];
+        let level3 = [];
+        let level4 = [];
+        let level5 = [];
+        let level6 = [];
+        let level7 = [];
+        let level8 = [];
+        let level9 = [];
+        for (let i = 0; i < response.data.length; i++) {
+          if (response.data[i].data.level === "Cantrip") {
+            level0.push(response.data[i]);
+          } else {
+            let levelnum = response.data[i].data.level.charAt(0);
+            eval("level" + levelnum).push(response.data[i]);
+          }
+        }
+        if (level0.length >= 1) {
+          listofLists.push(level0);
+        }
+        if (level1.length >= 1) {
+          listofLists.push(level1);
+        }
+        if (level2.length >= 1) {
+          listofLists.push(level2);
+        }
+        if (level3.length >= 1) {
+          listofLists.push(level3);
+        }
+        if (level4.length >= 1) {
+          listofLists.push(level4);
+        }
+        if (level5.length >= 1) {
+          listofLists.push(level5);
+        }
+        if (level6.length >= 1) {
+          listofLists.push(level6);
+        }
+        if (level7.length >= 1) {
+          listofLists.push(level7);
+        }
+        if (level8.length >= 1) {
+          listofLists.push(level8);
+        }
+        if (level9.length >= 1) {
+          listofLists.push(level9);
+        }
+        console.log(listofLists);
+        this.setState({
+          searchActive: true,
+          classList: newClass,
+          spellFound: false,
+          listofLists: listofLists,
+        });
       })
-      // spellAPI
-      //   .getClassList(newClass)
-      //   .then(response => {
-      //     console.log(response);
-      //     let listofLists = [];
-      //     let level0 = [];
-      //     let level1 = [];
-      //     let level2 = [];
-      //     let level3 = [];
-      //     let level4 = [];
-      //     let level5 = [];
-      //     let level6 = [];
-      //     let level7 = [];
-      //     let level8 = [];
-      //     let level9 = [];
-      //     for (let i = 0; i < response.data.length; i++) {
-      //       if (response.data[i].data.level === "Cantrip") {
-      //         level0.push(response.data[i]);
-      //       } else {
-      //         let levelnum = response.data[i].data.level.charAt(0);
-      //         eval("level" + levelnum).push(response.data[i]);
-      //       }
-      //     }
-      //     if (level0.length >= 1) {
-      //       listofLists.push(level0);
-      //     }
-      //     if (level1.length >= 1) {
-      //       listofLists.push(level1);
-      //     }
-      //     if (level2.length >= 1) {
-      //       listofLists.push(level2);
-      //     }
-      //     if (level3.length >= 1) {
-      //       listofLists.push(level3);
-      //     }
-      //     if (level4.length >= 1) {
-      //       listofLists.push(level4);
-      //     }
-      //     if (level5.length >= 1) {
-      //       listofLists.push(level5);
-      //     }
-      //     if (level6.length >= 1) {
-      //       listofLists.push(level6);
-      //     }
-      //     if (level7.length >= 1) {
-      //       listofLists.push(level7);
-      //     }
-      //     if (level8.length >= 1) {
-      //       listofLists.push(level8);
-      //     }
-      //     if (level9.length >= 1) {
-      //       listofLists.push(level9);
-      //     }
-      //     console.log(listofLists);
-      //     this.setState({
-      //       searchActive: true,
-      //       classList: newClass,
-      //       spellFound: false,
-      //       listofLists: listofLists,
-      //     });
-      // })
       .catch(err => console.log(err));
   };
 
@@ -434,6 +464,7 @@ class LandingPage extends Component {
               />
             ) : null}
             <SearchList
+              listofLists={this.state.listofLists}
               toggleList={this.toggleLevelList}
               classSelected={this.state.classList}
               fetchSpell={this.toFetchSpell}
@@ -453,6 +484,7 @@ class LandingPage extends Component {
           <div>
             <div className="pages-landing-list-container">
               <SearchList
+                listofLists={this.state.listofLists}
                 toggleList={this.toggleLevelList}
                 classSelected={this.state.classList}
                 fetchSpell={this.toFetchSpell}
