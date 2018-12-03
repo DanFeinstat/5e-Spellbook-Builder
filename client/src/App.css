@@ -128,7 +128,7 @@
 }
 @media (min-width: 1200px) {
   .App-background-Warlock {
-    background-position: left top, 140% -90%;
+    background-position: left top, 140% -550px;
     background-size: 100vw, 80vw;
   }
 }

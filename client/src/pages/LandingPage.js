@@ -127,7 +127,7 @@ class LandingPage extends Component {
           components: comps,
           desc: data.desc,
           // higherLevel: data.higher_level,
-          school: data.school.name,
+          school: data.school,
           castingTime: data.casting_time,
           level: newLevel,
         };
