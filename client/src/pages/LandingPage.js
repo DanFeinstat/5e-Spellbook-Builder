@@ -77,6 +77,7 @@ class LandingPage extends Component {
         str[i] !== "from" &&
         str[i] !== "into" &&
         str[i] !== "of" &&
+        str[i] !== "without" &&
         str[i] !== "with"
       ) {
         str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
@@ -98,36 +99,48 @@ class LandingPage extends Component {
   };
   onSpellSubmit = e => {
     e.preventDefault();
-    this.toQuerySpellData();
+    const betterSearch = this.titleCase(this.state.search.trim());
+    this.setState(
+      {
+        search: betterSearch,
+      },
+      this.querySpellData
+    );
   };
 
   querySpellData = () => {
     let spellName = this.state.search.trim();
     spellAPI.findSpell(spellName).then(response => {
-      console.log(response.data[0].data);
-      let data = response.data[0].data;
-      let comps = data.components.split(", ");
-      let newLevel =
-        data.level !== "Cantrip" ? parseInt(data.level.charAt(0)) : 0;
-      const spellData = {
-        name: data.name,
-        range: data.range,
-        duration: data.duration,
-        materials: data.material,
-        ritual: data.ritual,
-        concentration: data.concentration,
-        components: comps,
-        desc: data.desc,
-        // higherLevel: data.higher_level,
-        school: data.school.name,
-        castingTime: data.casting_time,
-        level: newLevel,
-      };
-      this.setState({
-        currentSpell: spellData,
-        spellFound: true,
-        searchActive: false,
-      });
+      // console.log(response.data[0].data);
+      if (response.data.length > 0) {
+        let data = response.data[0].data;
+        let comps = data.components.split(", ");
+        let newLevel =
+          data.level !== "Cantrip" ? parseInt(data.level.charAt(0)) : 0;
+        const spellData = {
+          name: data.name,
+          range: data.range,
+          duration: data.duration,
+          materials: data.material,
+          ritual: data.ritual,
+          concentration: data.concentration,
+          components: comps,
+          desc: data.desc,
+          // higherLevel: data.higher_level,
+          school: data.school.name,
+          castingTime: data.casting_time,
+          level: newLevel,
+        };
+        this.setState({
+          currentSpell: spellData,
+          spellFound: true,
+          searchActive: false,
+        });
+      } else {
+        alert(
+          "Spell could not be found as written.  Make sure the words/characters are correct or check the lists below."
+        );
+      }
     });
   };
 
