@@ -6,7 +6,7 @@ const SearchList = props => {
     <div className="sL-container">
       {props.classSelected != null
         ? props.listofLists.map((level, index) => {
-            console.log(props.listofLists);
+            // console.log(props.listofLists);
             let listNumber = index;
             let spellLevel =
               props.classSelected !== "Paladin" &&
