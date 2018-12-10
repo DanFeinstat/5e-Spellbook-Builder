@@ -1,14 +1,14 @@
 import React from "react";
-import "./Signup.css";
+import styles from "./Signup.module.css";
 
 const Signup = props => {
   return (
-    <form className="signup-container">
+    <form className={styles.container}>
       <h1>Sign Up</h1>
-      <div className="signup-input-group">
+      <div className={styles.inputGroup}>
         <label for="username">User Name</label>
         <input
-          className="signup-input"
+          className={styles.input}
           maxlength="20"
           name="name"
           type="text"
@@ -17,12 +17,12 @@ const Signup = props => {
           onChange={props.inputChange}
         />
       </div>
-      <div className="signup-input-group">
-        <label className="signup-label" for="email">
+      <div className={styles.inputGroup}>
+        <label className={styles.label} for="email">
           Email
         </label>
         <input
-          className="signup-input"
+          className={styles.input}
           maxlength="50"
           name="email"
           type="email"
@@ -32,12 +32,12 @@ const Signup = props => {
           onChange={props.inputChange}
         />
       </div>
-      <div className="signup-input-group">
-        <label className="signup-label" for="password">
+      <div className={styles.inputGroup}>
+        <label className={styles.label} for="password">
           Password
         </label>
         <input
-          className="signup-input"
+          className={styles.input}
           maxlength="20"
           name="password"
           type="password"
@@ -47,12 +47,12 @@ const Signup = props => {
           onChange={props.inputChange}
         />
       </div>
-      <div className="signup-input-group">
-        <label className="signup-label" for="confirmPassword">
+      <div className={styles.inputGroup}>
+        <label className={styles.label} for="confirmPassword">
           Confirm Password
         </label>
         <input
-          className="signup-input"
+          className={styles.input}
           maxlength="20"
           name="confirmPassword"
           type="password"
@@ -60,7 +60,7 @@ const Signup = props => {
           placeholder=" see above"
           onChange={props.inputChange}
         />
-        <button onClick={props.signupSubmit} className="signup-submit-btn">
+        <button onClick={props.signupSubmit} className={styles.submitBtn}>
           Submit
         </button>
       </div>

@@ -1,4 +1,4 @@
-.login-container {
+.container {
   margin: auto;
   margin-bottom: 50px;
   margin-top: 30px;
@@ -14,16 +14,16 @@
   /* justify-content: center; */
 }
 
-.login-input {
+.input {
   margin-top: 4px;
 }
 
-.login-label {
+.label {
   margin-top: 6px;
 }
 
 @media (min-width: 375px) {
-  .login-container {
+  .container {
     width: 320px;
   }
 }

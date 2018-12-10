@@ -1,4 +1,4 @@
-.logout-btn {
+.btn {
   float: left;
   clear: both;
   /* margin-left: auto; */
@@ -23,15 +23,15 @@
   color: linen;
 }
 
-.logout-btn:hover {
+.btn:hover {
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14),
     0 1px 10px 0 rgba(0, 0, 0, 0.12);
   transform: scale(1.08);
 }
 
-@media (min-width: 900px) {
+/* @media (min-width: 900px) {
   .login-btn {
     margin: 100px;
     margin-bottom: 50px;
   }
-}
+} */

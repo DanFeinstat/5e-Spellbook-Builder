@@ -1,23 +1,23 @@
 import React from "react";
-import "./Search.css";
+import styles from "./Search.module.css";
 
 const Search = props => {
   return (
-    <form className="search-container">
-      <div className="search-sub-container">
-        <span className="search-name">Mystic Tutor</span>
+    <form className={styles.container}>
+      <div className={styles.subContainer}>
+        <span className={styles.name}>Mystic Tutor</span>
         <input
           name="search"
           type="text"
-          className="search-input"
+          className={styles.input}
           id="spellNameInput"
           placeholder="Enter spell name here"
           onChange={props.inputChange}
         />
-        <button className="search-submit" onClick={props.onSubmit}>
+        <button className={styles.submit} onClick={props.onSubmit}>
           Submit
         </button>
-        <button className="search-back" onClick={props.returnToClassSelect}>
+        <button className={styles.back} onClick={props.returnToClassSelect}>
           Back
         </button>
       </div>

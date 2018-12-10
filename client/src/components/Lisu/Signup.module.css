@@ -1,4 +1,4 @@
-.signup-container {
+.container {
   margin: auto;
   margin-bottom: 70px;
   margin-top: 30px;
@@ -14,7 +14,7 @@
   justify-content: center;
 }
 
-.signup-input-group {
+.inputGroup {
   width: 200px;
   margin-top: 5px;
   display: flex;
@@ -22,15 +22,15 @@
   justify-content: center;
 }
 
-.signup-input {
+.input {
   margin-top: 4px;
 }
 
-.signup-label {
+.label {
   margin-top: 6px;
 }
 
-.signup-submit-btn {
+.submitBtn {
   margin-top: 8px;
   margin-bottom: 6px;
   margin-right: 25px;
@@ -41,14 +41,14 @@
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-.signup-submit-btn:hover {
+.submitBtn:hover {
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14),
     0 1px 10px 0 rgba(0, 0, 0, 0.12);
   transform: scale(1.08);
 }
 
 @media (min-width: 375px) {
-  .signup-container {
+  .container {
     width: 320px;
   }
 }

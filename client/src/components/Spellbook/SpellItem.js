@@ -1,10 +1,10 @@
 import React from "react";
-import "./SpellItem.css";
+import styles from "./SpellItem.module.css";
 
 const SpellItem = props => {
   return (
     <div
-      className="sI-container"
+      className={styles.container}
       data-name={props.name}
       onClick={props.spellToDisplay}
     >

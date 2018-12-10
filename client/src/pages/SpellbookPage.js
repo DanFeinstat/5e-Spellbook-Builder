@@ -3,7 +3,7 @@ import userAPI from "../utils/userAPI";
 import SpellItem from "../components/Spellbook/SpellItem";
 import Spellbook from "../components/Spellbook/Spellbook";
 import Card from "../components/Card/Card";
-import "./Pages.css";
+import styles from "./Pages.module.css";
 import LogoutBtn from "../components/Spellbook/LogoutBtn";
 import SbRow from "../components/Spellbook/SbRow";
 const jwt = require("jsonwebtoken");
@@ -161,8 +161,8 @@ class SpellbookPage extends Component {
 
   render() {
     return (
-      <div className="page-spellbook-container">
-        <div className="pages-spellbook-content">
+      <div className={styles.spellbookContainer}>
+        <div className={styles.spellbookContent}>
           <LogoutBtn logout={this.toSearchPage} text={"Spell Search"} />
           <LogoutBtn logout={this.toLogout} text={"Log Out"} />
           <Spellbook>
@@ -179,7 +179,7 @@ class SpellbookPage extends Component {
                   {level.map((list, index) => {
                     return (
                       <li
-                        className="page-spellbook-li"
+                        className={styles.spellbookLi}
                         key={index}
                         data-name={list.name}
                         onClick={this.displaySpell}

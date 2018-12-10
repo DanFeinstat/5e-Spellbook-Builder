@@ -1,4 +1,4 @@
-.card-container {
+.container {
   margin: auto;
   margin-bottom: 80px;
   margin-top: 30px;
@@ -9,19 +9,20 @@
   padding: 15px;
   background-color: whitesmoke;
 }
-.card-title {
+.title {
   font-size: 120%;
   font-weight: bold;
+  text-align: center;
 }
-.card-font-1 {
+.font1 {
   font-family: "Elsie", cursive;
   /* font-weight: bold; */
 }
-.card-font-2 {
+.font2 {
   font-family: "Boogaloo", cursive;
   font-size: 90%;
 }
-.card-font-3 {
+.font3 {
   font-family: "Cinzel Decorative", cursive;
 }
 /* font-family: 'Caveat', cursive;
@@ -35,7 +36,7 @@ font-family: "East Sea Dokdo", cursive;
 font-family: "Spirax", cursive;
 */
 @media (min-width: 331px) {
-  .card-container {
+  .container {
     width: 320px;
   }
 }
@@ -44,7 +45,7 @@ font-family: "Spirax", cursive;
   }
 } */
 
-.card-text-block {
+.textBlock {
   margin-top: 5px;
   margin-bottom: 5px;
 }
@@ -53,13 +54,13 @@ font-family: "Spirax", cursive;
   float: right;
 } */
 
-.card-icon {
+.icon {
   height: 20px;
   margin-right: 5px;
   margin-bottom: -3px;
 }
 
-.card-transcribe-btn {
+.transcribeBtn {
   margin: auto;
   width: 80px;
   margin-top: -93px;
@@ -75,11 +76,11 @@ font-family: "Spirax", cursive;
 }
 
 @media (min-width: 1000px) {
-  .spellbook-adjust {
+  .spellbookAdjust {
     margin-left: 585px;
   }
 }
-.card-transcribe-btn:hover {
+.transcribeBtn:hover {
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14),
     0 1px 10px 0 rgba(0, 0, 0, 0.12);
   transform: scale(1.08);
@@ -87,7 +88,7 @@ font-family: "Spirax", cursive;
   background-color: black; */
 }
 
-.text-center {
+.textCenter {
   text-align: center;
 }
 

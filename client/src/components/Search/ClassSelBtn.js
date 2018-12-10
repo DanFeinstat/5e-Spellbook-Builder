@@ -1,11 +1,11 @@
 import React from "react";
-import "./ClassSelBtn.css";
+import styles from "./ClassSelBtn.module.css";
 
 const ClassSelBtn = props => {
   return (
     <button
       onClick={props.selectClass}
-      className={props.special ? "cs-btn-tutorial" : "cs-btn"}
+      className={props.special ? styles.btnTutorial : styles.btn}
     >
       {props.name}
     </button>

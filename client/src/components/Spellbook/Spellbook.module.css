@@ -1,4 +1,4 @@
-.spellbook-container {
+.container {
   width: 340px;
   overflow: hidden;
   margin: auto;
@@ -23,7 +23,7 @@ font-family: 'East Sea Dokdo', cursive;
 font-family: 'Spirax', cursive; */
 
 @media (min-width: 769px) {
-  .spellbook-container {
+  .container {
     margin: 5px;
     margin-left: 20px;
     margin-top: 50px;
@@ -32,7 +32,7 @@ font-family: 'Spirax', cursive; */
 }
 
 @media (min-width: 800px) {
-  .spellbook-container {
+  .container {
     width: 400px;
   }
 }

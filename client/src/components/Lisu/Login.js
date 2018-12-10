@@ -1,15 +1,15 @@
 import React from "react";
-import "./Signup.css";
-import "./Login.css";
+import styles from "./Login.module.css";
+import styles2 from "./Signup.module.css";
 
 const Login = props => {
   return (
-    <form className="login-container">
+    <form className={styles.container}>
       <h1>Log In</h1>
-      <div className="signup-input-group">
+      <div className={styles2.inputGroup}>
         <label for="email">Email</label>
         <input
-          className="login-input"
+          className={styles.input}
           name="email"
           type="email"
           id="email"
@@ -18,12 +18,12 @@ const Login = props => {
           onChange={props.inputChange}
         />
       </div>
-      <div className="signup-input-group">
-        <label className="login-label" for="login-password">
+      <div className={styles2.inputGroup}>
+        <label className={styles.label} for="login-password">
           Password
         </label>
         <input
-          className="login-input"
+          className={styles.input}
           name="password"
           type="password"
           id="login-password"
@@ -31,7 +31,7 @@ const Login = props => {
           autoComplete="current-password"
           onChange={props.inputChange}
         />
-        <button onClick={props.loginSubmit} className="signup-submit-btn">
+        <button onClick={props.loginSubmit} className={styles2.submitBtn}>
           Submit
         </button>
       </div>

@@ -1,11 +1,11 @@
-.tCard-text-block {
+.textBlock {
   margin-top: 5px;
   margin-bottom: 5px;
   padding-top: 20px;
   padding-bottom: 20px;
 }
 
-.tCard-transcribe-btn {
+.transcribeBtn {
   margin: auto;
   width: 80px;
   margin-top: -93px;
@@ -17,7 +17,7 @@
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-.tCard-container {
+.container {
   margin: auto;
   margin-bottom: 80px;
   margin-top: 30px;
@@ -31,7 +31,7 @@
 }
 
 @media (min-width: 331px) {
-  .tCard-container {
+  .container {
     width: 320px;
   }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 // import ReactDOM from "react-dom";
 import "../App.css";
-import "./Pages.css";
+import styles from "./Pages.module.css";
 //Components
 import ClassSelection from "../components/Search/ClassSelection";
 import ClassSelBtn from "../components/Search/ClassSelBtn";
@@ -375,8 +375,12 @@ class LandingPage extends Component {
       "Wizard",
     ];
     return (
-      <div className={"App App-background-" + this.state.classList}>
-        <div className="pages-landing-search-container">
+      <div
+        className={`${styles.App} ${
+          styles[`background${this.state.classList}`]
+        }`}
+      >
+        <div className={styles.landingSearchContainer}>
           {this.state.searchActive ? (
             <Search
               inputChange={this.handleInputChange}
@@ -406,26 +410,26 @@ class LandingPage extends Component {
         </div>
         {!this.state.classList && this.state.tutorial ? (
           <React.Fragment>
-            <h2 className="pages-landing-tutorial-content">
+            <h2 className={styles.landingTutorialContent}>
               Welcome to the 5e Spellbook!
             </h2>
-            <p className="pages-landing-tutorial-content">
+            <p className={styles.landingTutorialContent}>
               Below is an example spell card that demonstrates the layout and
               icons used. The "Transcribe" button at the bottom will only show
               up if you're logged in. It allows you to save the spell to a
               personal spellbook.
             </p>
             <TutorialCard />
-            <p className="pages-landing-tutorial-content2">
+            <p className={styles.landingTutorialContent2}>
               To get started, select a class at the top of the page, or hit the
               "Log In" button in the bottom right of the screen.
             </p>
           </React.Fragment>
         ) : !this.state.classList && !this.state.tutorial ? (
-          <h1 className="pages-landing-splash">Welcome to the 5e Spellbook!</h1>
+          <h1 className={styles.landingSplash}>Welcome to the 5e Spellbook!</h1>
         ) : null}
         {reArrange ? (
-          <div className="pages-landing-content-container">
+          <div className={styles.landingContentContainer}>
             {this.state.spellFound ? (
               <Card
                 page="landing"
@@ -456,7 +460,7 @@ class LandingPage extends Component {
           </div>
         ) : (
           <div>
-            <div className="pages-landing-list-container">
+            <div className={styles.landingListContainer}>
               <SearchList
                 listofLists={this.state.listofLists}
                 toggleList={this.toggleLevelList}
@@ -474,7 +478,7 @@ class LandingPage extends Component {
                 level9={this.state.level9}
               />
             </div>
-            <div className="pages-landing-card-container">
+            <div className={styles.landingCardContainer}>
               {this.state.spellFound ? (
                 <Card
                   page="landing"

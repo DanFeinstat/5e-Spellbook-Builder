@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import "./Card.css";
+import styles from "./Card.module.css";
 //API
 import userAPI from "../../utils/userAPI";
 //school icons
@@ -87,91 +87,92 @@ class Card extends Component {
     const desc = this.props.spell.desc;
     return (
       <React.Fragment>
-        <div
-          className={"card-container card-float-" + this.props.float}
-          id="scrollRefOne"
-        >
-          <div className="card-text-block text-center full card-font-1 card-title">
+        <div className={styles.container} id="scrollRefOne">
+          <div
+            className={`${styles.textBlock} ${styles.full} ${styles.font1} ${
+              styles.title
+            }`}
+          >
             {this.props.spell.name}
           </div>
-          <div className="card-text-block half">
+          <div className={`${styles.textBlock} ${styles.half}`}>
             {this.props.spell.school === "Abjuration" ? (
               <React.Fragment>
                 <AbjurationIcon />{" "}
-                <span className="card-font-1">{this.props.spell.school}</span>
+                <span className={styles.font1}>{this.props.spell.school}</span>
               </React.Fragment>
             ) : this.props.spell.school === "Conjuration" ? (
               <React.Fragment>
                 <ConjurationIcon />{" "}
-                <span className="card-font-1">{this.props.spell.school}</span>
+                <span className={styles.font1}>{this.props.spell.school}</span>
               </React.Fragment>
             ) : this.props.spell.school === "Divination" ? (
               <React.Fragment>
                 <DivinationIcon />{" "}
-                <span className="card-font-1">{this.props.spell.school}</span>
+                <span className={styles.font1}>{this.props.spell.school}</span>
               </React.Fragment>
             ) : this.props.spell.school === "Enchantment" ? (
               <React.Fragment>
                 <EnchantmentIcon />{" "}
-                <span className="card-font-1">{this.props.spell.school}</span>
+                <span className={styles.font1}>{this.props.spell.school}</span>
               </React.Fragment>
             ) : this.props.spell.school === "Evocation" ? (
               <React.Fragment>
                 <EvocationIcon />{" "}
-                <span className="card-font-1">{this.props.spell.school}</span>
+                <span className={styles.font1}>{this.props.spell.school}</span>
               </React.Fragment>
             ) : this.props.spell.school === "Illusion" ? (
               <React.Fragment>
                 <IllusionIcon />{" "}
-                <span className="card-font-1">{this.props.spell.school}</span>
+                <span className={styles.font1}>{this.props.spell.school}</span>
               </React.Fragment>
             ) : this.props.spell.school === "Necromancy" ? (
               <React.Fragment>
                 <NecromancyIcon />{" "}
-                <span className="card-font-1">{this.props.spell.school}</span>
+                <span className={styles.font1}>{this.props.spell.school}</span>
               </React.Fragment>
             ) : this.props.spell.school === "Transmutation" ? (
               <React.Fragment>
                 <TransmutationIcon />{" "}
-                <span className="card-font-1">{this.props.spell.school}</span>
+                <span className={styles.font1}>{this.props.spell.school}</span>
               </React.Fragment>
             ) : (
               "School: " + this.props.spell.school
             )}
           </div>
-          <div className="card-text-block half">
-            <span className="card-font-2">CASTING TIME</span>:{" "}
+          <div className={`${styles.textBlock} ${styles.half}`}>
+            <span className={styles.font2}>CASTING TIME</span>:{" "}
             {this.props.spell.castingTime}
           </div>
-          <div className="card-text-block full">
-            <div className="half">
+          <div className={`${styles.textBlock} ${styles.full}`}>
+            <div className={styles.half}>
               <DurationIcon />: {this.props.spell.duration}
             </div>
-            <div className="half">
-              <span className="card-font-2">RANGE</span>:{" "}
+            <div className={styles.half}>
+              <span className={styles.font2}>RANGE</span>:{" "}
               {this.props.spell.range}
             </div>
           </div>
-          <div className="card-text-block full">
-            <div className="twoThirds">
-              <span className="card-font-2">COMPONENTS</span>:{" "}
+          <div className={`${styles.textBlock} ${styles.full}`}>
+            <div className={styles.twoThirds}>
+              <span className={styles.font2}>COMPONENTS</span>:{" "}
               {components.map((data, index) => {
                 return <React.Fragment key={index}>{data}</React.Fragment>;
               })}
             </div>
-            <div className="third">
-              <span className="card-font-2">LEVEL</span>:{" "}
+            <div className={styles.third}>
+              <span className={styles.font2}>LEVEL</span>:{" "}
               {this.props.spell.level === -1 || this.props.spell.level === 0
                 ? "Cantrip"
                 : this.props.spell.level}
             </div>
           </div>
-          <div className="card-text-block full">{desc}</div>
-          <div className="card-text-block full">
-            <div className="half">
+          <div className={`${styles.textBlock} ${styles.full}`}>{desc}</div>
+          <div className={`${styles.textBlock} ${styles.full}`}>
+            <div className={styles.half}>
               <span>
                 <img
-                  className="card-icon"
+                  className={styles.icon}
                   src={concentrationIcon}
                   alt="concentration"
                 />
@@ -179,7 +180,7 @@ class Card extends Component {
               {": "}
               {this.props.spell.concentration}
             </div>
-            <div className="half">
+            <div className={styles.half}>
               <span>
                 <RitualIcon />
               </span>
@@ -187,8 +188,8 @@ class Card extends Component {
               {this.props.spell.ritual}
             </div>
           </div>
-          <div className="card-text-block full">
-            <span className="card-font-2">MATERIALS</span>:{" "}
+          <div className={`${styles.textBlock} ${styles.full}`}>
+            <span className={styles.font2}>MATERIALS</span>:{" "}
             {this.props.spell.materials !== undefined
               ? this.props.spell.materials
               : "No materials required."}
@@ -203,8 +204,10 @@ class Card extends Component {
             }
             className={
               this.props.page === "landing"
-                ? "card-transcribe-btn bg-" + this.props.class
-                : "card-transcribe-btn spellbook-adjust bg-" + this.props.class
+                ? `${styles.transcribeBtn} bg-${this.props.class}`
+                : `${styles.transcribeBtn} ${styles.spellbookAdjust} bg-${
+                    this.props.class
+                  }`
             }
           >
             {this.props.page === "landing" ? "Transcribe" : "Delete"}

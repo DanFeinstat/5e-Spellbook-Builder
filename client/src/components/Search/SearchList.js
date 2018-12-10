@@ -1,12 +1,11 @@
 import React from "react";
-import "./SearchList.css";
+import styles from "./SearchList.module.css";
 
 const SearchList = props => {
   return (
-    <div className="sL-container">
+    <div className={styles.container}>
       {props.classSelected != null
         ? props.listofLists.map((level, index) => {
-            // console.log(props.listofLists);
             let listNumber = index;
             let spellLevel =
               props.classSelected !== "Paladin" &&
@@ -19,7 +18,7 @@ const SearchList = props => {
             return level.length ? (
               <React.Fragment>
                 <h4
-                  className="sL-level"
+                  className={styles.level}
                   onClick={props.toggleList}
                   data-level={"level" + listNumber}
                 >
@@ -32,8 +31,8 @@ const SearchList = props => {
                       <li
                         className={
                           props[toggleKey] === true
-                            ? "sL-li"
-                            : "sL-li sL-hidden"
+                            ? styles.li
+                            : `${styles.li} ${styles.hidden}`
                         }
                         key={index}
                         data-name={list.data.name}

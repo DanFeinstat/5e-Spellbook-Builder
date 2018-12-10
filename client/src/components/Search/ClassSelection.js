@@ -1,10 +1,10 @@
 import React from "react";
-import "./ClassSelection.css";
+import styles from "./ClassSelection.module.css";
 
 const ClassSelection = props => {
   return (
-    <div className="cs-container">
-      <p className="cs-title">Select a Class:</p>
+    <div className={styles.container}>
+      <p className={styles.title}>Select a Class:</p>
       {props.children}
     </div>
   );
