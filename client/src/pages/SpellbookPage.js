@@ -20,20 +20,12 @@ class SpellbookPage extends Component {
   };
 
   componentDidMount() {
-    // console.log("loaded");
     this.decodeUserIDandPopulate();
   }
 
-  //   componentDidUpdate() {
-
-  //   }
-
   decodeUserIDandPopulate = () => {
-    // console.log(localStorage.spellbookJwt);
     const decoder = jwt.decode(localStorage.spellbookJwt);
-    // console.log(decoder);
     const decodedID = decoder.id;
-    // console.log(decodedID);
     this.setState(
       {
         id: decodedID,
@@ -50,7 +42,6 @@ class SpellbookPage extends Component {
         this.state.spellToDisplay.name
       )
       .then(response => {
-        // console.log("Spell Removed!");
         this.populateSpellbook();
         this.setState({
           spellToDisplay: "",
@@ -60,12 +51,9 @@ class SpellbookPage extends Component {
   };
 
   populateSpellbook = () => {
-    // console.log(this.state.id);
     userAPI
       .getSpells(this.state.id)
       .then(response => {
-        console.log(response);
-        // console.log(response.data.spellbooks[0].spells);
         const alphabetizedSpells = response.data.spellbooks[0].spells.sort(
           function(a, b) {
             if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
@@ -73,7 +61,7 @@ class SpellbookPage extends Component {
             return 0;
           }
         );
-        // console.log(alphabetizedSpells);
+
         let spellsByLevel = [];
         let level0 = [];
         let level1 = [];
@@ -92,7 +80,6 @@ class SpellbookPage extends Component {
           ) {
             spellsByLevel.push(alphabetizedSpells[k]);
             level0.push(alphabetizedSpells[k]);
-            // console.log(level0);
           }
         }
         for (let i = 1; i < 10; i++) {
@@ -103,16 +90,13 @@ class SpellbookPage extends Component {
             }
           }
         }
-        // console.log(spellsByLevel);
-        // console.log(level0);
-        // console.log(level2);
-        // console.log(level3);
+
         let listOfLists = [];
         for (let l = 0; l < 10; l++) {
           let listFragment = eval("level" + l);
           listOfLists.push(listFragment);
         }
-        // console.log(listOfLists);
+
         this.setState({
           names: response.data.names,
           email: response.data.email,
@@ -130,7 +114,6 @@ class SpellbookPage extends Component {
   };
 
   displaySpell = e => {
-    // console.log(e.target.dataset.name);
     for (let i = 0; i < this.state.spells.length; i++) {
       if (this.state.spells[i].name === e.target.dataset.name) {
         this.setState({
@@ -170,12 +153,7 @@ class SpellbookPage extends Component {
               let listNumber = index;
               let spellLevel = index === 0 ? "Cantrip" : index;
               return level.length ? (
-                <SbRow
-                  level={spellLevel}
-                  key={listNumber}
-                  // data-level={"level" + listNumber}
-                  // toggleList={this.toggleLevelList}
-                >
+                <SbRow level={spellLevel} key={listNumber}>
                   {level.map((list, index) => {
                     return (
                       <li
@@ -200,7 +178,6 @@ class SpellbookPage extends Component {
               class={"none"}
               loggedIn={this.state.id}
               removeSpell={this.deleteSpellFromSpellbook}
-              // float={"right"}
             />
           ) : null}
         </div>

@@ -45,12 +45,6 @@ class LandingPage extends Component {
       this.decodeUserID();
     }
   }
-  // componentDidUpdate() {
-  //   if (localStorage.spellbookJwt && !this.state.id) {
-  //     console.log("check");
-  //     this.decodeUserID();
-  //   }
-  // }
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.handleWindowSizeChange);
@@ -82,7 +76,6 @@ class LandingPage extends Component {
       ) {
         str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
         for (let j = 0; j < str[i].length; j++) {
-          // console.log(str[i].charAt(j));
           if (str[i].charAt(j) === "/") {
             str[i] =
               str[i].slice(0, j + 1) +
@@ -141,99 +134,6 @@ class LandingPage extends Component {
       }
     });
   };
-
-  //Switched from API to my own Database, Holding on to this function in case there's a need to access that API again
-  // toQuerySpellData = () => {
-  //   const queryURL =
-  //     "http://www.dnd5eapi.co/api/spells/" +
-  //     this.state.classList.toLowerCase() +
-  //     "/";
-  //   let spellName = this.state.search.trim();
-  //   let toSubmit = this.titleCase(spellName);
-  //   fetch(queryURL)
-  //     .then(response => response.json())
-  //     .then(res => {
-  //       for (let i = 0; i < res.results.length; i++) {
-  //         if (res.results[i].name === toSubmit) {
-  //           fetch(res.results[i].url)
-  //             .then(response => response.json())
-  //             .then(data => {
-  //               let desc = [];
-  //               if (Array.isArray(data.desc)) {
-  //                 for (let i = 0; i < data.desc.length; i++) {
-  //                   const newDesc = data.desc[i]
-  //                     .replace(/â€™/g, "'")
-  //                     .replace(/â€“/g, "-")
-  //                     .replace(/â€”/g, "-")
-  //                     .replace(/â€œ/g, '"')
-  //                     .replace(/â€�/g, '"');
-  //                   desc.push(newDesc);
-  //                 }
-  //               } else {
-  //                 let newDesc = data.desc
-  //                   .replace(/â€™/g, "'")
-  //                   .replace(/â€“/g, "-")
-  //                   .replace(/â€”/g, "-")
-  //                   .replace(/â€œ/g, '"')
-  //                   .replace(/â€�/g, '"');
-  //                 desc.push(newDesc);
-  //               }
-  //               const fixMaterialCharacters = data => {
-  //                 if (data.material === undefined) {
-  //                   return undefined;
-  //                 } else if (
-  //                   Array.isArray(data.material) &&
-  //                   data.material.length > 1
-  //                 ) {
-  //                   let materials = [];
-  //                   for (let i = 0; i < data.material.length; i++) {
-  //                     const newMaterials = data.material[i]
-  //                       .replace(/â€™/g, "'")
-  //                       .replace(/â€œ/g, '"')
-  //                       .replace(/â€�/g, '"');
-  //                     materials.push(newMaterials);
-  //                   }
-  //                   return materials;
-  //                 } else {
-  //                   let newMaterials = data.material.replace(/â€™/g, "'");
-  //                   return newMaterials;
-  //                 }
-  //               };
-  //               let materials = fixMaterialCharacters(data);
-
-  //               const spellData = {
-  //                 name: data.name,
-  //                 range: data.range,
-  //                 duration: data.duration,
-  //                 materials: materials,
-  //                 ritual: data.ritual,
-  //                 concentration: data.concentration,
-  //                 components: data.components,
-  //                 desc: desc,
-  //                 higherLevel: data.higher_level,
-  //                 school: data.school.name,
-  //                 castingTime: data.casting_time,
-  //                 level: data.level,
-  //               };
-  //               this.setState(
-  //                 {
-  //                   currentSpell: spellData,
-  //                   spellFound: true,
-  //                   searchActive: false,
-  //                 }
-  //                 // this.scrollToCard
-  //               );
-  //             })
-  //             .catch(function(error) {
-  //               console.log(error);
-  //             });
-  //         }
-  //       }
-  //     })
-  //     .catch(function(error) {
-  //       console.log(error);
-  //     });
-  // };
 
   decodeUserID = () => {
     const decoder = jwt.decode(localStorage.spellbookJwt);
@@ -438,7 +338,6 @@ class LandingPage extends Component {
                 class={this.state.classList}
                 loggedIn={this.state.id}
                 scrollActive={reArrange}
-                //   transcribe={this.saveSpellToSpellbook}
               />
             ) : null}
             <SearchList
