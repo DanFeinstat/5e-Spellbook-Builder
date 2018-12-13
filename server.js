@@ -5,7 +5,7 @@ const path = require("path");
 const dotenv = require("dotenv");
 const routes = require("./routes");
 const db = require("./models");
-const spellData = require("./spells.json");
+// const spellData = require("./spells.json");
 const jwt = require("jsonwebtoken");
 
 const app = express();
