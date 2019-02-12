@@ -2,7 +2,6 @@
   width: 340px;
   overflow: hidden;
   margin: auto;
-  margin-top: 50px;
   padding: 5px;
   background-color: rgb(253, 241, 220);
   border-top: 6px solid rgb(230, 154, 40);
@@ -34,5 +33,11 @@ font-family: 'Spirax', cursive; */
 @media (min-width: 800px) {
   .container {
     width: 400px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .container {
+    margin-top: -40px !important;
   }
 }

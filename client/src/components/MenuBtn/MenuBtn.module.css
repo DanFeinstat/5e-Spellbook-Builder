@@ -1,0 +1,36 @@
+.container {
+  float: right;
+  margin-right: 20px;
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.barOne,
+.barTwo,
+.barThree {
+  width: 35px;
+  height: 5px;
+  background-color: #333;
+  margin: 6px 0px;
+  border-radius: 10px;
+  transition: 0.4s;
+}
+
+/* Rotate first bar */
+.changeOne {
+  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+  transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+/* Fade out the second bar */
+.changeTwo {
+  opacity: 0;
+}
+
+/* Rotate last bar */
+.changeThree {
+  -webkit-transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);
+}

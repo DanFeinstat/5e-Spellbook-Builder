@@ -269,6 +269,11 @@
   transform: scale(1.03) translate(6px);
 }
 
+.spellbookTitle {
+  text-align: center;
+  font-family: "Cinzel Decorative", cursive;
+}
+
 .spellbookContent {
   max-width: 1000px;
   margin: auto;
@@ -291,6 +296,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+  .spellbookCardContainer {
+    padding-top: 70px;
   }
 }
 

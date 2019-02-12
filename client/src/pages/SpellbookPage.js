@@ -5,6 +5,8 @@ import Spellbook from "../components/Spellbook/Spellbook";
 import Card from "../components/Card/Card";
 import styles from "./Pages.module.css";
 import LogoutBtn from "../components/Spellbook/LogoutBtn";
+import MenuBtn from "../components/MenuBtn/MenuBtn";
+import Menu from "../components/Tooltips/Tooltips";
 import SbRow from "../components/Spellbook/SbRow";
 const jwt = require("jsonwebtoken");
 
@@ -12,11 +14,15 @@ class SpellbookPage extends Component {
   state = {
     id: "",
     names: [],
+    nameDisplayed: "",
     email: "",
     spells: [],
     listsByLevels: [],
     spellToDisplay: "",
     levelToDisplay: "",
+    newBookName: "",
+    editTitle: false,
+    menuActive: false,
   };
 
   componentDidMount() {
@@ -38,7 +44,7 @@ class SpellbookPage extends Component {
     userAPI
       .deleteSpell(
         this.state.id,
-        this.state.names[0],
+        this.state.nameDisplayed,
         this.state.spellToDisplay.name
       )
       .then(response => {
@@ -99,6 +105,7 @@ class SpellbookPage extends Component {
 
         this.setState({
           names: response.data.names,
+          nameDisplayed: response.data.spellbooks[0].name,
           email: response.data.email,
           spells: spellsByLevel,
           listsByLevels: listOfLists,
@@ -142,10 +149,65 @@ class SpellbookPage extends Component {
     window.location.href = "/";
   };
 
+  toggleMenu = e => {
+    e.preventDefault();
+    this.setState(prevState => ({
+      menuActive: !prevState.menuActive,
+    }));
+  };
+
+  toEditMode = e => {
+    if (this.state.editMode) {
+      const name = e.target.name;
+      this.setState(prevState => ({
+        [name]: !prevState[name],
+      }));
+    }
+  };
+
+  selectTheme = () => {};
+
+  verifyEdit = () => {};
+  editBookName = () => {};
+  createNewBook = e => {
+    e.preventDefault();
+    let bookName = this.state.newName;
+    let userInput = {
+      name: bookName,
+      spells: [],
+    };
+    if (bookName.length > 0) {
+      userAPI
+        .newBook(this.state.id, userInput)
+        .then(response => {
+          console.log("function fired");
+        })
+        .catch(err => console.log(err));
+    } else {
+      alert("Please enter a Name");
+    }
+  };
+
+  selectDifferentBook = () => {};
+
   render() {
     return (
       <div className={styles.spellbookContainer}>
         <div className={styles.spellbookContent}>
+          <h2 className={styles.spellbookTitle}>
+            {this.state.editTitle ? (
+              <input />
+            ) : (
+              <span onClick={this.toEditMode}>{this.state.nameDisplayed}</span>
+            )}
+            's Spellbook
+          </h2>
+          <Menu
+            active={this.state.menuActive}
+            toggleShape={this.toggleMenu}
+            message={`test`}
+          />
+          {/* <LogoutBtn logout={this.createNewBook} text={"New Spellbook"} /> */}
           <LogoutBtn logout={this.toSearchPage} text={"Spell Search"} />
           <LogoutBtn logout={this.toLogout} text={"Log Out"} />
           <Spellbook>
@@ -171,14 +233,17 @@ class SpellbookPage extends Component {
             })}
           </Spellbook>
           {this.state.spellToDisplay ? (
-            <Card
-              username={this.state.names[0]}
-              page="spellbook"
-              spell={this.state.spellToDisplay}
-              class={"none"}
-              loggedIn={this.state.id}
-              removeSpell={this.deleteSpellFromSpellbook}
-            />
+            <div className={styles.spellbookCardContainer}>
+              <Card
+                username={this.state.names[0]}
+                page="spellbook"
+                spell={this.state.spellToDisplay}
+                class={"none"}
+                loggedIn={this.state.id}
+                removeSpell={this.deleteSpellFromSpellbook}
+                scrollActive={window.innerWidth < 1000 ? true : false}
+              />
+            </div>
           ) : null}
         </div>
       </div>
