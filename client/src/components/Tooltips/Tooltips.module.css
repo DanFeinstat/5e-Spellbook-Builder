@@ -23,8 +23,9 @@ body {
 }
 
 .tooltipBubble {
-  min-width: 120px;
-  max-width: 210px;
+  /* min-width: 120px;
+  max-width: 210px; */
+  width: 180px;
   position: absolute;
   z-index: 10;
 }
@@ -52,7 +53,7 @@ body {
   top: 100%;
   left: 50%;
   padding-top: 9px;
-  transform: translateX(-38%);
+  transform: translateX(-76%);
 }
 .tooltipBottom::after {
   border-left: 9px solid transparent;
@@ -60,7 +61,7 @@ body {
   border-bottom: 9px solid rgba(0, 0, 0, 0.7);
   top: 0;
   left: 50%;
-  transform: translateX(-38%);
+  transform: translateX(290%);
 }
 
 .tooltip-left {

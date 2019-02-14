@@ -1,0 +1,74 @@
+/* body {
+  font-family: Helvetica;
+  font-size: 14px;
+} */
+
+.container {
+  margin-top: 120px;
+  text-align: center;
+}
+
+.position {
+  position: relative;
+}
+
+.mTrigger {
+  display: inline-block;
+  text-decoration: underline;
+}
+
+.mBubble {
+  width: 180px;
+  position: absolute;
+  z-index: 10;
+}
+.mBubble::after {
+  content: "";
+  position: absolute;
+}
+
+.mBottom {
+  top: 100%;
+  left: 50%;
+  padding-top: 9px;
+  transform: translateX(-76%);
+}
+.mBottom::after {
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  border-bottom: 9px solid rgba(0, 0, 0, 0.7);
+  top: 0;
+  left: 50%;
+  transform: translateX(290%);
+}
+
+.mContent {
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 3px;
+  /* color: #fff;
+  font-size: 0.75rem;
+  line-height: 1.4; */
+  padding: 0.75em;
+  text-align: center;
+}
+
+.mContentContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.mContentItem {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  cursor: pointer;
+  font-size: 120%;
+  color: linen;
+  font-family: "Contrail One", cursive;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
+
+.mBorderTop {
+  border-top: 1px solid black;
+}

@@ -272,6 +272,11 @@
 .spellbookTitle {
   text-align: center;
   font-family: "Cinzel Decorative", cursive;
+  margin-bottom: 50px;
+}
+.spellbookMenuSpacing {
+  width: 100%;
+  height: 50px;
 }
 
 .spellbookContent {

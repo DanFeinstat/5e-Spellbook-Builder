@@ -1,4 +1,5 @@
 import React from "react";
+import { useSpring, animated } from "react-spring";
 import styles from "./Card.module.css";
 import styles2 from "./TutorialCard.module.css";
 //card category icons
@@ -9,7 +10,7 @@ import SomaticIcon from "../Icons/SomaticIcon";
 import MaterialIcon from "../Icons/MaterialIcon";
 import concentrationIcon from "../../images/concentration.png";
 
-const TutorialCard = props => {
+const TutorialCard = () => {
   return (
     <React.Fragment>
       <div className={styles2.container}>

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Transition, animated } from "react-spring/renderprops";
 import userAPI from "../utils/userAPI";
 import SpellItem from "../components/Spellbook/SpellItem";
 import Spellbook from "../components/Spellbook/Spellbook";
@@ -6,11 +7,12 @@ import Card from "../components/Card/Card";
 import styles from "./Pages.module.css";
 import LogoutBtn from "../components/Spellbook/LogoutBtn";
 import MenuBtn from "../components/MenuBtn/MenuBtn";
-import Menu from "../components/Tooltips/Tooltips";
+import Menu from "../components/Menu/Menu";
 import SbRow from "../components/Spellbook/SbRow";
+// import { animated } from "react-spring/renderprops-universal";
 const jwt = require("jsonwebtoken");
 
-class SpellbookPage extends Component {
+class SpellbookPage extends React.PureComponent {
   state = {
     id: "",
     names: [],
@@ -202,14 +204,37 @@ class SpellbookPage extends Component {
             )}
             's Spellbook
           </h2>
-          <Menu
-            active={this.state.menuActive}
-            toggleShape={this.toggleMenu}
-            message={`test`}
-          />
+          <div className={styles.spellbookMenuSpacing}>
+            <MenuBtn
+              active={this.state.menuActive}
+              toggleShape={this.toggleMenu}
+            >
+              <Transition
+                native
+                items={this.state.menuActive}
+                from={{ position: "absolute", opacity: 0 }}
+                enter={{ opacity: 1 }}
+                leave={{ opacity: 0 }}
+              >
+                {show =>
+                  show &&
+                  (props => (
+                    <animated.div style={props}>
+                      <Menu
+                        // displayMenu={this.state.menuActive}
+                        spellSearch={this.toSearchPage}
+                        newBook={this.createNewBook}
+                        logout={this.toLogout}
+                      />
+                    </animated.div>
+                  ))
+                }
+              </Transition>
+            </MenuBtn>
+          </div>
           {/* <LogoutBtn logout={this.createNewBook} text={"New Spellbook"} /> */}
-          <LogoutBtn logout={this.toSearchPage} text={"Spell Search"} />
-          <LogoutBtn logout={this.toLogout} text={"Log Out"} />
+          {/* <LogoutBtn logout={this.toSearchPage} text={"Spell Search"} /> */}
+          {/* <LogoutBtn logout={this.toLogout} text={"Log Out"} /> */}
           <Spellbook>
             {this.state.listsByLevels.map((level, index) => {
               let listNumber = index;
