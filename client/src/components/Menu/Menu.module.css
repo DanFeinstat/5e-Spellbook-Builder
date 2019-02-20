@@ -42,6 +42,21 @@
   transform: translateX(290%);
 }
 
+.mLeft {
+  top: 50%;
+  right: 100%;
+  padding-right: 9px;
+  transform: translateY(-50%);
+}
+.mLeft::after {
+  border-left: 9px solid rgba(0, 0, 0, 0.7);
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
 .mContent {
   background: rgba(0, 0, 0, 0.7);
   border-radius: 3px;
@@ -58,8 +73,8 @@
 }
 
 .mContentItem {
-  padding-top: 2px;
-  padding-bottom: 2px;
+  padding-top: 6px;
+  padding-bottom: 6px;
   cursor: pointer;
   font-size: 120%;
   color: linen;

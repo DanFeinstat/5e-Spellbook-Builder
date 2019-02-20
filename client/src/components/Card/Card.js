@@ -205,9 +205,9 @@ class Card extends Component {
             className={
               this.props.page === "landing"
                 ? `${styles.transcribeBtn} bg-${this.props.class}`
-                : `${styles.transcribeBtn} ${styles.spellbookAdjust} bg-${
-                    this.props.class
-                  }`
+                : `${styles.transcribeBtn} 
+                ${styles.spellbookAdjust} 
+                bg-${this.props.class}`
             }
           >
             {this.props.page === "landing" ? "Transcribe" : "Delete"}

@@ -25,6 +25,7 @@ class SpellbookPage extends React.PureComponent {
     newBookName: "",
     editTitle: false,
     menuActive: false,
+    bookMenuActive: false,
   };
 
   componentDidMount() {
@@ -153,24 +154,32 @@ class SpellbookPage extends React.PureComponent {
 
   toggleMenu = e => {
     e.preventDefault();
+
     this.setState(prevState => ({
       menuActive: !prevState.menuActive,
     }));
   };
 
-  toEditMode = e => {
-    if (this.state.editMode) {
-      const name = e.target.name;
-      this.setState(prevState => ({
-        [name]: !prevState[name],
-      }));
-    }
+  toggleBookMenu = e => {
+    e.stopPropagation();
+    this.setState(prevState => ({
+      bookMenuActive: !prevState.bookMenuActive,
+    }));
   };
 
-  selectTheme = () => {};
+  // toEditMode = e => {
+  //   if (this.state.editMode) {
+  //     const name = e.target.name;
+  //     this.setState(prevState => ({
+  //       [name]: !prevState[name],
+  //     }));
+  //   }
+  // };
 
-  verifyEdit = () => {};
-  editBookName = () => {};
+  // selectTheme = () => {};
+
+  // verifyEdit = () => {};
+  // editBookName = () => {};
   createNewBook = e => {
     e.preventDefault();
     let bookName = this.state.newName;
@@ -224,7 +233,10 @@ class SpellbookPage extends React.PureComponent {
                         // displayMenu={this.state.menuActive}
                         spellSearch={this.toSearchPage}
                         newBook={this.createNewBook}
+                        toggleBookMenu={this.toggleBookMenu}
+                        bookMenuActive={this.state.bookMenuActive}
                         logout={this.toLogout}
+                        names={this.state.names}
                       />
                     </animated.div>
                   ))

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-// import ReactDOM from "react-dom";
 import "../App.css";
 import styles from "./Pages.module.css";
 //Components
+import { Transition } from "react-spring/renderprops";
 import ClassSelection from "../components/Search/ClassSelection";
 import ClassSelBtn from "../components/Search/ClassSelBtn";
 import Search from "../components/Search/Search";
@@ -12,7 +12,6 @@ import TutorialCard from "../components/Card/TutorialCard";
 import LoginBtn from "../components/Login/LoginBtn";
 import userAPI from "../utils/userAPI";
 import spellAPI from "../utils/spellAPI";
-// import cardTutorial from "../utils/dataObjects/cardTutorial";
 const jwt = require("jsonwebtoken");
 
 class LandingPage extends Component {
@@ -257,6 +256,16 @@ class LandingPage extends Component {
           classList: newClass,
           spellFound: false,
           listofLists: listofLists,
+          level0: false,
+          level1: false,
+          level2: false,
+          level3: false,
+          level4: false,
+          level5: false,
+          level6: false,
+          level7: false,
+          level8: false,
+          level9: false,
         });
       })
       .catch(err => console.log(err));
@@ -282,110 +291,269 @@ class LandingPage extends Component {
       >
         <div className={styles.landingSearchContainer}>
           {this.state.searchActive ? (
-            <Search
-              inputChange={this.handleInputChange}
-              onSubmit={this.onSpellSubmit}
-              returnToClassSelect={this.returnToClassList}
-            />
+            <Transition
+              items={this.state.searchActive}
+              from={{ transform: "translate3d(0,-40px,0)" }}
+              enter={{ transform: "translate3d(0,0px,0)" }}
+              leave={{ transform: "translate3d(0,-40px,0)" }}
+            >
+              {show =>
+                show &&
+                (props => (
+                  <div style={props}>
+                    <Search
+                      inputChange={this.handleInputChange}
+                      onSubmit={this.onSpellSubmit}
+                      returnToClassSelect={this.returnToClassList}
+                    />
+                  </div>
+                ))
+              }
+            </Transition>
           ) : (
             <ClassSelection>
               {classes.map((value, index) => {
+                let delay = index * 75;
                 return (
-                  <ClassSelBtn
-                    selectClass={this.getClassList}
-                    key={index}
-                    name={value}
-                  />
+                  <Transition
+                    items={!this.state.searchActive}
+                    from={{ transform: "scale(0.1)", opacity: 0 }}
+                    enter={{ transform: "scale(1)", opacity: 1 }}
+                    leave={{ transform: "scale(0.1)", opacity: 0 }}
+                    trail={delay}
+                  >
+                    {show =>
+                      show &&
+                      (props => (
+                        <div
+                          className={styles.landingClassBtnTransition}
+                          style={props}
+                        >
+                          <ClassSelBtn
+                            selectClass={this.getClassList}
+                            key={index}
+                            name={value}
+                          />
+                        </div>
+                      ))
+                    }
+                  </Transition>
                 );
               })}
               {!this.state.classList ? (
-                <ClassSelBtn
-                  name="Tutorial"
-                  special="cs-btn-tutorial"
-                  selectClass={this.toggleTutorial}
-                />
+                <Transition
+                  items={!this.state.searchActive}
+                  from={{ transform: "scale(0.1)", opacity: 0 }}
+                  enter={{ transform: "scale(1)", opacity: 1 }}
+                  leave={{ transform: "scale(0.1)", opacity: 0 }}
+                  trail={675}
+                >
+                  {show =>
+                    show &&
+                    (props => (
+                      <div
+                        className={styles.landingClassBtnTransition}
+                        style={props}
+                      >
+                        <ClassSelBtn
+                          name="Tutorial"
+                          special="cs-btn-tutorial"
+                          selectClass={this.toggleTutorial}
+                        />
+                      </div>
+                    ))
+                  }
+                </Transition>
               ) : null}
             </ClassSelection>
           )}
         </div>
         {!this.state.classList && this.state.tutorial ? (
           <React.Fragment>
-            <h2 className={styles.landingTutorialContent}>
-              Welcome to the 5e Spellbook!
-            </h2>
-            <p className={styles.landingTutorialContent}>
-              Below is an example spell card that demonstrates the layout and
-              icons used. The "Transcribe" button at the bottom will only show
-              up if you're logged in. It allows you to save the spell to a
-              personal spellbook.
-            </p>
-            <TutorialCard />
-            <p className={styles.landingTutorialContent2}>
-              To get started, select a class at the top of the page, or hit the
-              "Log In" button in the bottom right of the screen.
-            </p>
+            <Transition
+              items={this.state.tutorial}
+              from={{ opacity: 0 }}
+              enter={{ opacity: 1 }}
+              leave={{ opacity: 0 }}
+              trail={200}
+            >
+              {show =>
+                show &&
+                (props => (
+                  <div style={props}>
+                    <h2 className={styles.landingTutorialContent}>
+                      Welcome to the 5e Spellbook!
+                    </h2>
+                    <p className={styles.landingTutorialContent}>
+                      Below is an example spell card that demonstrates the
+                      layout and icons used. The "Transcribe" button at the
+                      bottom will only show up if you're logged in. It allows
+                      you to save the spell to a personal spellbook.
+                    </p>
+                    <TutorialCard />
+                    <p className={styles.landingTutorialContent2}>
+                      To get started, select a class at the top of the page, or
+                      hit the "Log In" button in the bottom right of the screen.
+                    </p>
+                  </div>
+                ))
+              }
+            </Transition>
           </React.Fragment>
         ) : !this.state.classList && !this.state.tutorial ? (
-          <h1 className={styles.landingSplash}>Welcome to the 5e Spellbook!</h1>
+          <Transition
+            items={!this.state.tutorial}
+            from={{ opacity: 0 }}
+            enter={{ opacity: 1 }}
+            leave={{ opacity: 0 }}
+            trail={200}
+          >
+            {show =>
+              show &&
+              (props => (
+                <div style={props}>
+                  <h1 className={styles.landingSplash}>
+                    Welcome to the 5e Spellbook!
+                  </h1>
+                </div>
+              ))
+            }
+          </Transition>
         ) : null}
         {reArrange ? (
           <div className={styles.landingContentContainer}>
             {this.state.spellFound ? (
-              <Card
-                page="landing"
-                spell={this.state.currentSpell}
-                username={this.state.names[0]}
-                class={this.state.classList}
-                loggedIn={this.state.id}
-                scrollActive={reArrange}
-              />
+              <Transition
+                items={this.state.spellFound}
+                from={{
+                  transform: "translate3d(200px,0,0)",
+                  opacity: 0,
+                }}
+                enter={{
+                  transform: "translate3d(0px,0,0)",
+                  opacity: 1,
+                }}
+                leave={{
+                  transform: "translate3d(200px,0,0)",
+                  opacity: 0,
+                }}
+              >
+                {show =>
+                  show &&
+                  (props => (
+                    <div style={props}>
+                      <Card
+                        page="landing"
+                        spell={this.state.currentSpell}
+                        username={this.state.names[0]}
+                        class={this.state.classList}
+                        loggedIn={this.state.id}
+                        scrollActive={reArrange}
+                      />
+                    </div>
+                  ))
+                }
+              </Transition>
             ) : null}
-            <SearchList
-              listofLists={this.state.listofLists}
-              toggleList={this.toggleLevelList}
-              classSelected={this.state.classList}
-              fetchSpell={this.toFetchSpell}
-              level0={this.state.level0}
-              level1={this.state.level1}
-              level2={this.state.level2}
-              level3={this.state.level3}
-              level4={this.state.level4}
-              level5={this.state.level5}
-              level6={this.state.level6}
-              level7={this.state.level7}
-              level8={this.state.level8}
-              level9={this.state.level9}
-            />
+            <Transition
+              items={this.state.classList}
+              from={{ opacity: 0 }}
+              enter={{ opacity: 1 }}
+              leave={{ opacity: 0 }}
+              // trail={200}
+            >
+              {show =>
+                show &&
+                (props => (
+                  <div style={props}>
+                    <SearchList
+                      listofLists={this.state.listofLists}
+                      toggleList={this.toggleLevelList}
+                      classSelected={this.state.classList}
+                      fetchSpell={this.toFetchSpell}
+                      level0={this.state.level0}
+                      level1={this.state.level1}
+                      level2={this.state.level2}
+                      level3={this.state.level3}
+                      level4={this.state.level4}
+                      level5={this.state.level5}
+                      level6={this.state.level6}
+                      level7={this.state.level7}
+                      level8={this.state.level8}
+                      level9={this.state.level9}
+                    />
+                  </div>
+                ))
+              }
+            </Transition>
           </div>
         ) : (
           <div>
             <div className={styles.landingListContainer}>
-              <SearchList
-                listofLists={this.state.listofLists}
-                toggleList={this.toggleLevelList}
-                classSelected={this.state.classList}
-                fetchSpell={this.toFetchSpell}
-                level0={this.state.level0}
-                level1={this.state.level1}
-                level2={this.state.level2}
-                level3={this.state.level3}
-                level4={this.state.level4}
-                level5={this.state.level5}
-                level6={this.state.level6}
-                level7={this.state.level7}
-                level8={this.state.level8}
-                level9={this.state.level9}
-              />
+              <Transition
+                items={this.state.classList}
+                from={{ opacity: 0 }}
+                enter={{ opacity: 1 }}
+                leave={{ opacity: 0 }}
+                // trail={200}
+              >
+                {show =>
+                  show &&
+                  (props => (
+                    <div style={props}>
+                      <SearchList
+                        listofLists={this.state.listofLists}
+                        toggleList={this.toggleLevelList}
+                        classSelected={this.state.classList}
+                        fetchSpell={this.toFetchSpell}
+                        level0={this.state.level0}
+                        level1={this.state.level1}
+                        level2={this.state.level2}
+                        level3={this.state.level3}
+                        level4={this.state.level4}
+                        level5={this.state.level5}
+                        level6={this.state.level6}
+                        level7={this.state.level7}
+                        level8={this.state.level8}
+                        level9={this.state.level9}
+                      />
+                    </div>
+                  ))
+                }
+              </Transition>
             </div>
             <div className={styles.landingCardContainer}>
               {this.state.spellFound ? (
-                <Card
-                  page="landing"
-                  spell={this.state.currentSpell}
-                  class={this.state.classList}
-                  username={this.state.names[0]}
-                  loggedIn={this.state.id}
-                />
+                <Transition
+                  items={this.state.spellFound}
+                  from={{
+                    transform: "translate3d(200px,0,0)",
+                    opacity: 0,
+                  }}
+                  enter={{
+                    transform: "translate3d(0px,0,0)",
+                    opacity: 1,
+                  }}
+                  // leave={{
+                  //   transform: "translate3d(200px,0,0)",
+                  //   opacity: 0,
+                  // }}
+                >
+                  {show =>
+                    show &&
+                    (props => (
+                      <div style={props}>
+                        <Card
+                          page="landing"
+                          spell={this.state.currentSpell}
+                          class={this.state.classList}
+                          username={this.state.names[0]}
+                          loggedIn={this.state.id}
+                        />{" "}
+                      </div>
+                    ))
+                  }
+                </Transition>
               ) : null}
             </div>
           </div>

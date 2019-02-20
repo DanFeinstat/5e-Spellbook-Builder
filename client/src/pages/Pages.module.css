@@ -81,6 +81,25 @@
   background-size: 100vw, 99vw;
   background-repeat: no-repeat, no-repeat, repeat;
 }
+.landingClassBtnTransition {
+  grid-row-start: 2;
+  display: inline-block;
+}
+
+.landingSearchContainer {
+  width: 100vw;
+  height: 160px;
+  cursor: default;
+}
+@media only screen and (max-height: 450px) {
+  .landingSearchContainer {
+    height: 120px;
+  }
+  .landingSplash {
+    padding-top: 80px !important;
+    padding-bottom: 150px !important;
+  }
+}
 
 @media (max-height: 400px) {
   .backgroundSorcerer {
@@ -138,12 +157,6 @@
     background-position: left top, 140% -700px;
     background-size: 100vw, 80vw;
   }
-}
-
-.landingSearchContainer {
-  width: 100vw;
-  height: 160px;
-  cursor: default;
 }
 .landingSplash {
   width: 300px;

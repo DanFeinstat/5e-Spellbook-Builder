@@ -22,12 +22,18 @@
   margin-bottom: 80px;
   margin-top: 30px;
   width: 270px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.19), 0 8px 17px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.3);
   border: 1px solid #eee;
   overflow: hidden;
   padding: 15px;
   background-color: whitesmoke;
   cursor: default;
+  transition: box-shadow 0.5s;
+  will-change: transform;
+}
+
+.container:hover {
+  box-shadow: 0px 30px 100px -10px rgba(0, 0, 0, 0.4);
 }
 
 @media (min-width: 331px) {
