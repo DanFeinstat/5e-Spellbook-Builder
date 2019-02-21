@@ -87,3 +87,42 @@
 .mBorderTop {
   border-top: 1px solid black;
 }
+
+.mGridContainer {
+  width: 156px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(3, 1fr);
+}
+.mGridTitle {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border-top: solid 1px black;
+  border-left: solid 1px black;
+  border-right: solid 1px black;
+}
+.mGridInput {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  border-top: solid 1px black;
+  border-left: solid 1px black;
+  border-right: solid 1px black;
+}
+.mBookFormBtn1 {
+  border-top: solid 1px black;
+  border-bottom: solid 1px black;
+  border-left: solid 1px black;
+  border-right: solid 0.5px black;
+  grid-row-start: 3;
+}
+.mBookFormBtn2 {
+  border-top: solid 1px black;
+  border-bottom: solid 1px black;
+  border-left: solid 0.5px black;
+  border-right: solid 1px black;
+  grid-row-start: 3;
+}

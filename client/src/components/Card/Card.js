@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
+import CardContainer from "./CardContainer";
 import styles from "./Card.module.css";
 //API
 import userAPI from "../../utils/userAPI";
@@ -31,15 +32,34 @@ class Card extends Component {
       this.scrollToCard();
     }
   }
+  spellbookForIn = (name, array) => {
+    for (let i = 0; i < array.length; i++) {
+      let obj = array[i];
+      for (const property in obj) {
+        if (obj[property] === name) {
+          return i;
+        }
+      }
+    }
+  };
   saveSpellToSpellbook = e => {
     e.preventDefault();
     userAPI
       .getSpells(this.props.loggedIn)
       .then(response => {
+        let spellbookIndex = this.spellbookForIn(
+          this.props.username,
+          response.data.spellbooks
+        );
         let isDuplicate = res => {
-          for (let i = 0; i < res.data.spellbooks[0].spells.length; i++) {
+          for (
+            let i = 0;
+            i < res.data.spellbooks[spellbookIndex].spells.length;
+            i++
+          ) {
             if (
-              res.data.spellbooks[0].spells[i].name === this.props.spell.name
+              res.data.spellbooks[spellbookIndex].spells[i].name ===
+              this.props.spell.name
             ) {
               return true;
             }
@@ -86,7 +106,8 @@ class Card extends Component {
     );
     const desc = this.props.spell.desc;
     return (
-      <React.Fragment>
+      // <CardContainer>
+      <div>
         <div className={styles.container} id="scrollRefOne">
           <div
             className={`${styles.textBlock} ${styles.full} ${styles.font1} ${
@@ -213,7 +234,8 @@ class Card extends Component {
             {this.props.page === "landing" ? "Transcribe" : "Delete"}
           </div>
         ) : null}
-      </React.Fragment>
+        {/* </CardContainer> */}
+      </div>
     );
   }
 }

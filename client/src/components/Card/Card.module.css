@@ -9,6 +9,18 @@
   padding: 15px;
   background-color: whitesmoke;
 }
+
+.wrapper {
+  margin: auto;
+  margin-bottom: 80px;
+  margin-top: 30px;
+  width: 270px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.19), 0 8px 17px rgba(0, 0, 0, 0.2);
+  border: 1px solid #eee;
+  /* overflow: hidden; */
+  padding: 15px;
+  /* background-color: whitesmoke; */
+}
 .title {
   font-size: 120%;
   font-weight: bold;

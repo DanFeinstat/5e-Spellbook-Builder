@@ -13,13 +13,13 @@ const Menu = props => {
                 return (
                   <div
                     key={index}
-                    data-bookName={value}
+                    data-name={value}
                     className={
                       index === 0
                         ? `${styles.mContentItem} ${styles.mBorderTop}`
                         : `${styles.mContentItem}`
                     }
-                    // onClick={props.chooseBook}
+                    onClick={props.chooseBook}
                   >
                     {value}
                   </div>
@@ -32,6 +32,25 @@ const Menu = props => {
                 Back
               </div>
             </div>
+          ) : props.creatingNewBook ? (
+            <div className={styles.mGridContainer}>
+              <div className={styles.mGridTitle}>Book Name</div>
+              <input
+                className={styles.mGridInput}
+                onClick={props.stopProp}
+                onChange={props.handleInputChange}
+                data-name={`newBookName`}
+              />
+              <div className={styles.mBookFormBtn1} onClick={props.newBook}>
+                Submit
+              </div>
+              <div
+                className={styles.mBookFormBtn2}
+                onClick={props.toggleBookForm}
+              >
+                Back
+              </div>
+            </div>
           ) : (
             <div className={styles.mContentContainer}>
               <div
@@ -40,7 +59,10 @@ const Menu = props => {
               >
                 Spell Search
               </div>
-              <div className={styles.mContentItem} onClick={props.newBook}>
+              <div
+                className={styles.mContentItem}
+                onClick={props.toggleBookForm}
+              >
                 New Book
               </div>
               <div
