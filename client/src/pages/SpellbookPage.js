@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Transition, animated } from "react-spring/renderprops";
+import { Spring, Transition, animated } from "react-spring/renderprops";
 import userAPI from "../utils/userAPI";
 import SpellItem from "../components/Spellbook/SpellItem";
 import Spellbook from "../components/Spellbook/Spellbook";
@@ -53,10 +53,12 @@ class SpellbookPage extends React.PureComponent {
         this.state.spellToDisplay.name
       )
       .then(response => {
-        this.populateSpellbook();
-        this.setState({
-          spellToDisplay: "",
-        });
+        this.setState(
+          {
+            spellToDisplay: "",
+          },
+          this.populateSpellbook()
+        );
       })
       .catch(err => console.log(err));
   };
@@ -239,6 +241,8 @@ class SpellbookPage extends React.PureComponent {
 
     this.setState(prevState => ({
       menuActive: !prevState.menuActive,
+      bookMenuActive: false,
+      creatingNewBook: false,
     }));
   };
 
@@ -269,7 +273,7 @@ class SpellbookPage extends React.PureComponent {
     e.stopPropagation();
     e.preventDefault();
     let bookName = this.state.newBookName;
-    console.log(bookName);
+    // console.log(bookName);
     let userInput = {
       name: bookName,
       spells: [],
@@ -278,6 +282,16 @@ class SpellbookPage extends React.PureComponent {
       userAPI
         .newBook(this.state.id, userInput)
         .then(response => {
+          this.setState(
+            {
+              nameDisplayed: bookName,
+              menuActive: false,
+              bookMenuActive: false,
+              creatingNewBook: false,
+              newBookName: "",
+            },
+            this.populateChangedSpellbook(bookName)
+          );
           console.log("function fired");
         })
         .catch(err => console.log(err));
@@ -346,7 +360,40 @@ class SpellbookPage extends React.PureComponent {
                             stopProp={this.stopProp}
                             spellSearch={this.toSearchPage}
                             handleInputChange={this.handleInputChange}
-                            newBook={this.createNewBook}
+                            newBook={e => {
+                              e.stopPropagation();
+                              e.preventDefault();
+                              let bookName = this.state.newBookName;
+                              // console.log(bookName);
+                              let userInput = {
+                                name: bookName,
+                                spells: [],
+                              };
+                              if (bookName.length > 0) {
+                                userAPI
+                                  .newBook(this.state.id, userInput)
+                                  .then(response => {
+                                    this.setState(
+                                      {
+                                        nameDisplayed: bookName,
+                                        menuActive: false,
+                                        bookMenuActive: false,
+                                        creatingNewBook: false,
+                                      },
+                                      () => {
+                                        updateNameDisplayed(
+                                          this.state.nameDisplayed
+                                        );
+                                        this.populateChangedSpellbook(bookName);
+                                      }
+                                    );
+                                    console.log("function fired");
+                                  })
+                                  .catch(err => console.log(err));
+                              } else {
+                                alert("Please enter a Name");
+                              }
+                            }}
                             toggleBookMenu={this.toggleBookMenu}
                             bookMenuActive={this.state.bookMenuActive}
                             logout={this.toLogout}
@@ -385,39 +432,90 @@ class SpellbookPage extends React.PureComponent {
               {/* <LogoutBtn logout={this.createNewBook} text={"New Spellbook"} /> */}
               {/* <LogoutBtn logout={this.toSearchPage} text={"Spell Search"} /> */}
               {/* <LogoutBtn logout={this.toLogout} text={"Log Out"} /> */}
-              <Spellbook>
-                {this.state.listsByLevels.map((level, index) => {
-                  let listNumber = index;
-                  let spellLevel = index === 0 ? "Cantrip" : index;
-                  return level.length ? (
-                    <SbRow level={spellLevel} key={listNumber}>
-                      {level.map((list, index) => {
-                        return (
-                          <li
-                            className={styles.spellbookLi}
-                            key={index}
-                            data-name={list.name}
-                            onClick={this.displaySpell}
+              <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
+                {props => (
+                  <div style={props}>
+                    <Spellbook>
+                      {this.state.listsByLevels.map((level, index) => {
+                        let listNumber = index;
+                        let spellLevel = index === 0 ? "Cantrip" : index;
+                        return level.length ? (
+                          <Spring
+                            delay={300}
+                            from={{ opacity: 0 }}
+                            to={{ opacity: 1 }}
                           >
-                            {list.name}
-                          </li>
-                        );
+                            {props => (
+                              <div style={props}>
+                                <SbRow level={spellLevel} key={listNumber}>
+                                  {level.map((list, index) => {
+                                    return (
+                                      <Spring
+                                        delay={600}
+                                        from={{ opacity: 0 }}
+                                        to={{ opacity: 1 }}
+                                      >
+                                        {props => (
+                                          <div style={props}>
+                                            <li
+                                              className={styles.spellbookLi}
+                                              key={index}
+                                              data-name={list.name}
+                                              onClick={this.displaySpell}
+                                            >
+                                              {list.name}
+                                            </li>
+                                          </div>
+                                        )}
+                                      </Spring>
+                                    );
+                                  })}
+                                </SbRow>
+                              </div>
+                            )}
+                          </Spring>
+                        ) : null;
                       })}
-                    </SbRow>
-                  ) : null;
-                })}
-              </Spellbook>
+                    </Spellbook>
+                  </div>
+                )}
+              </Spring>
               {this.state.spellToDisplay ? (
                 <div className={styles.spellbookCardContainer}>
-                  <Card
-                    username={this.state.names[0]}
-                    page="spellbook"
-                    spell={this.state.spellToDisplay}
-                    class={"none"}
-                    loggedIn={this.state.id}
-                    removeSpell={this.deleteSpellFromSpellbook}
-                    scrollActive={window.innerWidth < 1000 ? true : false}
-                  />
+                  <Transition
+                    items={this.state.spellToDisplay}
+                    from={{
+                      transform: "translate3d(200px,0,0)",
+                      opacity: 0,
+                    }}
+                    enter={{
+                      transform: "translate3d(0px,0,0)",
+                      opacity: 1,
+                    }}
+                    leave={{
+                      transform: "translate3d(200px,0,0)",
+                      opacity: 0,
+                    }}
+                  >
+                    {show =>
+                      show &&
+                      (props => (
+                        <div style={props}>
+                          <Card
+                            username={this.state.names[0]}
+                            page="spellbook"
+                            spell={this.state.spellToDisplay}
+                            class={"none"}
+                            loggedIn={this.state.id}
+                            removeSpell={this.deleteSpellFromSpellbook}
+                            scrollActive={
+                              window.innerWidth < 1000 ? true : false
+                            }
+                          />
+                        </div>
+                      ))
+                    }
+                  </Transition>
                 </div>
               ) : null}
             </div>

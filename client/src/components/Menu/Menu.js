@@ -33,7 +33,7 @@ const Menu = props => {
               </div>
             </div>
           ) : props.creatingNewBook ? (
-            <div className={styles.mGridContainer}>
+            <div className={styles.mGridContainer} onClick={props.stopProp}>
               <div className={styles.mGridTitle}>Book Name</div>
               <input
                 className={styles.mGridInput}
@@ -41,6 +41,7 @@ const Menu = props => {
                 onChange={props.handleInputChange}
                 data-name={`newBookName`}
               />
+
               <div className={styles.mBookFormBtn1} onClick={props.newBook}>
                 Submit
               </div>
