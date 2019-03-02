@@ -227,7 +227,7 @@ class SpellbookPage extends React.PureComponent {
         spells: [],
         spellToDisplay: "",
       },
-      (window.location.href = "/")
+      this.props.history.push("/")
     );
   };
 
@@ -384,6 +384,8 @@ class SpellbookPage extends React.PureComponent {
                                         menuActive: false,
                                         bookMenuActive: false,
                                         creatingNewBook: false,
+                                        newBookName: "",
+                                        spellToDisplay: "",
                                       },
                                       () => {
                                         updateNameDisplayed(
@@ -415,6 +417,7 @@ class SpellbookPage extends React.PureComponent {
                                     nameDisplayed: toBeDisplayed,
                                     bookMenuActive: false,
                                     menuActive: false,
+                                    spellToDisplay: "",
                                   },
                                   () => {
                                     updateNameDisplayed(
