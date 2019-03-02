@@ -190,7 +190,7 @@ class SpellbookPage extends React.PureComponent {
         }
 
         this.setState({
-          // names: response.data.names,
+          names: response.data.names,
           // nameDisplayed: response.data.spellbooks[0].name,
           // email: response.data.email,
           spells: spellsByLevel,
@@ -289,6 +289,7 @@ class SpellbookPage extends React.PureComponent {
               bookMenuActive: false,
               creatingNewBook: false,
               newBookName: "",
+              spellToDisplay: "",
             },
             this.populateChangedSpellbook(bookName)
           );
@@ -305,7 +306,11 @@ class SpellbookPage extends React.PureComponent {
     e.preventDefault();
     let name = e.target.dataset.name;
     let value = e.target.value;
-    this.setState({ [name]: value });
+    if (e.target.value.length > 14) {
+      e.target.value = this.state[name];
+    } else {
+      this.setState({ [name]: value });
+    }
   };
 
   toggleBookForm = e => {
