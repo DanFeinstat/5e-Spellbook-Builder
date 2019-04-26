@@ -1,6 +1,6 @@
 # 5e Spellbook Builder
 
-Have you ever been in the middle of a combat round and needed to take a 5 minute break to search for spell details in the PHB? This spellbook builder is a tool to allow users to search and save spell lists with quickly accessible full spell details.
+Have you ever been in the middle of a combat round and needed to take a 5 minute break to search for spell details in the PHB? This spellbook builder is a tool to allow users to search and save spell lists with fully detailed and quickly accessible spells.
 
 Live Link: https://dnd-5e-spellbook-builder.herokuapp.com/
 
@@ -22,6 +22,6 @@ the 5e Spellbook Builder is a MERN app built with:
 This list is not exhaustive nor certain.
 
 - Add spells from supplemental materials
-- Allow multiple spellbooks per account with easy swapping
 - Add more filtering options
 - Add more account customization
+-Add optional character details for storing content such as spell DCs
