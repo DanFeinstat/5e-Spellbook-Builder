@@ -22,6 +22,7 @@ the 5e Spellbook Builder is a MERN app built with:
 This list is not exhaustive nor certain.
 
 - Add spells from supplemental materials
+- On mobile view change spell cards to modals 
 - Add more filtering options
 - Add more account customization
 -Add optional character details for storing content such as spell DCs
