@@ -1,0 +1,14 @@
+.h3 {
+  color: rgb(88, 23, 13);
+  border-bottom: 2px solid rgb(200, 173, 106);
+  display: inline-block;
+  margin-top: 5px;
+  margin-bottom: 2px;
+  padding: 2px;
+  padding-right: 4px;
+}
+
+.ul {
+  margin-top: 6px;
+  margin-bottom: 6px;
+}

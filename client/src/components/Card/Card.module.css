@@ -1,0 +1,121 @@
+.modalContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  /* bottom: 0; */
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  width: 100vw;
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.container {
+  margin: auto;
+  max-height: calc(100vh - 50px);
+  overflow-y: auto;
+  width: 270px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.19), 0 8px 17px rgba(0, 0, 0, 0.2);
+  border: 1px solid #eee;
+  padding: 15px;
+  background-color: whitesmoke;
+}
+
+.wrapper {
+  width: 270px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.19), 0 8px 17px rgba(0, 0, 0, 0.2);
+  border: 1px solid #eee;
+  padding: 15px;
+}
+.title {
+  font-size: 120%;
+  font-weight: bold;
+  text-align: center;
+}
+.font1 {
+  font-family: "Elsie", cursive;
+}
+.font2 {
+  font-family: "Boogaloo", cursive;
+  font-size: 90%;
+}
+.font3 {
+  font-family: "Cinzel Decorative", cursive;
+}
+
+@media (min-width: 376px) {
+  .container {
+    width: 320px;
+  }
+}
+@media (min-height: 376px) {
+  .container {
+    max-height: calc(100vh - 225px);
+  }
+}
+
+.textBlock {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.icon {
+  height: 20px;
+  margin-right: 5px;
+  margin-bottom: -3px;
+}
+
+.transcribeBtn {
+  width: 80px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border: solid 1px black;
+  border-radius: 5px;
+  padding: 2px;
+  text-align: center;
+  background-color: rgb(244, 239, 219);
+  cursor: pointer;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 135ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 1000px) {
+  /* .spellbookAdjust {
+    margin-left: 685px;
+  } */
+}
+.transcribeBtn:hover {
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14),
+    0 1px 10px 0 rgba(0, 0, 0, 0.12);
+  transform: scale(1.08);
+  /* color: whitesmoke;
+  background-color: black; */
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.full {
+  width: 100%;
+  float: left;
+}
+
+.half {
+  width: 50%;
+  float: left;
+}
+
+.twoThirds {
+  width: 66.7%;
+  float: left;
+}
+
+.third {
+  width: 33.3%;
+  float: left;
+}

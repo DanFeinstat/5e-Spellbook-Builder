@@ -1,13 +1,13 @@
 import React from "react";
-import "./SbRow.css";
+import styles from "./SbRow.module.css";
 
 const SbRow = props => {
   return (
     <div>
-      <h3 onClick={props.toggleList} className="sbr-h3">
+      <h3 onClick={props.toggleList} className={styles.h3}>
         Spell Level: {props.level}
       </h3>
-      <ul className="sbr-ul">{props.children}</ul>
+      <ul className={styles.ul}>{props.children}</ul>
     </div>
   );
 };

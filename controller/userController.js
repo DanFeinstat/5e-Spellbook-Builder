@@ -27,8 +27,22 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
 
-  deleteUser: function(req, res) {
+  deleteUser: (req, res) => {
     db.Users.deleteOne({ _id: req.params.id })
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+
+  newBook: (req, res) => {
+    db.Users.updateOne(
+      { _id: req.params.id },
+      {
+        $push: {
+          names: req.body.name,
+          spellbooks: req.body,
+        },
+      }
+    )
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

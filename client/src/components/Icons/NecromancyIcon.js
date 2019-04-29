@@ -1,9 +1,10 @@
 import React from "react";
+import styles from "./Icons.module.css";
 
 const NecromancyIcon = () => {
   return (
     <svg
-      className="card-icon"
+      className={styles.icon}
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       version="1.1"

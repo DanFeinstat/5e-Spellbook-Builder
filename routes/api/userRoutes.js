@@ -10,7 +10,8 @@ router.route("/data/:id").get(userController.getUser);
 router
   .route("/:id")
   .delete(userController.deleteUser)
-  .get(userController.getSpells);
+  .get(userController.getSpells)
+  .put(userController.newBook);
 
 router.route("/:id/:username").put(userController.addSpell);
 

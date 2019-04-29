@@ -1,9 +1,10 @@
 import React from "react";
+import styles from "./Icons.module.css";
 
 const DurationIcon = () => {
   return (
     <svg
-      className="card-icon"
+      className={styles.icon}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 50 50"
       x="0px"

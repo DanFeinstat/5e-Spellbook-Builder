@@ -3,7 +3,7 @@ import Signup from "../components/Lisu/Signup";
 import Login from "../components/Lisu/Login";
 import LoginBtn from "../components/Login/LoginBtn";
 import userAPI from "../utils/userAPI";
-import "./Pages.css";
+import styles from "./Pages.module.css";
 
 class SignupPage extends Component {
   state = {
@@ -75,7 +75,7 @@ class SignupPage extends Component {
   };
   render() {
     return (
-      <div className="page-signup-container">
+      <div className={styles.signupContainer}>
         <Login
           inputChange={this.handleInputChange}
           loginSubmit={this.handleLoginSubmit}

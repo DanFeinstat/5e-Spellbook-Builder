@@ -1,24 +1,26 @@
 import React, { Component } from "react";
-// import ReactDOM from "react-dom";
 import "../App.css";
-import "./Pages.css";
+import styles from "./Pages.module.css";
 //Components
+import { UserConsumer } from "../components/Context/Context";
+import { Transition } from "react-spring/renderprops";
 import ClassSelection from "../components/Search/ClassSelection";
 import ClassSelBtn from "../components/Search/ClassSelBtn";
 import Search from "../components/Search/Search";
 import SearchList from "../components/Search/SearchList";
 import Card from "../components/Card/Card";
+import CardContainer from "../components/Card/CardContainer";
 import TutorialCard from "../components/Card/TutorialCard";
 import LoginBtn from "../components/Login/LoginBtn";
 import userAPI from "../utils/userAPI";
 import spellAPI from "../utils/spellAPI";
-// import cardTutorial from "../utils/dataObjects/cardTutorial";
 const jwt = require("jsonwebtoken");
 
 class LandingPage extends Component {
   state = {
     id: "",
     names: [],
+    nameDisplayed: this.context.nameDisplayed,
     width: window.innerWidth,
     searchActive: false,
     search: "",
@@ -38,19 +40,14 @@ class LandingPage extends Component {
     level8: false,
     level9: false,
   };
-
+  static contextType = UserConsumer;
   componentDidMount() {
+    console.log(this.context);
     window.addEventListener("resize", this.handleWindowSizeChange);
     if (localStorage.spellbookJwt) {
       this.decodeUserID();
     }
   }
-  // componentDidUpdate() {
-  //   if (localStorage.spellbookJwt && !this.state.id) {
-  //     console.log("check");
-  //     this.decodeUserID();
-  //   }
-  // }
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.handleWindowSizeChange);
@@ -82,7 +79,6 @@ class LandingPage extends Component {
       ) {
         str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
         for (let j = 0; j < str[i].length; j++) {
-          // console.log(str[i].charAt(j));
           if (str[i].charAt(j) === "/") {
             str[i] =
               str[i].slice(0, j + 1) +
@@ -142,99 +138,6 @@ class LandingPage extends Component {
     });
   };
 
-  //Switched from API to my own Database, Holding on to this function in case there's a need to access that API again
-  // toQuerySpellData = () => {
-  //   const queryURL =
-  //     "http://www.dnd5eapi.co/api/spells/" +
-  //     this.state.classList.toLowerCase() +
-  //     "/";
-  //   let spellName = this.state.search.trim();
-  //   let toSubmit = this.titleCase(spellName);
-  //   fetch(queryURL)
-  //     .then(response => response.json())
-  //     .then(res => {
-  //       for (let i = 0; i < res.results.length; i++) {
-  //         if (res.results[i].name === toSubmit) {
-  //           fetch(res.results[i].url)
-  //             .then(response => response.json())
-  //             .then(data => {
-  //               let desc = [];
-  //               if (Array.isArray(data.desc)) {
-  //                 for (let i = 0; i < data.desc.length; i++) {
-  //                   const newDesc = data.desc[i]
-  //                     .replace(/â€™/g, "'")
-  //                     .replace(/â€“/g, "-")
-  //                     .replace(/â€”/g, "-")
-  //                     .replace(/â€œ/g, '"')
-  //                     .replace(/â€�/g, '"');
-  //                   desc.push(newDesc);
-  //                 }
-  //               } else {
-  //                 let newDesc = data.desc
-  //                   .replace(/â€™/g, "'")
-  //                   .replace(/â€“/g, "-")
-  //                   .replace(/â€”/g, "-")
-  //                   .replace(/â€œ/g, '"')
-  //                   .replace(/â€�/g, '"');
-  //                 desc.push(newDesc);
-  //               }
-  //               const fixMaterialCharacters = data => {
-  //                 if (data.material === undefined) {
-  //                   return undefined;
-  //                 } else if (
-  //                   Array.isArray(data.material) &&
-  //                   data.material.length > 1
-  //                 ) {
-  //                   let materials = [];
-  //                   for (let i = 0; i < data.material.length; i++) {
-  //                     const newMaterials = data.material[i]
-  //                       .replace(/â€™/g, "'")
-  //                       .replace(/â€œ/g, '"')
-  //                       .replace(/â€�/g, '"');
-  //                     materials.push(newMaterials);
-  //                   }
-  //                   return materials;
-  //                 } else {
-  //                   let newMaterials = data.material.replace(/â€™/g, "'");
-  //                   return newMaterials;
-  //                 }
-  //               };
-  //               let materials = fixMaterialCharacters(data);
-
-  //               const spellData = {
-  //                 name: data.name,
-  //                 range: data.range,
-  //                 duration: data.duration,
-  //                 materials: materials,
-  //                 ritual: data.ritual,
-  //                 concentration: data.concentration,
-  //                 components: data.components,
-  //                 desc: desc,
-  //                 higherLevel: data.higher_level,
-  //                 school: data.school.name,
-  //                 castingTime: data.casting_time,
-  //                 level: data.level,
-  //               };
-  //               this.setState(
-  //                 {
-  //                   currentSpell: spellData,
-  //                   spellFound: true,
-  //                   searchActive: false,
-  //                 }
-  //                 // this.scrollToCard
-  //               );
-  //             })
-  //             .catch(function(error) {
-  //               console.log(error);
-  //             });
-  //         }
-  //       }
-  //     })
-  //     .catch(function(error) {
-  //       console.log(error);
-  //     });
-  // };
-
   decodeUserID = () => {
     const decoder = jwt.decode(localStorage.spellbookJwt);
     const decodedID = decoder.id;
@@ -277,12 +180,12 @@ class LandingPage extends Component {
 
   toLogin = e => {
     e.preventDefault();
-    window.location.href = "/signup";
+    this.props.history.push("/signup");
   };
 
   toSpellbook = e => {
     e.preventDefault();
-    window.location.href = "/spellbook/user";
+    this.props.history.push("/spellbook/user");
   };
 
   toggleLevelList = e => {
@@ -296,6 +199,20 @@ class LandingPage extends Component {
     this.setState(prevState => ({
       tutorial: !prevState.tutorial,
     }));
+  };
+
+  exitCardModal = () => {
+    this.setState({
+      currentSpell: {},
+      spellFound: false,
+    });
+  };
+
+  exitCardOnEscape = e => {
+    if (e.keyCode === 27 && this.state.spellFound === true) {
+      console.log("escape");
+      this.exitCardModal();
+    }
   };
 
   getClassList = e => {
@@ -357,6 +274,16 @@ class LandingPage extends Component {
           classList: newClass,
           spellFound: false,
           listofLists: listofLists,
+          level0: false,
+          level1: false,
+          level2: false,
+          level3: false,
+          level4: false,
+          level5: false,
+          level6: false,
+          level7: false,
+          level8: false,
+          level9: false,
         });
       })
       .catch(err => console.log(err));
@@ -375,124 +302,256 @@ class LandingPage extends Component {
       "Wizard",
     ];
     return (
-      <div className={"App App-background-" + this.state.classList}>
-        <div className="pages-landing-search-container">
-          {this.state.searchActive ? (
-            <Search
-              inputChange={this.handleInputChange}
-              onSubmit={this.onSpellSubmit}
-              returnToClassSelect={this.returnToClassList}
-            />
-          ) : (
-            <ClassSelection>
-              {classes.map((value, index) => {
-                return (
-                  <ClassSelBtn
-                    selectClass={this.getClassList}
-                    key={index}
-                    name={value}
-                  />
-                );
-              })}
-              {!this.state.classList ? (
-                <ClassSelBtn
-                  name="Tutorial"
-                  special="cs-btn-tutorial"
-                  selectClass={this.toggleTutorial}
-                />
-              ) : null}
-            </ClassSelection>
-          )}
-        </div>
-        {!this.state.classList && this.state.tutorial ? (
-          <React.Fragment>
-            <h2 className="pages-landing-tutorial-content">
-              Welcome to the 5e Spellbook!
-            </h2>
-            <p className="pages-landing-tutorial-content">
-              Below is an example spell card that demonstrates the layout and
-              icons used. The "Transcribe" button at the bottom will only show
-              up if you're logged in. It allows you to save the spell to a
-              personal spellbook.
-            </p>
-            <TutorialCard />
-            <p className="pages-landing-tutorial-content2">
-              To get started, select a class at the top of the page, or hit the
-              "Log In" button in the bottom right of the screen.
-            </p>
-          </React.Fragment>
-        ) : !this.state.classList && !this.state.tutorial ? (
-          <h1 className="pages-landing-splash">Welcome to the 5e Spellbook!</h1>
-        ) : null}
-        {reArrange ? (
-          <div className="pages-landing-content-container">
-            {this.state.spellFound ? (
-              <Card
-                page="landing"
-                spell={this.state.currentSpell}
-                username={this.state.names[0]}
-                class={this.state.classList}
-                loggedIn={this.state.id}
-                scrollActive={reArrange}
-                //   transcribe={this.saveSpellToSpellbook}
-              />
+      <UserConsumer>
+        {({ updateNameDisplayed, nameDisplayed }) => (
+          <div
+            className={`${styles.App} ${
+              styles[`background${this.state.classList}`]
+            }`}
+          >
+            <div className={styles.landingSearchContainer}>
+              {this.state.searchActive ? (
+                <Transition
+                  items={this.state.searchActive}
+                  from={{ transform: "translate3d(0,-40px,0)" }}
+                  enter={{ transform: "translate3d(0,0px,0)" }}
+                  leave={{ transform: "translate3d(0,-40px,0)" }}
+                >
+                  {show =>
+                    show &&
+                    (props => (
+                      <div style={props}>
+                        <Search
+                          inputChange={this.handleInputChange}
+                          onSubmit={this.onSpellSubmit}
+                          returnToClassSelect={this.returnToClassList}
+                        />
+                      </div>
+                    ))
+                  }
+                </Transition>
+              ) : (
+                <ClassSelection>
+                  {classes.map((value, index) => {
+                    let delay = index * 50;
+                    return (
+                      <Transition
+                        items={!this.state.searchActive}
+                        from={{ transform: "scale(0.1)", opacity: 0 }}
+                        enter={{ transform: "scale(1)", opacity: 1 }}
+                        leave={{ transform: "scale(0.1)", opacity: 0 }}
+                        trail={delay}
+                      >
+                        {show =>
+                          show &&
+                          (props => (
+                            <div
+                              className={styles.landingClassBtnTransition}
+                              style={props}
+                            >
+                              <ClassSelBtn
+                                selectClass={this.getClassList}
+                                key={index}
+                                name={value}
+                              />
+                            </div>
+                          ))
+                        }
+                      </Transition>
+                    );
+                  })}
+                  {!this.state.classList ? (
+                    <Transition
+                      items={!this.state.searchActive}
+                      from={{ transform: "scale(0.1)", opacity: 0 }}
+                      enter={{ transform: "scale(1)", opacity: 1 }}
+                      leave={{ transform: "scale(0.1)", opacity: 0 }}
+                      trail={675}
+                    >
+                      {show =>
+                        show &&
+                        (props => (
+                          <div
+                            className={styles.landingClassBtnTransition}
+                            style={props}
+                          >
+                            <ClassSelBtn
+                              name="Tutorial"
+                              special="cs-btn-tutorial"
+                              selectClass={this.toggleTutorial}
+                            />
+                          </div>
+                        ))
+                      }
+                    </Transition>
+                  ) : null}
+                </ClassSelection>
+              )}
+            </div>
+            {!this.state.classList && this.state.tutorial ? (
+              <React.Fragment>
+                <Transition
+                  items={this.state.tutorial}
+                  from={{ opacity: 0 }}
+                  enter={{ opacity: 1 }}
+                  leave={{ opacity: 0 }}
+                  trail={200}
+                >
+                  {show =>
+                    show &&
+                    (props => (
+                      <div style={props}>
+                        <h2 className={styles.landingTutorialContent}>
+                          Welcome to the 5e Spellbook!
+                        </h2>
+                        <p className={styles.landingTutorialContent}>
+                          Below is an example spell card that demonstrates the
+                          layout and icons used. The "Transcribe" button at the
+                          bottom will only show up if you're logged in. It
+                          allows you to save the spell to a personal spellbook.
+                        </p>
+                        <TutorialCard />
+                        <p className={styles.landingTutorialContent2}>
+                          To get started, select a class at the top of the page,
+                          or hit the "Log In" button in the bottom right of the
+                          screen.
+                        </p>
+                      </div>
+                    ))
+                  }
+                </Transition>
+              </React.Fragment>
+            ) : !this.state.classList && !this.state.tutorial ? (
+              <Transition
+                items={!this.state.tutorial}
+                from={{ opacity: 0 }}
+                enter={{ opacity: 1 }}
+                leave={{ opacity: 0 }}
+                trail={200}
+              >
+                {show =>
+                  show &&
+                  (props => (
+                    <div style={props}>
+                      <h1 className={styles.landingSplash}>
+                        Welcome to the 5e Spellbook!
+                      </h1>
+                    </div>
+                  ))
+                }
+              </Transition>
             ) : null}
-            <SearchList
-              listofLists={this.state.listofLists}
-              toggleList={this.toggleLevelList}
-              classSelected={this.state.classList}
-              fetchSpell={this.toFetchSpell}
-              level0={this.state.level0}
-              level1={this.state.level1}
-              level2={this.state.level2}
-              level3={this.state.level3}
-              level4={this.state.level4}
-              level5={this.state.level5}
-              level6={this.state.level6}
-              level7={this.state.level7}
-              level8={this.state.level8}
-              level9={this.state.level9}
-            />
-          </div>
-        ) : (
-          <div>
-            <div className="pages-landing-list-container">
-              <SearchList
-                listofLists={this.state.listofLists}
-                toggleList={this.toggleLevelList}
-                classSelected={this.state.classList}
-                fetchSpell={this.toFetchSpell}
-                level0={this.state.level0}
-                level1={this.state.level1}
-                level2={this.state.level2}
-                level3={this.state.level3}
-                level4={this.state.level4}
-                level5={this.state.level5}
-                level6={this.state.level6}
-                level7={this.state.level7}
-                level8={this.state.level8}
-                level9={this.state.level9}
-              />
-            </div>
-            <div className="pages-landing-card-container">
-              {this.state.spellFound ? (
-                <Card
-                  page="landing"
-                  spell={this.state.currentSpell}
-                  class={this.state.classList}
-                  username={this.state.names[0]}
-                  loggedIn={this.state.id}
-                />
-              ) : null}
-            </div>
+            {reArrange ? (
+              <div className={styles.landingContentContainer}>
+                <Transition
+                  items={this.state.classList}
+                  from={{ opacity: 0 }}
+                  enter={{ opacity: 1 }}
+                  leave={{ opacity: 0 }}
+                  // trail={200}
+                >
+                  {show =>
+                    show &&
+                    (props => (
+                      <div style={props}>
+                        <SearchList
+                          listofLists={this.state.listofLists}
+                          toggleList={this.toggleLevelList}
+                          classSelected={this.state.classList}
+                          fetchSpell={this.toFetchSpell}
+                          level0={this.state.level0}
+                          level1={this.state.level1}
+                          level2={this.state.level2}
+                          level3={this.state.level3}
+                          level4={this.state.level4}
+                          level5={this.state.level5}
+                          level6={this.state.level6}
+                          level7={this.state.level7}
+                          level8={this.state.level8}
+                          level9={this.state.level9}
+                        />
+                      </div>
+                    ))
+                  }
+                </Transition>
+                {this.state.spellFound && (
+                  <Card
+                    page="landing"
+                    spell={this.state.currentSpell}
+                    exitOnEscape={this.exitCardOnEscape}
+                    username={
+                      this.state.nameDisplayed
+                        ? this.state.nameDisplayed
+                        : this.state.names[0]
+                    }
+                    exitModal={this.exitCardModal}
+                    class={this.state.classList}
+                    loggedIn={this.state.id}
+                    scrollActive={reArrange}
+                  />
+                )}
+              </div>
+            ) : (
+              <div>
+                <div className={styles.landingListContainer}>
+                  <Transition
+                    items={this.state.classList}
+                    from={{ opacity: 0 }}
+                    enter={{ opacity: 1 }}
+                    leave={{ opacity: 0 }}
+                    // trail={200}
+                  >
+                    {show =>
+                      show &&
+                      (props => (
+                        <div style={props}>
+                          <SearchList
+                            listofLists={this.state.listofLists}
+                            toggleList={this.toggleLevelList}
+                            classSelected={this.state.classList}
+                            fetchSpell={this.toFetchSpell}
+                            level0={this.state.level0}
+                            level1={this.state.level1}
+                            level2={this.state.level2}
+                            level3={this.state.level3}
+                            level4={this.state.level4}
+                            level5={this.state.level5}
+                            level6={this.state.level6}
+                            level7={this.state.level7}
+                            level8={this.state.level8}
+                            level9={this.state.level9}
+                          />
+                        </div>
+                      ))
+                    }
+                  </Transition>
+                </div>
+                <div className={styles.landingCardContainer}>
+                  {this.state.spellFound && (
+                    <Card
+                      page="landing"
+                      spell={this.state.currentSpell}
+                      class={this.state.classList}
+                      exitModal={this.exitCardModal}
+                      username={
+                        this.state.nameDisplayed
+                          ? this.state.nameDisplayed
+                          : this.state.names[0]
+                      }
+                      loggedIn={this.state.id}
+                    />
+                  )}
+                </div>
+              </div>
+            )}
+            {!this.state.id ? (
+              <LoginBtn text={"Log In"} onward={this.toLogin} />
+            ) : (
+              <LoginBtn text={"Spellbook"} onward={this.toSpellbook} />
+            )}
           </div>
         )}
-        {!this.state.id ? (
-          <LoginBtn text={"Log In"} onward={this.toLogin} />
-        ) : (
-          <LoginBtn text={"Spellbook"} onward={this.toSpellbook} />
-        )}
-      </div>
+      </UserConsumer>
     );
   }
 }

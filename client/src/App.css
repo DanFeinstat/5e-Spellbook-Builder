@@ -1,4 +1,4 @@
-.App {
+/* .App {
   overflow-x: auto;
   min-height: 100vh;
   width: 100vw;
@@ -27,25 +27,19 @@
 .App-background-Druid {
   background-image: url(./images/backgroundTexture.png),
     url(./images/druidbackground.jpg), url(./images/fullbackgroundtexture.png) !important;
-  /* background-position: left top, 125% 0%; */
   background-repeat: no-repeat, no-repeat, repeat;
-
-  /* background-size: 100vw, 42vh; */
   background-position: left top, right top;
   background-size: 100vw, 100vw;
 }
 .App-background-Paladin {
   background-image: url(./images/backgroundTexture.png),
     url(./images/paladinbackground.jpg), url(./images/fullbackgroundtexture.png) !important;
-  /* background-position: left top, 125% 0%; */
   background-repeat: no-repeat, no-repeat, repeat;
-
-  /* background-size: 100vw, 42vh; */
   background-position: left top, right top;
   background-size: 100vw, 80vw;
-}
+} */
 
-.App-background-Ranger {
+/* .App-background-Ranger {
   background-image: url(./images/backgroundTexture.png),
     url(./images/rangerbackground.jpg), url(./images/fullbackgroundtexture.png) !important;
   background-position: left top, 140% 0%;
@@ -134,7 +128,7 @@
     background-position: left top, 140% -700px;
     background-size: 100vw, 80vw;
   }
-}
+} */
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;

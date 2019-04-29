@@ -1,0 +1,330 @@
+.App {
+  overflow-x: auto;
+  min-height: 100vh;
+  width: 100vw;
+}
+
+.backgroundnull {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+    url(../images/fullbackgroundtexture.png) !important;
+}
+
+.backgroundBard {
+  background-image: url(../images/backgroundTexture.png),
+    url(../images/bardbackground.jpg), url(../images/fullbackgroundtexture.png) !important;
+  background-position: left top, 100% 0%;
+  background-size: 100vw, 80vw;
+  background-repeat: no-repeat, no-repeat, repeat;
+}
+.backgroundCleric {
+  background-image: url(../images/backgroundTexture.png),
+    url(../images/possiblecleric.jpg), url(../images/fullbackgroundtexture.png) !important;
+  background-position: left top, 1000% 0%;
+  background-size: 100vw, 97vw;
+  background-repeat: no-repeat, no-repeat, repeat;
+}
+
+.backgroundDruid {
+  background-image: url(../images/backgroundTexture.png),
+    url(../images/druidbackground.jpg), url(../images/fullbackgroundtexture.png) !important;
+  /* background-position: left top, 125% 0%; */
+  background-repeat: no-repeat, no-repeat, repeat;
+
+  /* background-size: 100vw, 42vh; */
+  background-position: left top, right top;
+  background-size: 100vw, 100vw;
+}
+.backgroundPaladin {
+  background-image: url(../images/backgroundTexture.png),
+    url(../images/paladinbackground.jpg),
+    url(../images/fullbackgroundtexture.png) !important;
+  /* background-position: left top, 125% 0%; */
+  background-repeat: no-repeat, no-repeat, repeat;
+
+  /* background-size: 100vw, 42vh; */
+  background-position: left top, right top;
+  background-size: 100vw, 80vw;
+}
+
+.backgroundRanger {
+  background-image: url(../images/backgroundTexture.png),
+    url(../images/rangerbackground.jpg),
+    url(../images/fullbackgroundtexture.png) !important;
+  background-position: left top, 140% 0%;
+  background-repeat: no-repeat, no-repeat, repeat;
+
+  background-size: 100vw, 80vw;
+}
+
+.backgroundSorcerer {
+  background-image: url(../images/backgroundTexture.png),
+    url(../images/sorcererbackground.jpg),
+    url(../images/fullbackgroundtexture.png) !important;
+  background-position: left top, 140% 0%;
+  background-size: 100vw, 75vw;
+  background-repeat: no-repeat, no-repeat, repeat;
+}
+.backgroundWarlock {
+  background-image: url(../images/backgroundTexture.png),
+    url(../images/warlockbackground.jpg),
+    url(../images/fullbackgroundtexture.png) !important;
+  background-position: left top, 120% -6%;
+  background-size: 100vw, 70vw;
+  background-repeat: no-repeat, no-repeat, repeat;
+}
+
+.backgroundWizard {
+  background-image: url(../images/backgroundTexture.png),
+    url(../images/wizardbackground.jpg),
+    url(../images/fullbackgroundtexture.png) !important;
+  background-position: left top, 100px 0%;
+  background-size: 100vw, 99vw;
+  background-repeat: no-repeat, no-repeat, repeat;
+}
+.landingClassBtnTransition {
+  grid-row-start: 2;
+  display: inline-block;
+}
+
+.landingSearchContainer {
+  width: 100vw;
+  height: 160px;
+  cursor: default;
+}
+@media only screen and (max-height: 450px) {
+  .landingSearchContainer {
+    height: 120px;
+  }
+  .landingSplash {
+    padding-top: 80px !important;
+    padding-bottom: 150px !important;
+  }
+}
+
+@media (max-height: 400px) {
+  .backgroundSorcerer {
+    background-size: 100vw, 80vw;
+  }
+  .backgroundWarlock {
+    background-position: left top, 140%, 0%;
+    background-size: 100vw, 80vw;
+  }
+}
+
+@media (min-width: 420px) {
+  .backgroundCleric {
+    background-position: left top, 180% 0%;
+    background-size: 100vw, 80vw;
+  }
+}
+
+@media (min-width: 630px) {
+  .backgroundCleric {
+    background-position: left top, 140% 0%;
+    background-size: 100vw, 80vw;
+  }
+  .backgroundWizard {
+    background-position: left top, 300% 0%;
+    background-size: 100vw, 90vw;
+  }
+}
+
+@media (min-width: 700px) {
+  .backgroundSorcerer {
+    background-position: left top, 100% 0%;
+    background-size: 100vw, 70vw;
+  }
+  .backgroundWarlock {
+    background-position: left top, 150% -250px;
+    background-size: 100vw, 80vw;
+  }
+}
+@media (min-width: 800px) {
+  .backgroundWarlock {
+    background-position: left top, 150% -350px;
+    background-size: 100vw, 80vw;
+  }
+}
+@media (min-width: 1200px) {
+  .backgroundWarlock {
+    background-position: left top, 140% -550px;
+    background-size: 100vw, 80vw;
+  }
+}
+
+@media (min-width: 1420px) {
+  .backgroundWarlock {
+    background-position: left top, 140% -700px;
+    background-size: 100vw, 80vw;
+  }
+}
+.landingSplash {
+  width: 300px;
+  padding-top: 86px;
+  padding-bottom: 158px;
+  margin: auto;
+  margin-top: 10px;
+  text-align: center;
+  cursor: default;
+  font-family: "Cinzel Decorative", cursive;
+  font-weight: 900;
+  font-size: 150%;
+  background-image: url(../images/Unsealed_Spellbook_rune.png) !important;
+  background-repeat: no-repeat;
+  background-size: 300px;
+  background-position: center center;
+}
+.landingTutorialContent {
+  width: 300px;
+  margin: auto;
+  margin-top: 10px;
+  text-align: center;
+  cursor: default;
+}
+.landingTutorialContent2 {
+  width: 300px;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 60px;
+  text-align: center;
+  cursor: default;
+}
+
+@media (min-width: 414px) {
+  .landingSplash {
+    width: 380px;
+    padding-top: 114px;
+    padding-bottom: 210px;
+    font-weight: bolder;
+    font-size: 180%;
+  }
+  .landingTutorialContent {
+    width: 380px;
+  }
+  .landingTutorialContent2 {
+    width: 380px;
+  }
+}
+@media (min-width: 520px) {
+  .landingSplash {
+    width: 500px;
+    padding-top: 172px;
+    padding-bottom: 272px;
+    font-weight: 900;
+    font-size: 250%;
+  }
+  .landingTutorialContent {
+    width: 500px;
+  }
+  .landingTutorialContent2 {
+    width: 500px;
+  }
+}
+
+@media (max-width: 899px) {
+  .landingContentContainer {
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+@media (min-width: 900px) {
+  .landingListContainer {
+    width: 30vw;
+    overflow: hidden;
+    float: left;
+  }
+  .landingCardContainer {
+    width: 50vw;
+    padding-bottom: 20px;
+    overflow: hidden;
+    float: left;
+  }
+}
+@media (min-width: 1100px) {
+  .landingCardContainer {
+    width: 30vw;
+  }
+}
+
+.signupContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100vw;
+  min-height: 100vh;
+  overflow: hidden;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+    url(../images/fullbackgroundtexture.png) !important;
+}
+
+.spellbookContainer {
+  width: 100vw;
+  height: auto;
+  min-height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+    url(../images/vintageTableTexture.jpg) !important;
+  background-repeat: repeat, repeat, repeat;
+}
+
+.spellbookLi {
+  cursor: pointer;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  /* font-family: "Spirax", cursive; */
+  font-family: "Oregano", cursive;
+  font-size: 130%;
+  /* text-decoration: underline; */
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.spellbookLi:hover {
+  transform: scale(1.03) translate(6px);
+}
+
+.spellbookTitle {
+  text-align: center;
+  font-family: "Cinzel Decorative", cursive;
+  margin-bottom: 50px;
+}
+.spellbookMenuSpacing {
+  width: 100%;
+  height: 50px;
+}
+
+.spellbookContent {
+  max-width: 1000px;
+  margin: auto;
+  background-image: url(../images/fullbackgroundtexture.png);
+  background-position: 100% 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  min-height: 100vh;
+  overflow: hidden;
+}
+@media (min-width: 769px) {
+  .spellbookContent {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+}
+
+@media (max-width: 999px) {
+  .spellbookContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .spellbookCardContainer {
+    padding-top: 70px;
+  }
+}
+
+/* @media (min-width: 800px) {
+  .signup-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+} */

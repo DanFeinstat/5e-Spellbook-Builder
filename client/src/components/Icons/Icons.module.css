@@ -1,0 +1,22 @@
+.icon {
+  height: 20px;
+  margin-right: 5px;
+  margin-bottom: -3px;
+}
+
+/* .spin {
+  animation: rotate infinite 3s;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes rotate {
+  from {
+    transform: scaleX(1);
+    rotate(0deg);
+  }
+  to {
+    transform: scaleX(-1);
+    rotate(180deg);
+  }
+} */

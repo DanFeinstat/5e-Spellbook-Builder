@@ -1,9 +1,10 @@
 import React from "react";
+import styles from "./Icons.module.css";
 
 const SomaticIcon = () => {
   return (
     <svg
-      className="card-icon"
+      className={styles.icon}
       xmlnsX="http://ns.adobe.com/Extensibility/1.0/"
       xmlnsI="http://ns.adobe.com/AdobeIllustrator/10.0/"
       xmlnsGraph="http://ns.adobe.com/Graphs/1.0/"

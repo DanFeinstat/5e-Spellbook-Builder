@@ -10,6 +10,9 @@ export default {
   deleteUser: id => {
     return axios.delete("/api/user/" + id);
   },
+  newBook: (id, bookData) => {
+    return axios.put("/api/user/" + id, bookData);
+  },
   addSpell: (id, username, spellData) => {
     return axios.put("/api/user/" + id + "/" + username, spellData);
   },
