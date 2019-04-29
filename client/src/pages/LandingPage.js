@@ -128,7 +128,7 @@ class LandingPage extends Component {
         this.setState({
           currentSpell: spellData,
           spellFound: true,
-          searchActive: false,
+          // searchActive: false,
         });
       } else {
         alert(
