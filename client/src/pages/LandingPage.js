@@ -201,6 +201,20 @@ class LandingPage extends Component {
     }));
   };
 
+  exitCardModal = () => {
+    this.setState({
+      currentSpell: {},
+      spellFound: false,
+    });
+  };
+
+  exitCardOnEscape = e => {
+    if (e.keyCode === 27 && this.state.spellFound === true) {
+      console.log("escape");
+      this.exitCardModal();
+    }
+  };
+
   getClassList = e => {
     let newClass = e.target.textContent;
     spellAPI
@@ -429,45 +443,6 @@ class LandingPage extends Component {
             ) : null}
             {reArrange ? (
               <div className={styles.landingContentContainer}>
-                {this.state.spellFound ? (
-                  <Transition
-                    items={this.state.spellFound}
-                    from={{
-                      transform: "translate3d(200px,0,0)",
-                      opacity: 0,
-                    }}
-                    enter={{
-                      transform: "translate3d(0px,0,0)",
-                      opacity: 1,
-                    }}
-                    leave={{
-                      transform: "translate3d(200px,0,0)",
-                      opacity: 0,
-                    }}
-                  >
-                    {show =>
-                      show &&
-                      (props => (
-                        <div style={props}>
-                          {/* <CardContainer> */}
-                          <Card
-                            page="landing"
-                            spell={this.state.currentSpell}
-                            username={
-                              this.state.nameDisplayed
-                                ? this.state.nameDisplayed
-                                : this.state.names[0]
-                            }
-                            class={this.state.classList}
-                            loggedIn={this.state.id}
-                            scrollActive={reArrange}
-                          />
-                          {/* </CardContainer> */}
-                        </div>
-                      ))
-                    }
-                  </Transition>
-                ) : null}
                 <Transition
                   items={this.state.classList}
                   from={{ opacity: 0 }}
@@ -499,6 +474,22 @@ class LandingPage extends Component {
                     ))
                   }
                 </Transition>
+                {this.state.spellFound && (
+                  <Card
+                    page="landing"
+                    spell={this.state.currentSpell}
+                    exitOnEscape={this.exitCardOnEscape}
+                    username={
+                      this.state.nameDisplayed
+                        ? this.state.nameDisplayed
+                        : this.state.names[0]
+                    }
+                    exitModal={this.exitCardModal}
+                    class={this.state.classList}
+                    loggedIn={this.state.id}
+                    scrollActive={reArrange}
+                  />
+                )}
               </div>
             ) : (
               <div>
@@ -536,42 +527,20 @@ class LandingPage extends Component {
                   </Transition>
                 </div>
                 <div className={styles.landingCardContainer}>
-                  {this.state.spellFound ? (
-                    <Transition
-                      items={this.state.spellFound}
-                      from={{
-                        transform: "translate3d(200px,0,0)",
-                        opacity: 0,
-                      }}
-                      enter={{
-                        transform: "translate3d(0px,0,0)",
-                        opacity: 1,
-                      }}
-                      // leave={{
-                      //   transform: "translate3d(200px,0,0)",
-                      //   opacity: 0,
-                      // }}
-                    >
-                      {show =>
-                        show &&
-                        (props => (
-                          <div style={props}>
-                            <Card
-                              page="landing"
-                              spell={this.state.currentSpell}
-                              class={this.state.classList}
-                              username={
-                                this.state.nameDisplayed
-                                  ? this.state.nameDisplayed
-                                  : this.state.names[0]
-                              }
-                              loggedIn={this.state.id}
-                            />{" "}
-                          </div>
-                        ))
+                  {this.state.spellFound && (
+                    <Card
+                      page="landing"
+                      spell={this.state.currentSpell}
+                      class={this.state.classList}
+                      exitModal={this.exitCardModal}
+                      username={
+                        this.state.nameDisplayed
+                          ? this.state.nameDisplayed
+                          : this.state.names[0]
                       }
-                    </Transition>
-                  ) : null}
+                      loggedIn={this.state.id}
+                    />
+                  )}
                 </div>
               </div>
             )}

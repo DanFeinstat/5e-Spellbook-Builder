@@ -22,16 +22,16 @@ import MaterialIcon from "../Icons/MaterialIcon";
 import concentrationIcon from "../../images/concentration.png";
 
 class Card extends Component {
-  componentDidMount() {
-    if (this.props.scrollActive) {
-      this.scrollToCard();
-    }
-  }
-  componentDidUpdate(prevProps) {
-    if (this.props.spell !== prevProps.spell && this.props.scrollActive) {
-      this.scrollToCard();
-    }
-  }
+  // componentDidMount() {
+  // if (this.props.scrollActive) {
+  //   this.scrollToCard();
+  // }
+  // }
+  // componentDidUpdate(prevProps) {
+  //   if (this.props.spell !== prevProps.spell && this.props.scrollActive) {
+  //     this.scrollToCard();
+  //   }
+  // }
   spellbookForIn = (name, array) => {
     for (let i = 0; i < array.length; i++) {
       let obj = array[i];
@@ -96,18 +96,17 @@ class Card extends Component {
     return compsArr;
   };
 
-  scrollToCard = () => {
-    let cardDiv = ReactDOM.findDOMNode(document.getElementById("scrollRefOne"));
-    cardDiv.scrollIntoView({ behavior: "smooth", block: "start" }, true);
-  };
+  // scrollToCard = () => {
+  //   let cardDiv = ReactDOM.findDOMNode(document.getElementById("scrollRefOne"));
+  //   cardDiv.scrollIntoView({ behavior: "smooth", block: "start" }, true);
+  // };
   render() {
     const components = this.convertComponentsToIcons(
       this.props.spell.components
     );
     const desc = this.props.spell.desc;
     return (
-      // <CardContainer>
-      <div>
+      <div className={styles.modalContainer} onClick={this.props.exitModal}>
         <div className={styles.container} id="scrollRefOne">
           <div
             className={`${styles.textBlock} ${styles.full} ${styles.font1} ${
@@ -214,26 +213,29 @@ class Card extends Component {
             {this.props.spell.materials !== undefined
               ? this.props.spell.materials
               : "No materials required."}
-          </div>
-        </div>
-        {this.props.loggedIn ? (
-          <div
-            onClick={
-              this.props.page === "landing"
-                ? this.saveSpellToSpellbook
-                : this.props.removeSpell
-            }
-            className={
-              this.props.page === "landing"
-                ? `${styles.transcribeBtn} bg-${this.props.class}`
-                : `${styles.transcribeBtn} 
+            <div>
+              {this.props.loggedIn ? (
+                <div
+                  onClick={
+                    this.props.page === "landing"
+                      ? this.saveSpellToSpellbook
+                      : this.props.removeSpell
+                  }
+                  className={
+                    this.props.page === "landing"
+                      ? `${styles.transcribeBtn} bg-${this.props.class}`
+                      : `${styles.transcribeBtn} 
                 ${styles.spellbookAdjust} 
                 bg-${this.props.class}`
-            }
-          >
-            {this.props.page === "landing" ? "Transcribe" : "Delete"}
+                  }
+                >
+                  {this.props.page === "landing" ? "Transcribe" : "Delete"}
+                </div>
+              ) : null}
+            </div>
           </div>
-        ) : null}
+        </div>
+
         {/* </CardContainer> */}
       </div>
     );
@@ -241,3 +243,9 @@ class Card extends Component {
 }
 
 export default Card;
+
+// function ModalCard(props) {
+//   return ReactDOM.createPortal(Card, document.querySelector("#modal"));
+// }
+
+// export default ModalCard;

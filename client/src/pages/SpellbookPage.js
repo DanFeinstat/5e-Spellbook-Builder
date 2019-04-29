@@ -30,7 +30,6 @@ class SpellbookPage extends React.PureComponent {
   };
   static contextType = UserConsumer;
   componentDidMount() {
-    console.log(this.context);
     this.decodeUserIDandPopulate();
   }
 
@@ -191,8 +190,6 @@ class SpellbookPage extends React.PureComponent {
 
         this.setState({
           names: response.data.names,
-          // nameDisplayed: response.data.spellbooks[0].name,
-          // email: response.data.email,
           spells: spellsByLevel,
           listsByLevels: listOfLists,
         });
@@ -327,6 +324,12 @@ class SpellbookPage extends React.PureComponent {
       nameDisplayed: toBeDisplayed,
       bookMenuActive: false,
       menuActive: false,
+    });
+  };
+
+  exitCardModal = () => {
+    this.setState({
+      spellToDisplay: "",
     });
   };
 
@@ -488,44 +491,18 @@ class SpellbookPage extends React.PureComponent {
                   </div>
                 )}
               </Spring>
-              {this.state.spellToDisplay ? (
-                <div className={styles.spellbookCardContainer}>
-                  <Transition
-                    items={this.state.spellToDisplay}
-                    from={{
-                      transform: "translate3d(200px,0,0)",
-                      opacity: 0,
-                    }}
-                    enter={{
-                      transform: "translate3d(0px,0,0)",
-                      opacity: 1,
-                    }}
-                    leave={{
-                      transform: "translate3d(200px,0,0)",
-                      opacity: 0,
-                    }}
-                  >
-                    {show =>
-                      show &&
-                      (props => (
-                        <div style={props}>
-                          <Card
-                            username={this.state.names[0]}
-                            page="spellbook"
-                            spell={this.state.spellToDisplay}
-                            class={"none"}
-                            loggedIn={this.state.id}
-                            removeSpell={this.deleteSpellFromSpellbook}
-                            scrollActive={
-                              window.innerWidth < 1000 ? true : false
-                            }
-                          />
-                        </div>
-                      ))
-                    }
-                  </Transition>
-                </div>
-              ) : null}
+              {this.state.spellToDisplay && (
+                <Card
+                  username={this.state.names[0]}
+                  page="spellbook"
+                  spell={this.state.spellToDisplay}
+                  class={"none"}
+                  loggedIn={this.state.id}
+                  removeSpell={this.deleteSpellFromSpellbook}
+                  exitModal={this.exitCardModal}
+                  scrollActive={window.innerWidth < 1000 ? true : false}
+                />
+              )}
             </div>
           </div>
         )}
