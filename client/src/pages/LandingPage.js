@@ -42,7 +42,7 @@ class LandingPage extends Component {
   };
   static contextType = UserConsumer;
   componentDidMount() {
-    console.log(this.context);
+    // console.log(this.context);
     window.addEventListener("resize", this.handleWindowSizeChange);
     if (localStorage.spellbookJwt) {
       this.decodeUserID();
