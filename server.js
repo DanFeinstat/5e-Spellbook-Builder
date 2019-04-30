@@ -5,7 +5,7 @@ const path = require("path");
 const dotenv = require("dotenv");
 const routes = require("./routes");
 const db = require("./models");
-// const spellData = require("./spells.json");
+const spellData = require("./spells.json");
 const jwt = require("jsonwebtoken");
 
 const app = express();
@@ -36,10 +36,17 @@ if (process.env.NODE_ENV === "production") {
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/spellbook",
-  { useNewUrlParser: true }
-);
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/spellbook", {
+  useNewUrlParser: true,
+});
+
+db.Spells.create({ data: spellData })
+  .then(function(dbUser) {
+    console.log(dbUser);
+  })
+  .catch(function(err) {
+    console.log(err.message);
+  });
 
 app.listen(PORT, function() {
   console.log("Listening on port: " + PORT);
