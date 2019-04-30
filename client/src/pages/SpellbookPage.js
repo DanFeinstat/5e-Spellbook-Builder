@@ -497,6 +497,7 @@ class SpellbookPage extends React.PureComponent {
                   page="spellbook"
                   spell={this.state.spellToDisplay}
                   class={"none"}
+                  spellFound={this.state.spellToDisplay}
                   loggedIn={this.state.id}
                   removeSpell={this.deleteSpellFromSpellbook}
                   exitModal={this.exitCardModal}

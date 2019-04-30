@@ -305,9 +305,13 @@ class LandingPage extends Component {
       <UserConsumer>
         {({ updateNameDisplayed, nameDisplayed }) => (
           <div
-            className={`${styles.App} ${
-              styles[`background${this.state.classList}`]
-            }`}
+            className={
+              this.state.spellFound
+                ? `${styles.App} ${
+                    styles[`background${this.state.classList}`]
+                  } ${styles.modalOpen}`
+                : `${styles.App} ${styles[`background${this.state.classList}`]}`
+            }
           >
             <div className={styles.landingSearchContainer}>
               {this.state.searchActive ? (
@@ -484,6 +488,7 @@ class LandingPage extends Component {
                         ? this.state.nameDisplayed
                         : this.state.names[0]
                     }
+                    spellFound={this.state.spellFound}
                     exitModal={this.exitCardModal}
                     class={this.state.classList}
                     loggedIn={this.state.id}
@@ -532,6 +537,7 @@ class LandingPage extends Component {
                       page="landing"
                       spell={this.state.currentSpell}
                       class={this.state.classList}
+                      spellFound={this.state.spellFound}
                       exitModal={this.exitCardModal}
                       username={
                         this.state.nameDisplayed

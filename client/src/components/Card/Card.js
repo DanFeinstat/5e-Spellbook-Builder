@@ -22,16 +22,16 @@ import MaterialIcon from "../Icons/MaterialIcon";
 import concentrationIcon from "../../images/concentration.png";
 
 class Card extends Component {
-  // componentDidMount() {
-  // if (this.props.scrollActive) {
-  //   this.scrollToCard();
-  // }
-  // }
-  // componentDidUpdate(prevProps) {
-  //   if (this.props.spell !== prevProps.spell && this.props.scrollActive) {
-  //     this.scrollToCard();
-  //   }
-  // }
+  componentDidMount() {
+    if (this.props.spellFound) {
+      document.body.style.overflow = `hidden`;
+    }
+  }
+
+  componentWillUnmount() {
+    document.body.style.overflow = `unset`;
+  }
+
   spellbookForIn = (name, array) => {
     for (let i = 0; i < array.length; i++) {
       let obj = array[i];
