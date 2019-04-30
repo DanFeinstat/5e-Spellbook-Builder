@@ -31,12 +31,16 @@ class Card extends Component {
     window.addEventListener("keyup", this.handleKeyUp, false);
     if (this.props.spellFound) {
       document.body.style.overflow = `hidden`;
+      document.body.style.position = `relative`;
+      // document.getElementsByTagName(`html`)[0].style.overflow = `hidden`;
     }
   }
 
   componentWillUnmount() {
     window.removeEventListener("keyup", this.handleKeyUp, false);
     document.body.style.overflow = `unset`;
+    document.body.style.position = `unset`;
+    // document.getElementsByTagName(`html`)[0].style.overflow = `unset`;
   }
 
   handleKeyUp = e => {
