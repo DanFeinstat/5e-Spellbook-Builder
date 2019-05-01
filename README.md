@@ -10,6 +10,7 @@ Live Link: https://dnd-5e-spellbook-builder.herokuapp.com/
 the 5e Spellbook Builder is a MERN app built with:
 
 - React
+- React Spring
 - Node
 - Express
 - Mongodb
@@ -22,4 +23,4 @@ This list is not exhaustive nor certain.
  
 - Add more filtering options
 - Add more account customization
--Add optional character details for storing content such as spell DCs
+- Add optional character details for storing content such as spell DCs
