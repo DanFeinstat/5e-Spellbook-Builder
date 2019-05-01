@@ -40,14 +40,6 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/spellbook", {
   useNewUrlParser: true,
 });
 
-// db.Spells.create({ data: spellData })
-//   .then(function(dbUser) {
-//     console.log(dbUser);
-//   })
-//   .catch(function(err) {
-//     console.log(err.message);
-//   });
-
 app.listen(PORT, function() {
   console.log("Listening on port: " + PORT);
 });
