@@ -4,7 +4,6 @@ Have you ever been in the middle of a combat round and needed to take a 5 minute
 
 Live Link: https://dnd-5e-spellbook-builder.herokuapp.com/
 
-Note: Currently this Spellbook Builder only supports content from the core rulebooks and Sword Coast Adventurer's Guide.
 
 ## Technology
 
@@ -20,9 +19,7 @@ the 5e Spellbook Builder is a MERN app built with:
 ## Future Features/Plans
 
 This list is not exhaustive nor certain.
-
-- Add spells from supplemental materials
-- On mobile view change spell cards to modals 
+ 
 - Add more filtering options
 - Add more account customization
 -Add optional character details for storing content such as spell DCs
