@@ -30,13 +30,13 @@ class Card extends Component {
   componentDidMount() {
     window.addEventListener("keyup", this.handleKeyUp, false);
     // if (this.props.spellFound) {
-    //   document.body.style.overflow = `hidden`;
+    // document.body.style.scrollBehavior = `none`;
     // }
   }
 
   componentWillUnmount() {
     window.removeEventListener("keyup", this.handleKeyUp, false);
-    // document.body.style.overflow = `unset`;
+    // document.body.style.scrollBehavior = `auto`;
   }
 
   handleKeyUp = e => {
