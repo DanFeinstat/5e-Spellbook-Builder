@@ -337,7 +337,13 @@ class SpellbookPage extends React.PureComponent {
     return (
       <UserConsumer>
         {({ updateNameDisplayed, nameDisplayed }) => (
-          <div className={styles.spellbookContainer}>
+          <div
+            className={
+              this.state.spellToDisplay
+                ? `${styles.modalOpen} ${styles.spellbookContainer}`
+                : styles.spellbookContainer
+            }
+          >
             <div className={styles.spellbookContent}>
               <h2 className={styles.spellbookTitle}>
                 {nameDisplayed ? (
