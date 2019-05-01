@@ -8,7 +8,8 @@
   justify-items: center;
   width: 100vw;
   min-height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6);
+  /* background-color: rgba(0, 0, 0, 0.6); */
+  background-image: url(../../images/fullbackgroundtexture.png);
 }
 
 .container {
@@ -49,9 +50,22 @@
     width: 320px;
   }
 }
+@media (min-width: 450px) {
+  .modalContainer {
+    background-color: rgba(0, 0, 0, 0.6);
+    background-image: none;
+  }
+}
 @media (min-height: 376px) {
   .container {
     max-height: calc(100vh - 225px);
+  }
+}
+
+@media (max-height: 450px) {
+  .modalContainer {
+    background-color: none;
+    background-image: url(../../images/fullbackgroundtexture.png);
   }
 }
 
