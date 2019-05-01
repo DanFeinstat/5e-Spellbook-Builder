@@ -4,7 +4,7 @@ module.exports = {
   findAll: (req, res) => {
     db.Spells.find()
       .then(dbModel => {
-        console.log(dbModel);
+        // console.log(dbModel);
         res.json(dbModel);
       })
       .catch(err => res.status(422).json(err));
@@ -33,7 +33,7 @@ module.exports = {
       },
     ])
       .then(dbModel => {
-        console.log(dbModel);
+        // console.log(dbModel);
         res.json(dbModel);
       })
       .catch(err => res.status(422).json(err));

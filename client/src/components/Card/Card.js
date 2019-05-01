@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import CardContainer from "./CardContainer";
+// import ReactDOM from "react-dom";
+// import CardContainer from "./CardContainer";
 import styles from "./Card.module.css";
 //API
 import userAPI from "../../utils/userAPI";
@@ -22,16 +22,26 @@ import MaterialIcon from "../Icons/MaterialIcon";
 import concentrationIcon from "../../images/concentration.png";
 
 class Card extends Component {
-  // componentDidMount() {
-  // if (this.props.scrollActive) {
-  //   this.scrollToCard();
-  // }
-  // }
-  // componentDidUpdate(prevProps) {
-  //   if (this.props.spell !== prevProps.spell && this.props.scrollActive) {
-  //     this.scrollToCard();
-  //   }
-  // }
+  constructor(props) {
+    super(props);
+
+    this.handleKeyUp = this.handleKeyUp.bind(this);
+  }
+  componentDidMount() {
+    window.addEventListener("keyup", this.handleKeyUp, false);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("keyup", this.handleKeyUp, false);
+  }
+
+  handleKeyUp = e => {
+    e.preventDefault();
+    if (e.keyCode === 27) {
+      this.props.exitModal();
+    }
+  };
+
   spellbookForIn = (name, array) => {
     for (let i = 0; i < array.length; i++) {
       let obj = array[i];

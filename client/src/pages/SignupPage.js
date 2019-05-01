@@ -42,17 +42,25 @@ class SignupPage extends Component {
     };
     // console.log(userData);
     userAPI.createUser(userData).then(response => {
-      // console.log(response);
+      console.log(response);
       const userData = {
         email: this.state.email,
         password: this.state.password,
       };
 
-      userAPI.login(userData).then(response => {
-        console.log(response);
-        localStorage.setItem("spellbookJwt", response.data.spellbookJwt);
-        window.location.href = "/spellbook/user";
-      });
+      console.log(userData);
+
+      userAPI
+        .login(userData)
+        .then(response => {
+          // console.log(response);
+          localStorage.setItem("spellbookJwt", response.data.spellbookJwt);
+          window.location.href = "/spellbook/user";
+        })
+        .catch(function(error) {
+          // console.log(error);
+          alert(error.response.data.message);
+        });
     });
   };
 
@@ -63,11 +71,17 @@ class SignupPage extends Component {
       password: this.state.password,
     };
 
-    userAPI.login(userData).then(response => {
-      // console.log(response);
-      localStorage.setItem("spellbookJwt", response.data.spellbookJwt);
-      window.location.href = "/spellbook/user";
-    });
+    userAPI
+      .login(userData)
+      .then(function(response) {
+        // console.log(response);
+        localStorage.setItem("spellbookJwt", response.data.spellbookJwt);
+        window.location.href = "/spellbook/user";
+      })
+      .catch(function(error) {
+        // console.log(error);
+        alert(error.response.data.message);
+      });
   };
 
   toLanding = () => {

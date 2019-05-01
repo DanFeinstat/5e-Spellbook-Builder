@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const dotenv = require("dotenv");
 const routes = require("./routes");
-const db = require("./models");
+// const db = require("./models");
 // const spellData = require("./spells.json");
 const jwt = require("jsonwebtoken");
 
@@ -36,10 +36,9 @@ if (process.env.NODE_ENV === "production") {
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect(
-  process.env.MONGODB_URI || "mongodb://localhost/spellbook",
-  { useNewUrlParser: true }
-);
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/spellbook", {
+  useNewUrlParser: true,
+});
 
 app.listen(PORT, function() {
   console.log("Listening on port: " + PORT);

@@ -42,7 +42,7 @@ class LandingPage extends Component {
   };
   static contextType = UserConsumer;
   componentDidMount() {
-    console.log(this.context);
+    // console.log(this.context);
     window.addEventListener("resize", this.handleWindowSizeChange);
     if (localStorage.spellbookJwt) {
       this.decodeUserID();
@@ -128,7 +128,7 @@ class LandingPage extends Component {
         this.setState({
           currentSpell: spellData,
           spellFound: true,
-          searchActive: false,
+          // searchActive: false,
         });
       } else {
         alert(
@@ -305,9 +305,13 @@ class LandingPage extends Component {
       <UserConsumer>
         {({ updateNameDisplayed, nameDisplayed }) => (
           <div
-            className={`${styles.App} ${
-              styles[`background${this.state.classList}`]
-            }`}
+            className={
+              this.state.spellFound
+                ? `${styles.App} ${
+                    styles[`background${this.state.classList}`]
+                  } ${styles.modalOpen}`
+                : `${styles.App} ${styles[`background${this.state.classList}`]}`
+            }
           >
             <div className={styles.landingSearchContainer}>
               {this.state.searchActive ? (
@@ -484,6 +488,7 @@ class LandingPage extends Component {
                         ? this.state.nameDisplayed
                         : this.state.names[0]
                     }
+                    spellFound={this.state.spellFound}
                     exitModal={this.exitCardModal}
                     class={this.state.classList}
                     loggedIn={this.state.id}
@@ -532,6 +537,7 @@ class LandingPage extends Component {
                       page="landing"
                       spell={this.state.currentSpell}
                       class={this.state.classList}
+                      spellFound={this.state.spellFound}
                       exitModal={this.exitCardModal}
                       username={
                         this.state.nameDisplayed
