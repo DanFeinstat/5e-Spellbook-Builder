@@ -24,6 +24,7 @@ class SpellbookPage extends React.PureComponent {
     spellToDisplay: "",
     levelToDisplay: "",
     newBookName: "",
+    scrollOffset: 0,
     menuActive: false,
     bookMenuActive: false,
     creatingNewBook: false,
@@ -208,6 +209,7 @@ class SpellbookPage extends React.PureComponent {
       if (this.state.spells[i].name === e.target.dataset.name) {
         this.setState({
           spellToDisplay: this.state.spells[i],
+          scrollOffset: window.scrollY,
         });
       }
     }
@@ -328,9 +330,14 @@ class SpellbookPage extends React.PureComponent {
   };
 
   exitCardModal = () => {
-    this.setState({
-      spellToDisplay: "",
-    });
+    this.setState(
+      {
+        spellToDisplay: "",
+      },
+      () => {
+        window.scrollTo(0, this.state.scrollOffset);
+      }
+    );
   };
 
   render() {

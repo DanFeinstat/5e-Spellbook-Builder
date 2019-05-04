@@ -23,6 +23,7 @@ class LandingPage extends Component {
     nameDisplayed: this.context.nameDisplayed,
     width: window.innerWidth,
     searchActive: false,
+    scrollOffset: 0,
     search: "",
     classList: null,
     spellFound: false,
@@ -91,7 +92,10 @@ class LandingPage extends Component {
     return str.join(" ");
   };
   toFetchSpell = e => {
-    this.setState({ search: e.target.dataset.name }, this.querySpellData);
+    this.setState(
+      { search: e.target.dataset.name, scrollOffset: window.scrollY },
+      this.querySpellData
+    );
   };
   onSpellSubmit = e => {
     e.preventDefault();
@@ -202,15 +206,20 @@ class LandingPage extends Component {
   };
 
   exitCardModal = () => {
-    this.setState({
-      currentSpell: {},
-      spellFound: false,
-    });
+    this.setState(
+      {
+        currentSpell: {},
+        spellFound: false,
+      },
+      () => {
+        window.scrollTo(0, this.state.scrollOffset);
+      }
+    );
   };
 
   exitCardOnEscape = e => {
     if (e.keyCode === 27 && this.state.spellFound === true) {
-      console.log("escape");
+      // console.log("escape");
       this.exitCardModal();
     }
   };
@@ -481,6 +490,7 @@ class LandingPage extends Component {
                 {this.state.spellFound && (
                   <Card
                     page="landing"
+                    // scrollOffset={this.state.scrollOffset}
                     spell={this.state.currentSpell}
                     exitOnEscape={this.exitCardOnEscape}
                     username={
@@ -535,6 +545,7 @@ class LandingPage extends Component {
                   {this.state.spellFound && (
                     <Card
                       page="landing"
+                      // scrollOffset={this.state.scrollOffset}
                       spell={this.state.currentSpell}
                       class={this.state.classList}
                       spellFound={this.state.spellFound}
